@@ -1,0 +1,16 @@
+# secrets
+.env
+.env.*
+!.env.example
+*.pem
+*token*.json
+credentials*.json
+# generated media & caches
+projects/*/media/
+*.mp4
+*.mov
+*.wav
+*.mp3
+__pycache__/
+.venv/
+node_modules/
