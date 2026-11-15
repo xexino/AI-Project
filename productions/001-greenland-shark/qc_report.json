@@ -1,0 +1,65 @@
+{
+ "file": "oddlight_001_greenland_shark_v1.mp4",
+ "duration": 53.667,
+ "native_render_resolution": "1080x1920 (rendered natively, not upscaled)",
+ "integrated_lufs": -14.3,
+ "true_peak_dbtp": -1.4,
+ "checks": [
+  {
+   "check": "resolution 1080x1920",
+   "pass": true,
+   "detail": "1080x1920"
+  },
+  {
+   "check": "fps 24",
+   "pass": true,
+   "detail": "24/1"
+  },
+  {
+   "check": "codec h264 high yuv420p",
+   "pass": true,
+   "detail": "h264 High yuv420p"
+  },
+  {
+   "check": "audio aac 48k present",
+   "pass": true,
+   "detail": "aac 48000"
+  },
+  {
+   "check": "duration matches timeline (\u00b10.1s)",
+   "pass": true,
+   "detail": "53.667s vs 53.667s"
+  },
+  {
+   "check": "decodes without errors",
+   "pass": true,
+   "detail": "clean"
+  },
+  {
+   "check": "loudness -14 LUFS \u00b11",
+   "pass": true,
+   "detail": "-14.3 LUFS"
+  },
+  {
+   "check": "true peak <= -1 dBTP",
+   "pass": true,
+   "detail": "-1.4 dBTP"
+  },
+  {
+   "check": "no unintended black segments",
+   "pass": true,
+   "detail": "none"
+  },
+  {
+   "check": "no frozen video > 0.6s",
+   "pass": true,
+   "detail": "none"
+  },
+  {
+   "check": "every script word has a caption timing",
+   "pass": true,
+   "detail": "122 words, 0 interpolated"
+  }
+ ],
+ "all_pass": true
+}

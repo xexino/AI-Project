@@ -15,7 +15,7 @@ export async function build({ dur }) {
     vertexShader: `varying vec3 vW; void main(){ vW = normalize(position); gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.); }`,
     fragmentShader: `varying vec3 vW; uniform float uDay; uniform float uDusk; uniform float uAur; uniform float uT;
       void main(){ float h = clamp(vW.y, 0.0, 1.0);
-        vec3 night = mix(vec3(0.02,0.05,0.08), vec3(0.01,0.02,0.04), h);
+        vec3 night = mix(vec3(0.07,0.13,0.18), vec3(0.03,0.06,0.10), h);
         vec3 day = mix(vec3(0.55,0.62,0.66), vec3(0.22,0.36,0.48), pow(h,0.6));
         vec3 c = mix(night, day, uDay);
         c += vec3(1.0,0.5,0.15) * uDusk * exp(-h*9.0) * 0.9;
@@ -56,6 +56,7 @@ export async function build({ dur }) {
   ships.forEach((s) => { s.position.set(-40, 0, -2); s.scale.setScalar(1.25); above.add(s); });
   // ---------- below ----------
   const below = underwaterScene(0.05);
+  below.add(new THREE.HemisphereLight('#3d7c88', '#05141a', 0.6));
   const camB = new THREE.PerspectiveCamera(42, W / botH, 0.1, 200);
   iceCeiling(below, { y: 5, holeR: 0, chunks: 300, rand: rng(41) });
   const filt = new THREE.DirectionalLight('#ffb070', 0.6); filt.position.set(0, 10, 2); below.add(filt);
@@ -64,16 +65,16 @@ export async function build({ dur }) {
   const era = dur * 0.86 / 3;                                // the three eras share the first ~86%
   return { renderer, render(t) {
     // sky: fast day/night cycle (~1.25 s per day)
-    const ph = t / 1.25 * Math.PI * 2;
+    const ph = t / 2.4 * Math.PI * 2 - 0.6;
     const day = Math.max(0, Math.sin(ph)), dusk = Math.exp(-Math.pow(Math.sin(ph), 2) * 18) * (Math.cos(ph) > 0 ? 1 : 0.6);
     skyMat.uniforms.uDay.value = day * 0.85; skyMat.uniforms.uDusk.value = dusk; skyMat.uniforms.uAur.value = Math.max(0, -Math.sin(ph)); skyMat.uniforms.uT.value = t;
-    sun.intensity = 0.2 + day * 1.4; sun.position.set(Math.cos(ph) * 50, Math.sin(ph) * 40 + 5, -60);
-    amb.intensity = 0.15 + day * 0.5;
+    sun.intensity = 0.45 + day * 1.2; sun.position.set(Math.cos(ph) * 50, Math.sin(ph) * 40 + 5, -60);
+    amb.intensity = 0.45 + day * 0.4;
     ships.forEach((s, i) => { const lt = (t - i * era) / era; s.visible = lt > -0.05 && lt < 1.05; s.position.x = -10 + lt * 20; });
     for (const { p, i } of puffs) { const a = ((t * 0.9 + i / 14) % 1); p.position.set(1.2 - a * 6, 5.2 + a * 3.2, 0.6); p.scale.setScalar(0.4 + a * 1.8); p.material.opacity = 0.5 * (1 - a); }
     camA.position.set(0, 4.2, 22); camA.lookAt(0, 3.0, -14);
     // below: the shark hardly moves; light flickers with the days
-    filt.intensity = 0.15 + day * 0.7 + dusk * 0.3;
+    filt.intensity = 0.55 + day * 0.5 + dusk * 0.3;
     shark.group.position.set(-1.0 + t * 0.12, -1.0, 0); shark.group.rotation.set(0, -0.12, 0); shark.update(t);
     camB.position.set(0.4, -1.6, 9.5); camB.lookAt(0, -0.6, 0);
     snow.update(t);

@@ -23,6 +23,12 @@ check("loudness -14 LUFS ±1", abs(I + 14) <= 1, f"{I} LUFS")
 check("true peak <= -1 dBTP", TP <= -1.0, f"{TP} dBTP")
 bd = sh("ffmpeg", "-hide_banner", "-i", str(v), "-vf", "blackdetect=d=0.25:pic_th=0.985:pix_th=0.06", "-an", "-f", "null", "-").stderr
 blacks = re.findall(r"black_start:([\d.]+) black_end:([\d.]+)", bd)
+# intended fade-to-black transitions are allowed
+sc = T["scenes"]; allowed = [(sc[i + 1]["start"] - 0.2, sc[i + 1]["start"] + sc[i]["transition"]["d"] + 0.2) for i in range(len(sc) - 1) if sc[i]["transition"]["type"] == "fadeblack"]
+# the brand signature: a single glowing dot on black, from the last ~1.5 s of the exit scene into the end card
+ends = [s for s in sc if s["id"] == "end"]
+if ends: allowed.append((ends[0]["start"] - 1.6, ends[0]["start"] + 0.8))
+blacks = [b for b in blacks if not any(a <= float(b[0]) and float(b[1]) <= z for a, z in allowed)]
 check("no unintended black segments", len(blacks) == 0, blacks or "none")
 fz = sh("ffmpeg", "-hide_banner", "-i", str(v), "-vf", "freezedetect=n=0.0005:d=0.6", "-an", "-f", "null", "-").stderr
 freezes = re.findall(r"freeze_start: ([\d.]+)", fz)

@@ -9,7 +9,7 @@ export async function build({ dur }) {
   const left = 'oddl', dotless = 'ı', right = 'ght';
   const wl = g.measureText(left).width, wi = g.measureText(dotless).width, wr = g.measureText(right).width;
   const xh = g.measureText('x').actualBoundingBoxAscent;
-  const baseY = cy + xh + size * 0.2;                 // dot sits above the x-height
+  const baseY = cy + xh + size * 0.13;                 // dot sits above the x-height
   const x0 = cx - wl - wi / 2;
   const ease = (a) => { a = Math.min(Math.max(a, 0), 1); return a * a * (3 - 2 * a); };
   const glow = (r, a) => { const gr = g.createRadialGradient(cx, cy, 0, cx, cy, r * 3.2);

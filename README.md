@@ -2,7 +2,7 @@
 
 An original, faceless, AI-assisted short-form documentary brand, plus the pipeline that produces it.
 
-**Status:** Brand ODDLIGHT approved; Kokoro narration approved. Zero-cost proof shot rendered (experiments/poc-3d).
+**Status:** Pilot video 001 (Greenland shark) v1 produced at 0 cost: `APPROVAL_REQUIRED`. Rebuild: see `docs/pipeline.md`.
 
 ## Phase 1 deliverables
 

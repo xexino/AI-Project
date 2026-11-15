@@ -53,7 +53,7 @@ ScaledBorderAndShadow: yes
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Cap,OL Caption,64,{BONE},{BONE},{INK},{INK},0,0,0,0,100,100,0,0,3,14,0,2,120,120,560,1
-Style: Label,OL Caption,34,{SIGNAL},{SIGNAL},&H00000000,&H00000000,0,0,0,0,100,100,2,0,1,0,0,8,80,80,520,1
+Style: Label,OL Caption,42,{SIGNAL},{SIGNAL},&H00000000,&H00000000,0,0,0,0,100,100,2,0,1,0,0,8,80,80,260,1
 Style: Year,OL Display,72,{BONE},{BONE},&H00000000,&H00000000,0,0,0,0,100,100,4,0,1,0,0,8,80,80,120,1
 Style: Big,OL Display,150,{BONE},{BONE},&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,60,60,0,1
 Style: BigSub,OL Caption,52,{SIGNAL},{SIGNAL},&H00000000,&H00000000,0,0,0,0,100,100,2,0,1,0,0,5,60,60,0,1
@@ -91,7 +91,7 @@ for k in range(steps):
     ev.append(f"Dialogue: 2,{ass_time(a)},{ass_time(b)},Year,,0,0,0,,{yr}")
 ev.append(f"Dialogue: 2,{ass_time(s7 + span)},{ass_time(SC['s8']['start'])},Year,,0,0,0,,{{\\fad(0,200)}}{y1}")
 four = word_time("s7", "four")
-big_y = int(1920 * 0.46) + 300
+big_y = int(1920 * 0.46) + 210
 ev.append(f"Dialogue: 3,{ass_time(four)},{ass_time(SC['s8']['start'])},Big,,0,0,0,,{{\\an5\\pos(540,{big_y})\\fad(250,150)}}≈ 400 years")
 ev.append(f"Dialogue: 3,{ass_time(word_time('s7', 'century') - 0.3)},{ass_time(SC['s8']['start'])},BigSub,,0,0,0,,{{\\an5\\pos(540,{big_y + 120})\\fad(250,150)}}± 120")
 ass = B / "captions.ass"; ass.write_text(head + "\n".join(ev) + "\n", encoding="utf-8")

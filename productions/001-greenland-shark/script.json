@@ -8,7 +8,7 @@
   "lang": "en-gb",
   "speed": 1.0
  },
- "status": "EDITING",
+ "status": "APPROVAL_REQUIRED",
  "scenes": [
   {
    "id": "s1",
