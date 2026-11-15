@@ -18,3 +18,6 @@ models/
 experiments/**/out/
 experiments/**/node_modules/
 experiments/voice/*.wav
+productions/*/build/
+productions/*/output/
+engine/three/node_modules/
