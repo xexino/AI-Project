@@ -14,3 +14,7 @@ projects/*/media/
 __pycache__/
 .venv/
 node_modules/
+models/
+experiments/**/out/
+experiments/**/node_modules/
+experiments/voice/*.wav

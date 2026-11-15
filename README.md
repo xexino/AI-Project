@@ -2,7 +2,7 @@
 
 An original, faceless, AI-assisted short-form documentary brand, plus the pipeline that produces it.
 
-**Status:** Phase 1 (Research) complete. Waiting for approval of the brand and production direction.
+**Status:** Brand ODDLIGHT approved; Kokoro narration approved. Zero-cost proof shot rendered (experiments/poc-3d).
 
 ## Phase 1 deliverables
 
@@ -17,6 +17,7 @@ An original, faceless, AI-assisted short-form documentary brand, plus the pipeli
 | 9 | Video generation stack | [docs/phase1/02-architecture-and-stack.md](docs/phase1/02-architecture-and-stack.md) |
 | 10 | Budget (3 scenarios) | [docs/phase1/07-budget.md](docs/phase1/07-budget.md) |
 | 11–12 | Roadmap and limitations | [docs/phase1/08-roadmap-and-limitations.md](docs/phase1/08-roadmap-and-limitations.md) |
+| — | Zero-cost route, Fern analysis, prompt-motion.com findings | [docs/phase1/09-zero-cost-route-fern-motion-site.md](docs/phase1/09-zero-cost-route-fern-motion-site.md) |
 
 ## Security
 
