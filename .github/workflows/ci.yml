@@ -1,0 +1,37 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: System dependencies (ffmpeg with libass)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
+      - name: Python dependencies (no AI models are downloaded)
+        run: pip install -r requirements-dev.txt
+      - name: Python syntax
+        run: python -m compileall -q engine tests
+      - name: JSON validity
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          bad = []
+          for f in pathlib.Path('.').glob('**/*.json'):
+              if any(p in f.parts for p in ('node_modules', '.venv', 'work', 'delivery', 'build', 'baseline', 'var')):
+                  continue
+              try: json.loads(f.read_text(encoding='utf-8'))
+              except Exception as e: bad.append(f"{f}: {e}")
+          print("\n".join(bad) or "all JSON valid"); sys.exit(1 if bad else 0)
+          PY
+      - name: Validate production projects
+        run: |
+          python -m engine validate --project productions/001-greenland-shark
+          python -m engine validate --project productions/002-tunguska
+      - name: Unit tests + mock end-to-end smoke test
+        run: python -m pytest -q tests

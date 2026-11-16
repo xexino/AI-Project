@@ -1,17 +1,21 @@
 <!doctype html>
 <html><head><meta charset="utf-8">
 <style>html,body{margin:0;background:#000;overflow:hidden}canvas{display:block}</style>
-<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js"}}</script>
+<script type="importmap">{"imports":{"three":"/engine/node_modules/three/build/three.module.js","three/addons/":"/engine/node_modules/three/examples/jsm/","oddlight/":"/engine/lib/"}}</script>
 </head><body>
 <script type="module">
-// Generic deterministic scene host. ?scene=<name>&dur=<seconds>
-// Each scene module exports build({ dur }) -> { renderer, render(t) }.
+// Generic deterministic scene host.
+//   ?module=/project/scenes/s1.js | /engine/builtin/endcard.js  &dur=<seconds> &fps=24 &w=1080 &h=1920 &params=<base64 JSON>
+// A scene module exports build({ dur, fps, width, height, params }) -> { renderer: {domElement}, render(t) }.
 const q = new URLSearchParams(location.search);
-const dur = Number(q.get('dur') || 5);
-const mod = await import(`./scenes/${q.get('scene')}.js`);
-const s = await mod.build({ dur });
-window.FRAMES = Math.round(dur * 24);
-window.renderFrame = (i) => { s.render(i / 24); return s.renderer.domElement.toDataURL('image/png'); };
+const dur = Number(q.get('dur') || 5), fps = Number(q.get('fps') || 24);
+const width = Number(q.get('w') || 1080), height = Number(q.get('h') || 1920);
+const params = q.get('params') ? JSON.parse(decodeURIComponent(escape(atob(q.get('params'))))) : {};
+window.ODDLIGHT = { width, height, fps, params };
+const mod = await import(q.get('module'));
+const s = await mod.build({ dur, fps, width, height, params });
+window.FRAMES = Math.round(dur * fps);
+window.renderFrame = (i) => { s.render(i / fps); return s.renderer.domElement.toDataURL('image/png'); };
 window.READY = true;
 </script>
 </body></html>

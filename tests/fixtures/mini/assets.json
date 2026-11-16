@@ -1,0 +1,3 @@
+{"schema": "oddlight-asset-register/1", "assets": [
+ {"id": "fixture-visuals", "file": "scenes/*.js", "origin": "generated_in_house", "creator": "tests", "license": "owned", "commercial_use": true, "attribution": "none", "acquired": "2026-11-16", "verification": "generated_in_house", "generation_method": "mock renderer"}
+]}

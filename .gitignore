@@ -21,3 +21,12 @@ experiments/voice/*.wav
 productions/*/build/
 productions/*/output/
 engine/three/node_modules/
+productions/*/work/
+productions/*/delivery/
+productions/*/.delivery.tmp/
+productions/*/baseline/
+var/
+.pytest_cache/
+comparison/**/*.mp4
+comparison/**/*.png
+!comparison/**/*thumb_180px.png

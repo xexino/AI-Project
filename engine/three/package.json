@@ -1,15 +1,11 @@
 {
-  "name": "poc-3d",
+  "name": "oddlight-three",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "description": "Deterministic procedural 3D scene renderer for the ODDLIGHT engine",
   "dependencies": {
-    "three": "^0.170.0"
-  }
+    "three": "0.170.0",
+    "playwright": "1.63.0"
+  },
+  "private": true,
+  "license": "UNLICENSED"
 }

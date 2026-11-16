@@ -2,7 +2,24 @@
 
 An original, faceless, AI-assisted short-form documentary brand, plus the pipeline that produces it.
 
-**Status:** Pilot video 001 (Greenland shark) v1 produced at 0 cost: `APPROVAL_REQUIRED`. Rebuild: see `docs/pipeline.md`.
+**Status:** engine v0.2. Phase 1 docs are complete, and the generalized production engine is built and tested.
+- `001-greenland-shark` (v1 pilot) is preserved as the benchmark.
+- `002-tunguska` was produced with the same engine.
+
+## Quick start
+
+```bash
+python -m engine doctor
+```
+
+```bash
+python -m engine produce --project productions/002-tunguska
+```
+
+- Installation: [docs/INSTALL.md](docs/INSTALL.md)
+- Pipeline and resumability: [docs/pipeline.md](docs/pipeline.md)
+- QC rules: [docs/qc.md](docs/qc.md)
+- Layout: `engine/` (Python package and the `three/` renderer), `productions/<id>/` (project.json, scenes, assets.json), `customers/<id>/` (brand), `tests/`, `.github/workflows/ci.yml`
 
 ## Phase 1 deliverables
 

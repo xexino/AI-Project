@@ -1,0 +1,69 @@
+{
+ "id": "oddlight",
+ "name": "ODDLIGHT (internal brand)",
+ "type": "internal",
+ "contact": {
+  "name": "ODDLIGHT owner",
+  "email": null
+ },
+ "brand": {
+  "id": "oddlight",
+  "name": "oddlight",
+  "palette": {
+   "ink": "#05141a",
+   "bone": "#ede6d6",
+   "sodium": "#ff8a1f",
+   "teal": "#1f4e57",
+   "signal": "#7fd1c7"
+  },
+  "fonts": {
+   "display": "assets/fonts/Fraunces-Regular.ttf",
+   "display_light": "assets/fonts/Fraunces-Light.ttf",
+   "caption": "assets/fonts/Inter-SemiBold.ttf"
+  },
+  "caption_style": {
+   "font": "OL Caption",
+   "size": 64,
+   "primary": "#ede6d6",
+   "highlight": "#ff8a1f",
+   "box": "#05141a",
+   "box_alpha": 0.6,
+   "margin_v": 560,
+   "margin_lr": 120
+  },
+  "endcard": {
+   "wordmark_left": "oddl",
+   "wordmark_dotless": "ı",
+   "wordmark_right": "ght",
+   "tagline": "The world is stranger than you were told.",
+   "colors": {
+    "bg": "#05141a",
+    "text": "#ede6d6",
+    "footer": "#7fd1c7"
+   }
+  },
+  "required_endcard_module": "builtin:endcard",
+  "watermark": null,
+  "disclosure": "Animated reconstruction. Narration voice is AI-generated (Kokoro TTS)."
+ },
+ "content_preferences": {
+  "tone": "calm, precise, quietly amazed",
+  "avoid": [
+   "clickbait",
+   "unsourced claims",
+   "realistic depictions of real people"
+  ],
+  "disclosure": "Animated reconstruction. Narration voice is AI-generated."
+ },
+ "delivery_preferences": {
+  "formats": [
+   "mp4_h264_1080x1920"
+  ],
+  "subtitles": [
+   "srt",
+   "vtt"
+  ],
+  "cover": "png",
+  "publishing": "manual upload by the brand owner"
+ }
+}

@@ -1,0 +1,24 @@
+{
+ "schema_version": 1,
+ "id": "mini-fixture",
+ "customer_id": "oddlight",
+ "topic": "test fixture",
+ "title": "Mini Fixture",
+ "format": {"aspect_ratio": "9:16", "width": 216, "height": 384, "fps": 12, "target_duration_s": [1, 60]},
+ "narration": {"provider": "mock", "voice": "x", "lang": "en-us", "speed": 1.0, "aligner": "mock"},
+ "visual": {"renderer": "mock", "grade": {"grain": 3, "vignette": "PI/5", "contrast": 1.02, "saturation": 1.0, "bloom": 0.2}},
+ "scenes": [
+  {"id": "a", "beat": "HOOK", "text": "Water boils at one hundred degrees.", "lead": 0.3, "tail": 0.3, "transition_out": {"type": "fade", "d": 0.3}, "module": "scenes/a.js", "claims": ["c1"]},
+  {"id": "b", "beat": "EXIT", "text": "At sea level, that is.", "lead": 0.2, "tail": 0.6, "transition_out": {"type": "fadeblack", "d": 0.3}, "module": "scenes/b.js", "claims": ["c1"]},
+  {"id": "end", "beat": "END", "text": "", "lead": 0, "tail": 1.2, "transition_out": null, "module": "builtin:endcard", "non_factual": true}
+ ],
+ "overlays": [{"type": "label", "text": "test label", "at": {"scene_start": "a", "offset": 0.2}, "duration": 1.0},
+              {"type": "big", "text": "100 °C", "sub": "at sea level", "at": {"word": "hundred", "scene": "a"}, "until": {"scene_start": "b"}}],
+ "sound": {"bed": {"preset": "wind_bed", "level": 0.4}, "pad": null, "cues": [{"preset": "bell", "at": {"t": 0.1}}, {"preset": "boom", "at": {"word": "sea", "scene": "b"}}]},
+ "music": {"provider": "synth", "master_db": -24, "sections": [{"from": {"t": 0}, "chords": [["D2", "A2", "F3"]], "chord_s": 2.0, "level": 0.5, "brightness": 0.3}], "hits": [], "end_fade_s": 0.5},
+ "sources": [{"id": "s1", "citation": "Test source", "url": "https://example.org/water"}],
+ "claims": [{"id": "c1", "text": "Water boils at 100 C at sea level.", "sources": ["s1"], "status": "verified"}],
+ "cover": {"scene": "a", "frame": 3, "lines": ["Mini", "Fixture"], "size": 18, "y": 60},
+ "publishing": {"enabled": false, "platforms": {"tiktok": {"caption": "test", "ai_label": true}}},
+ "qc": {"loudness_lufs": -14.0}
+}
