@@ -1,0 +1,22 @@
+{
+ "a": "productions/002-tunguska/delivery/final_video.mp4",
+ "b": "productions/002-tunguska/experiments/visual-reference-v1/delivery/final_video.mp4",
+ "frames_per_video": 12,
+ "sampling": "centre of each of N equal slices of the full runtime",
+ "contact_sheet_original": "productions/002-tunguska/experiments/visual-reference-v1/comparison/full_runtime/contact_sheet_original.jpg",
+ "contact_sheet_reference_v1": "productions/002-tunguska/experiments/visual-reference-v1/comparison/full_runtime/contact_sheet_reference_v1.jpg",
+ "side_by_side": [
+  "productions/002-tunguska/experiments/visual-reference-v1/comparison/full_runtime/side_by_side/pair_00.jpg",
+  "productions/002-tunguska/experiments/visual-reference-v1/comparison/full_runtime/side_by_side/pair_01.jpg",
+  "productions/002-tunguska/experiments/visual-reference-v1/comparison/full_runtime/side_by_side/pair_02.jpg",
+  "productions/002-tunguska/experiments/visual-reference-v1/comparison/full_runtime/side_by_side/pair_03.jpg",
+  "productions/002-tunguska/experiments/visual-reference-v1/comparison/full_runtime/side_by_side/pair_04.jpg",
+  "productions/002-tunguska/experiments/visual-reference-v1/comparison/full_runtime/side_by_side/pair_05.jpg",
+  "productions/002-tunguska/experiments/visual-reference-v1/comparison/full_runtime/side_by_side/pair_06.jpg",
+  "productions/002-tunguska/experiments/visual-reference-v1/comparison/full_runtime/side_by_side/pair_07.jpg",
+  "productions/002-tunguska/experiments/visual-reference-v1/comparison/full_runtime/side_by_side/pair_08.jpg",
+  "productions/002-tunguska/experiments/visual-reference-v1/comparison/full_runtime/side_by_side/pair_09.jpg",
+  "productions/002-tunguska/experiments/visual-reference-v1/comparison/full_runtime/side_by_side/pair_10.jpg",
+  "productions/002-tunguska/experiments/visual-reference-v1/comparison/full_runtime/side_by_side/pair_11.jpg"
+ ]
+}

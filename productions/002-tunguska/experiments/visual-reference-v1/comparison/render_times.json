@@ -1,0 +1,50 @@
+{
+ "s1": {
+  "original_s": 914.5,
+  "reference_v1_s": 1689.9,
+  "ratio": 1.85,
+  "frames": 167
+ },
+ "s2": {
+  "original_s": 600.6,
+  "reference_v1_s": 1147.8,
+  "ratio": 1.91,
+  "frames": 126
+ },
+ "s3": {
+  "original_s": 1118.8,
+  "reference_v1_s": 1227.7,
+  "ratio": 1.1,
+  "frames": 119
+ },
+ "s4": {
+  "original_s": 586.8,
+  "reference_v1_s": 591.5,
+  "ratio": 1.01,
+  "frames": 134
+ },
+ "s5": {
+  "original_s": 369.8,
+  "reference_v1_s": 655.9,
+  "ratio": 1.77,
+  "frames": 133
+ },
+ "s6": {
+  "original_s": 600.0,
+  "reference_v1_s": 1210.0,
+  "ratio": 2.02,
+  "frames": 159
+ },
+ "total_s1_s6": {
+  "original_s": 4190,
+  "reference_v1_s": 6523
+ },
+ "reused_without_render": [
+  "s7",
+  "s8",
+  "s9",
+  "s10",
+  "end"
+ ],
+ "machine": "4 vCPU cloud container, no GPU, Chromium SwiftShader software WebGL"
+}
