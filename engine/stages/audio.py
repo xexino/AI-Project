@@ -62,6 +62,13 @@ SFX: dict[str, tuple[str, str, dict[str, Any]]] = {
 }
 
 
+def seeded(spec: str, seed: int | None) -> str:
+    """Append a fixed seed to anoisesrc sources so synthesized noise is identical on every run (opt-in: sound.seed)."""
+    if seed is None or not spec.startswith("anoisesrc") or ":seed=" in spec:
+        return spec
+    return f"{spec}:seed={seed}"
+
+
 def sfx_spec(cue: dict, tl: dict) -> tuple[str, str]:
     preset = cue.get("preset")
     if preset not in SFX:

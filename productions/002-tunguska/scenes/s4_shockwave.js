@@ -25,7 +25,6 @@ export async function build({ dur, params = {} }) {
   flash.position.set(0, 300, 0); scene.add(flash);
   const flashLight = new THREE.PointLight('#fff2dc', 0, 0, 2); flashLight.position.set(0, 300, 0); scene.add(flashLight);
   const dust = RL ? dustWall(scene, { count: 170, height: 230, color: REF.shock.dust, groundAt: heightAt }) : null;
-  if (RL) scene.fog.color.set(REF.shock.fog);
   const cam = new THREE.PerspectiveCamera(48, 1080 / 1920, 1, 9000);
   const tw = 0.35; const tint = new THREE.Color(), live = new THREE.Color(1, 1, 1), downC = new THREE.Color(2.6, 2.2, 1.7);                                           // wave starts after the flash
   return { renderer, render(t) {
@@ -39,7 +38,15 @@ export async function build({ dur, params = {} }) {
       tint.copy(live).lerp(downC, k).multiplyScalar(0.75 + 0.5 * trees[i].tint); forest.mesh.setColorAt(i, tint); }
     forest.mesh.instanceColor.needsUpdate = true;
     ringMat.uniforms.uR.value = Math.max(R, 1); ringMat.uniforms.uW.value = 30 + R * 0.08; ringMat.uniforms.uA.value = t < tw ? 0 : Math.max(0, 1 - R / 700);
-    if (dust) dust.update(R, t < tw ? 0 : Math.max(0, 1 - R / 760) * 0.55, t);
+    // the dust front grows with the wave (no dome at small radius) and thins as it spreads
+    if (dust) dust.update(R, t < tw ? 0 : THREE.MathUtils.smoothstep(R, 90, 260) * Math.max(0, 1 - R / 760) * 0.6, t);
+    if (dust) {   // S4-specific: the front starts low and rises as it spreads (cinema.js default grows faster)
+      const f = (0.2 + 0.8 * Math.min(1, R / 450)) / (0.5 + 0.5 * Math.min(1, R / 200));
+      for (const sp of dust.sprites) {
+        const hh = sp.scale.x / (0.45 + 0.35 * sp.userData.j), g = sp.position.y - 0.42 * hh;
+        sp.scale.x *= f; sp.scale.y *= f; sp.position.y = g + 0.42 * hh * f;
+      }
+    }
     const f = Math.exp(-Math.max(0, t) * 2.2);
     flash.scale.setScalar(200 + (1 - f) * 600); flash.material.opacity = f; flashLight.intensity = f * 5e5;
     renderer.toneMappingExposure = 0.7 + f * 1.2;

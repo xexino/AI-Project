@@ -7,8 +7,8 @@ from pathlib import Path
 
 from ..pipeline import Context
 from ..providers.render import THREE_DIR
-from ..util import FFMPEG, commit_file, fingerprint, hash_tree, run, tmp_path
-from .audio import bed_graph, pad_graph, resolve_at, sfx_spec
+from ..util import FFMPEG, EngineError, commit_file, fingerprint, hash_tree, run, tmp_path
+from .audio import bed_graph, pad_graph, resolve_at, seeded, sfx_spec
 
 FONTS = THREE_DIR / "fonts"
 
@@ -47,10 +47,15 @@ def build_graph(ctx: Context, tl: dict, clips: list[Path], ass: Path, music: Pat
 
     A: list[str] = []
     ai = len(clips)
+    sound_seed = (ctx.project.data.get("sound") or {}).get("seed")
+    nseed = 0
     ctx.options["_audio_from"] = len(chain)            # statements before this index are video-only
 
     def src(spec: str) -> str:
-        nonlocal ai
+        nonlocal ai, nseed
+        if sound_seed is not None and spec.startswith("anoisesrc"):
+            nseed += 1
+            spec = seeded(spec, int(sound_seed) + 7 * nseed)
         A.extend(["-f", "lavfi", "-i", spec]); ai += 1
         return f"{ai - 1}:a"
 
@@ -82,8 +87,10 @@ def build_graph(ctx: Context, tl: dict, clips: list[Path], ass: Path, music: Pat
         A.extend(["-i", str(music)]); ai += 1
         chain.append(f"[{ai - 1}:a]aresample=48000,aformat=channel_layouts=stereo[mus0];[mus0][key{k}]sidechaincompress=threshold=0.06:ratio=4:attack=30:release=500[mus]")
         amix.append("[mus]")
+    base_seed = sound.get("seed")
     for i, cue in enumerate(sound.get("cues", [])):
         spec, filt = sfx_spec(cue, tl)
+        spec = seeded(spec, None if base_seed is None else int(base_seed) + 101 * i)
         lab = src(spec); ms = int(resolve_at(cue["at"], tl) * 1000)
         chain.append(f"[{lab}]{filt},adelay={ms}|{ms},apad=whole_dur={dur}[c{i}]"); amix.append(f"[c{i}]")
     q = ctx.project.data["qc"]
@@ -109,6 +116,25 @@ def measure_loudness(ctx: Context, tl: dict, clips: list[Path], ass: Path, music
     return json.loads(txt)
 
 
+def audio_from_master(ctx: Context, tl: dict) -> Path | None:
+    """sound.audio_from: reuse a base production's mastered soundtrack (experiments that change only visuals).
+    Refuses unless the base timeline is identical (same durations, words and scene starts)."""
+    rel = (ctx.project.data.get("sound") or {}).get("audio_from")
+    if not rel:
+        return None
+    from ..project import load
+    base = load(ctx.project.dir / rel)
+    btl = json.loads((base.work / "timeline.json").read_text())
+    key = lambda t: [t["duration"], [(s["id"], s["start"], s["clip"]) for s in t["scenes"]], [(w["word"], w["start"], w["end"]) for w in t["words"]]]
+    if key(btl) != key(tl):
+        raise EngineError(f"sound.audio_from: timeline differs from {base.id}; the soundtrack cannot be reused")
+    m = base.work / "master" / f"{base.id}_master.mp4"
+    if not m.is_file():
+        raise EngineError(f"sound.audio_from: base master not found: {m}")
+    ctx.log.info("audio_reused", source=str(m))
+    return m
+
+
 def assemble(ctx: Context) -> dict:
     tl = json.loads(ctx.work("timeline.json").read_text())
     fps = tl["fps"]
@@ -127,12 +153,21 @@ def assemble(ctx: Context) -> dict:
         ctx.log.info("loudness_measured", **{k: ctx.options["_loudness_measured"][k] for k in ("input_i", "input_tp", "input_lra")})
     inputs, chain = build_graph(ctx, tl, clips, ass, music)
     ctx.options.pop("_loudness_measured", None)
+    audio_src = audio_from_master(ctx, tl)
+    if audio_src is not None:                     # keep another production's finished soundtrack bit-for-bit
+        chain = chain[: ctx.options["_audio_from"]]
+        inputs = inputs[: 2 * len(clips)] + ["-i", str(audio_src)]
+        amap = f"{len(clips)}:a"
+    else:
+        amap = "[a]"
     graph = ctx.work("assemble", "filter.txt"); graph.write_text(";\n".join(chain))
     master = ctx.work("master", f"{ctx.project.id}_master.mp4")
     tmp = tmp_path(master)
-    run(FFMPEG + inputs + ["-filter_complex_script", str(graph), "-map", "[v]", "-map", "[a]",
+    graph.write_text(";\n".join(chain))
+    run(FFMPEG + inputs + ["-filter_complex_script", str(graph), "-map", "[v]", "-map", amap,
                            "-c:v", "libx264", "-preset", "slow", "-crf", "18", "-profile:v", "high", "-pix_fmt", "yuv420p", "-r", str(fps),
-                           "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-t", f"{tl['duration']:.3f}", "-movflags", "+faststart", str(tmp)],
+                           *(["-c:a", "copy"] if audio_src is not None else ["-c:a", "aac", "-b:a", "192k", "-ar", "48000"]),
+                           "-t", f"{tl['duration']:.3f}", "-movflags", "+faststart", str(tmp)],
         log=ctx.log, timeout=7200)
     commit_file(tmp, master)
     # delivery encode (smaller, upload-friendly; grain-tuned), audio copied bit-exact

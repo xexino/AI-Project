@@ -394,7 +394,8 @@
     }
    }
   ],
-  "loudness": "two_pass"
+  "loudness": "two_pass",
+  "audio_from": "../.."
  },
  "music": {
   "provider": "synth",

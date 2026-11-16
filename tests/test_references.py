@@ -125,3 +125,28 @@ def test_experiment_reuses_base_frames_and_passes_reference_params(mini, tmp_pat
         assert scene_params(ctx, ctx.project.scene("b")) == {}                # unreferenced scenes get no look
     finally:
         shutil.rmtree(base, ignore_errors=True)
+
+
+@needs_ffmpeg
+def test_audio_from_requires_identical_timeline(mini, tmp_path):
+    from engine.stages.assemble import audio_from_master
+    base = ROOT / "productions" / "_test_audio_base"
+    if base.exists():
+        shutil.rmtree(base)
+    shutil.copytree(mini, base)
+    try:
+        assert cmd_produce(Namespace(project=str(base), until="assemble", force=None, jobs=1, scenes=None, renderer=None, tts=None, aligner=None)) == 0
+        exp = base / "experiments" / "a"; exp.mkdir(parents=True)
+        p = json.loads((base / "project.json").read_text()); p.update(id="mini-audio-exp", scene_root="../..")
+        p["sound"]["audio_from"] = "../.."; p["visual"]["reuse_frames_from"] = ["../.."]
+        (exp / "project.json").write_text(json.dumps(p)); shutil.copy(base / "assets.json", exp / "assets.json")
+        assert cmd_produce(Namespace(project=str(exp), until="assemble", force=None, jobs=1, scenes=None, renderer=None, tts=None, aligner=None)) == 0
+        def audio_md5(v):
+            return subprocess.run(["ffmpeg", "-v", "error", "-i", str(v), "-map", "0:a", "-c", "copy", "-f", "md5", "-"], capture_output=True, text=True).stdout
+        assert audio_md5(exp / "work/master/mini-audio-exp_master.mp4") == audio_md5(base / "work/master/mini-fixture_master.mp4")
+        ctx = build_context(Namespace(project=str(exp), jobs=1, scenes=None, renderer=None, tts=None, aligner=None))
+        tl = json.loads((exp / "work/timeline.json").read_text()); tl["duration"] += 1
+        with pytest.raises(EngineError, match="timeline differs"):
+            audio_from_master(ctx, tl)
+    finally:
+        shutil.rmtree(base, ignore_errors=True)

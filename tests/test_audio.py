@@ -43,3 +43,11 @@ def test_score_synth_is_deterministic_and_bounded():
     a, b = synth_score(cfg, tl, sr=8000), synth_score(cfg, tl, sr=8000)
     assert a.shape == (24000, 2) and np.array_equal(a, b) and np.max(np.abs(a)) < 1.0
     assert note_hz("A4") == pytest.approx(440.0)
+
+
+def test_noise_seeding_is_opt_in_and_deterministic():
+    from engine.stages.audio import seeded
+    assert seeded("anoisesrc=c=pink:d=2:r=48000", None) == "anoisesrc=c=pink:d=2:r=48000"      # default: v1 behaviour
+    assert seeded("anoisesrc=c=pink:d=2:r=48000", 42) == "anoisesrc=c=pink:d=2:r=48000:seed=42"
+    assert seeded("sine=f=55:d=2", 42) == "sine=f=55:d=2"                                      # only noise sources
+    assert seeded("anoisesrc=c=brown:seed=7", 42).endswith("seed=7")                             # explicit seed kept
