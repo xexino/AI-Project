@@ -28,7 +28,7 @@ def probe(v: Path) -> dict:
     return json.loads(p.stdout)
 
 
-def technical_checks(v: Path, tl: dict, fmt: dict, q: dict) -> tuple[list[dict], dict]:
+def technical_checks(v: Path, tl: dict, fmt: dict, q: dict, brand_endcard: bool = False) -> tuple[list[dict], dict]:
     checks: list[dict] = []
     def check(name: str, ok, detail) -> None:
         checks.append({"check": name, "pass": bool(ok), "detail": detail})
@@ -59,9 +59,20 @@ def technical_checks(v: Path, tl: dict, fmt: dict, q: dict) -> tuple[list[dict],
     allowed = [(sc[i + 1]["start"] - 0.2, sc[i + 1]["start"] + sc[i]["transition"]["d"] + 0.2) for i in range(len(sc) - 1) if sc[i]["transition"]["type"] == "fadeblack"]
     ends = [s for s in sc if s["id"] == "end"]
     if ends:
+        # the brand end dot (last ~1.5 s of the exit scene) — unchanged v1 allowance
         allowed.append((ends[0]["start"] - 1.6, ends[0]["start"] + 0.8))
+        if brand_endcard:
+            # The required brand end card is an intentionally ink-dark brand asset (~98% of pixels below the
+            # detector threshold). It is verified by its own check below instead of by black detection.
+            allowed.append((ends[0]["start"] - 1.6, dur + 1.0))
     blacks = [b for b in blacks if not any(a <= float(b[0]) and float(b[1]) <= z for a, z in allowed)]
-    check("no unintended black segments", len(blacks) == 0, blacks or "none")
+    check("no unintended black segments (content before the brand end card)", len(blacks) == 0, blacks or "none")
+    if ends and brand_endcard:
+        t0 = max(dur - 0.9, ends[0]["start"])
+        bf = _sh("ffmpeg", "-hide_banner", "-ss", f"{t0:.2f}", "-i", str(v), "-vf", "fps=8,blackframe=amount=0:threshold=32,metadata=print:key=lavfi.blackframe.pblack", "-an", "-f", "null", "-").stderr
+        pb = [int(x) for x in re.findall(r"pblack=(\d+)", bf)]
+        ok = bool(pb) and max(pb) < 100 and min(pb) <= 98
+        check("brand end card shows its wordmark (not blank)", ok, f"dark-pixel share {min(pb) if pb else '?'}-{max(pb) if pb else '?'}% in the final second")
     fz = _sh("ffmpeg", "-hide_banner", "-i", str(v), "-vf", "freezedetect=n=0.0005:d=0.6", "-an", "-f", "null", "-").stderr
     freezes = re.findall(r"freeze_start: ([\d.]+)", fz)
     check("no frozen video > 0.6s", len(freezes) == 0, freezes or "none")
@@ -130,7 +141,9 @@ def structural_checks(ctx: Context, tl: dict) -> list[dict]:
 def qc(ctx: Context) -> dict:
     tl = json.loads(ctx.work("timeline.json").read_text())
     final = ctx.work("master", "final_video.mp4")
-    tech, metrics = technical_checks(final, tl, ctx.project.fmt, ctx.project.data["qc"])
+    req = ctx.project.data["brand"].get("required_endcard_module")
+    tech, metrics = technical_checks(final, tl, ctx.project.fmt, ctx.project.data["qc"],
+                                     brand_endcard=bool(req) and ctx.project.scenes[-1]["module"] == req)
     master_probe = probe(ctx.work("master", f"{ctx.project.id}_master.mp4"))
     struct = structural_checks(ctx, tl)
     fc = json.loads(ctx.work("editorial", "factcheck.json").read_text())

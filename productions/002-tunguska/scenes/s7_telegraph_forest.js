@@ -6,7 +6,10 @@ import { particles } from 'oddlight/nature.js';
 export async function build({ dur }) {
   const renderer = makeRenderer(0.78); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   const { scene } = world({ renderer, skyEl: 3.5, skyAz: 250, fog: 0.011, fogColor: '#c9b49a', size: 900, segments: 240 });
-  const trunks = treesIn({ x0: -140, x1: 140, z0: -140, z1: 140, spacing: 5.5, seed: 71, scale: [14, 22], keep: (x, z) => Math.hypot(x, z) > BOG_R * 0.55 && Math.hypot(x, z) < 140 });
+  // keep a clear corridor along the camera path and its line of sight (no trunk may fill the lens)
+  const corridor = (x, z) => { let best = 1e9; for (let k = 0; k <= 20; k++) { const u = k / 20, cx = 92 - u * 16, cz = 26 + u * 6;
+      for (let d = 0; d <= 26; d += 2) { const lx = cx - d * 0.88, lz = cz - d * 0.47; best = Math.min(best, Math.hypot(x - lx, z - lz) + (d < 10 ? 0 : 3)); } } return best; };
+  const trunks = treesIn({ x0: -140, x1: 140, z0: -140, z1: 140, spacing: 5.5, seed: 71, scale: [14, 22], keep: (x, z) => Math.hypot(x, z) > BOG_R * 0.55 && Math.hypot(x, z) < 140 && corridor(x, z) > 5 });
   const dead = makeForest(trunks, { heightAt, geometry: geo.dead(), material: new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.92, color: '#a59584' }) });
   scene.add(dead.mesh);
   scene.add(new THREE.HemisphereLight('#a5b0c0', '#2c2419', 0.45));

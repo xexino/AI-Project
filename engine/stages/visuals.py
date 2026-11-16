@@ -6,6 +6,7 @@ same fingerprint resumes from its first missing frame; a scene whose inputs chan
 from __future__ import annotations
 
 import json
+import re
 import shutil
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -16,18 +17,36 @@ from ..providers.render import THREE_DIR
 from ..util import EngineError, atomic_write_text, fingerprint, hash_tree
 
 
-def _engine_lib_hash() -> str:
-    files = list((THREE_DIR / "lib").glob("*.js")) + list((THREE_DIR / "builtin").glob("*.js")) + [THREE_DIR / "index.html", THREE_DIR / "render.mjs"]
-    return hash_tree(files)
+IMPORT_RE = re.compile(r"""(?:import|export)[^'"]*?from\s*['"]([^'"]+)['"]|import\(\s*['"]([^'"]+)['"]\s*\)""")
+
+
+def scene_dependencies(project_dir: Path, module: str) -> list[Path]:
+    """The scene module plus every local file it imports, transitively ('oddlight/x.js' -> engine/three/lib/x.js).
+    The host page and renderer are always included. 'three' itself is pinned by package-lock."""
+    if module.startswith("builtin:"):
+        start = THREE_DIR / "builtin" / f"{module.split(':', 1)[1]}.js"
+    else:
+        start = project_dir / module
+    seen: set[Path] = set()
+    todo = [start.resolve()]
+    while todo:
+        f = todo.pop()
+        if f in seen or not f.is_file():
+            continue
+        seen.add(f)
+        for a, b in IMPORT_RE.findall(f.read_text(encoding="utf-8")):
+            spec = a or b
+            if spec.startswith("oddlight/"):
+                todo.append((THREE_DIR / "lib" / spec.split("/", 1)[1]).resolve())
+            elif spec.startswith("."):
+                todo.append((f.parent / spec).resolve())
+    return sorted(seen) + [THREE_DIR / "index.html", THREE_DIR / "render.mjs"]
 
 
 def scene_fingerprint(ctx: Context, s: dict, clip: float) -> str:
     p = ctx.project
-    mod = s["module"]
-    mod_hash = "builtin" if mod.startswith("builtin:") else hash_tree([p.dir / mod])
-    libs = list((p.dir / "scenes" / "lib").glob("*.js")) if (p.dir / "scenes" / "lib").is_dir() else []
-    return fingerprint(mod, mod_hash, hash_tree(libs) if libs else "", _engine_lib_hash(), round(clip, 4),
-                       p.fmt["fps"], p.fmt["width"], p.fmt["height"], s.get("params", {}))
+    deps = scene_dependencies(p.dir, s["module"])
+    return fingerprint(s["module"], hash_tree(deps), round(clip, 4), p.fmt["fps"], p.fmt["width"], p.fmt["height"], s.get("params", {}))
 
 
 def scene_words(tl: dict, seg: dict) -> list[dict]:

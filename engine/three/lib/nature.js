@@ -57,7 +57,8 @@ export function coniferGeometry({ height = 1, tiers = 6, radius = 0.26, trunk = 
   const parts = [];
   const bark = new THREE.Color('#4a3a2e'), needle = new THREE.Color('#1b2a20'), needleTip = new THREE.Color('#2b3b29');
   const paint = (geo, color) => { const n = geo.attributes.position.count, a = new Float32Array(n * 3), pp = geo.attributes.position; for (let i = 0; i < n; i++) { const v = 0.82 + 0.36 * valueNoise(pp.getX(i) * 40 + i * 0.37, pp.getY(i) * 31, seed + 2); a[i * 3] = color.r * v; a[i * 3 + 1] = color.g * v; a[i * 3 + 2] = color.b * v; } geo.setAttribute('color', new THREE.BufferAttribute(a, 3)); return geo; };
-  const t = new THREE.CylinderGeometry(trunk * 0.6, trunk, height, 6, 1, true); t.translate(0, height / 2, 0); parts.push(paint(t, bark));
+  const th = stripped ? height : height * 0.84;               // living trees: trunk ends inside the top tier
+  const t = new THREE.CylinderGeometry(trunk * 0.6, trunk, th, 6, 1, true); t.translate(0, th / 2, 0); parts.push(paint(t, bark));
   if (!stripped) {
     for (let k = 0; k < tiers; k++) {
       const f = k / tiers, r = radius * (1 - f * 0.82), hh = height * 0.26;

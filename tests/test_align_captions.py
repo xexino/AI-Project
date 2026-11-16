@@ -52,3 +52,9 @@ def test_ass_colors_match_v1_constants():
     assert ass_color("#ede6d6") == "&H00D6E6ED"
     assert ass_color("#ff8a1f") == "&H001F8AFF"
     assert ass_color("#05141a", 0.6) == "&H661A1405"
+
+
+def test_same_length_gap_takes_recognised_timing():
+    heard = [(" When", 0, .1), (" Leonid", .1, .44), (" Killick", .44, .86), (" finally", .86, 1.4)]
+    out = align_to_script("When Leonid Kulik finally", heard, 1.5)
+    assert out[2]["word"] == "Kulik" and out[2]["matched"] and out[2]["start"] == .44 and out[2]["end"] == .86

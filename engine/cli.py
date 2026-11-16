@@ -9,6 +9,7 @@
   python -m engine queue add|run|status|retry ...           sequential local batch queue (SQLite)
   python -m engine customers                                list customers / brands
   python -m engine dashboard [--out var/dashboard.html]     static HTML overview
+  python -m engine compare --a A.mp4 --b B.mp4 --out DIR    visual comparison package (evenly sampled frames)
 Publishing is not implemented as an action: packages are prepared for manual upload only."""
 from __future__ import annotations
 
@@ -158,6 +159,9 @@ def main(argv: list[str] | None = None) -> int:
     sp.add_argument("--project"); sp.add_argument("--max-attempts", type=int, default=2); sp.add_argument("--job", type=int)
     sp.add_argument("--renderer"); sp.add_argument("--tts"); sp.add_argument("--aligner"); sp.add_argument("--jobs", type=int, default=2)
     sub.add_parser("customers")
+    sp = sub.add_parser("compare"); sp.add_argument("--a", required=True); sp.add_argument("--b", required=True)
+    sp.add_argument("--out", required=True); sp.add_argument("--n", type=int, default=12)
+    sp.add_argument("--a-name", default="original"); sp.add_argument("--b-name", default="new")
     sp = sub.add_parser("dashboard"); sp.add_argument("--out", default=str(REPO_DIR / "var" / "dashboard.html"))
     a = ap.parse_args(argv)
     try:
@@ -178,6 +182,10 @@ def main(argv: list[str] | None = None) -> int:
             for c in customers.list_customers():
                 print(f"{c['id']:<16} {c.get('name', '')}  {c.get('error', '')}")
             return 0
+        if a.cmd == "compare":
+            from .compare import build
+            res = build(Path(a.a), Path(a.b), Path(a.out), a.n, a.a_name, a.b_name)
+            print(json.dumps({k: v for k, v in res.items() if k != "side_by_side"}, indent=1)); return 0
         if a.cmd == "dashboard":
             from .dashboard import write_dashboard
             print(write_dashboard(Path(a.out)))

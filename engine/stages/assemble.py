@@ -47,6 +47,7 @@ def build_graph(ctx: Context, tl: dict, clips: list[Path], ass: Path, music: Pat
 
     A: list[str] = []
     ai = len(clips)
+    ctx.options["_audio_from"] = len(chain)            # statements before this index are video-only
 
     def src(spec: str) -> str:
         nonlocal ai
@@ -86,9 +87,26 @@ def build_graph(ctx: Context, tl: dict, clips: list[Path], ass: Path, music: Pat
         lab = src(spec); ms = int(resolve_at(cue["at"], tl) * 1000)
         chain.append(f"[{lab}]{filt},adelay={ms}|{ms},apad=whole_dur={dur}[c{i}]"); amix.append(f"[c{i}]")
     q = ctx.project.data["qc"]
-    chain.append(f"[vo]{''.join(amix)}amix=inputs={len(amix) + 1}:normalize=0,atrim=0:{dur},"
-                 f"loudnorm=I={q['loudness_lufs']:g}:TP=-1.5:LRA=11,aresample=48000[a]")
+    measured = ctx.options.get("_loudness_measured")
+    ln = f"loudnorm=I={q['loudness_lufs']:g}:TP=-1.5:LRA=11"
+    if measured == "measure":
+        ln += ":print_format=json"
+    elif measured:
+        ln += (f":measured_I={measured['input_i']}:measured_TP={measured['input_tp']}:measured_LRA={measured['input_lra']}"
+               f":measured_thresh={measured['input_thresh']}:offset={measured['target_offset']}:linear=true")
+    chain.append(f"[vo]{''.join(amix)}amix=inputs={len(amix) + 1}:normalize=0,atrim=0:{dur},{ln},aresample=48000[a]")
     return inputs + A, chain
+
+
+def measure_loudness(ctx: Context, tl: dict, clips: list[Path], ass: Path, music: Path | None) -> dict:
+    """First pass of two-pass loudness normalisation: render the audio graph only and read loudnorm's measurement."""
+    ctx.options["_loudness_measured"] = "measure"
+    inputs, chain = build_graph(ctx, tl, clips, ass, music)
+    audio = chain[ctx.options["_audio_from"]:]
+    graph = ctx.work("assemble", "filter_measure.txt"); graph.write_text(";\n".join(audio))
+    p = run(["ffmpeg", "-hide_banner", "-loglevel", "info", "-y"] + inputs + ["-filter_complex_script", str(graph), "-map", "[a]", "-f", "null", "-"], log=ctx.log, timeout=3600)
+    txt = p.stderr[p.stderr.rfind("{"): p.stderr.rfind("}") + 1]
+    return json.loads(txt)
 
 
 def assemble(ctx: Context) -> dict:
@@ -103,7 +121,12 @@ def assemble(ctx: Context) -> dict:
         commit_file(tmp, c); clips.append(c)
     music = ctx.work("audio", "music.wav")
     music = music if (ctx.project.data.get("music") and music.exists()) else None
-    inputs, chain = build_graph(ctx, tl, clips, ctx.work("captions", "captions.ass"), music)
+    ass = ctx.work("captions", "captions.ass")
+    if (ctx.project.data.get("sound") or {}).get("loudness") == "two_pass":
+        ctx.options["_loudness_measured"] = measure_loudness(ctx, tl, clips, ass, music)
+        ctx.log.info("loudness_measured", **{k: ctx.options["_loudness_measured"][k] for k in ("input_i", "input_tp", "input_lra")})
+    inputs, chain = build_graph(ctx, tl, clips, ass, music)
+    ctx.options.pop("_loudness_measured", None)
     graph = ctx.work("assemble", "filter.txt"); graph.write_text(";\n".join(chain))
     master = ctx.work("master", f"{ctx.project.id}_master.mp4")
     tmp = tmp_path(master)

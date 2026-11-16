@@ -13,15 +13,15 @@ export async function build({ dur }) {
   Object.assign(fireLight.shadow.camera, { left: -260, right: 260, top: 260, bottom: -260, near: 1, far: 3000 }); fireLight.shadow.bias = -0.0005; fireLight.shadow.normalBias = 0.8;
   scene.add(fireLight, fireLight.target);
   const fb = fireball(scene, { size: 16, trail: 46, smoke: 70 });
-  const A = new THREE.Vector3(-560, 1250, -2500), B = new THREE.Vector3(330, 170, -2700);
-  const t0 = dur * 0.18, t1 = dur * 1.15;
+  const A = new THREE.Vector3(-300, 760, -2500), B = new THREE.Vector3(330, 170, -2700);
+  const t0 = -0.4, t1 = dur * 1.12;                        // already streaking in on the first frame (hook)
   const path = (t) => new THREE.Vector3().lerpVectors(A, B, ease((t - t0) / (t1 - t0)));
   const cam = new THREE.PerspectiveCamera(46, 1080 / 1920, 1, 8000);
   return { renderer, render(t) {
     const p = easeInOut(t / dur);
     const cz = 80 - p * 140;
     cam.position.set(-10 + p * 25, heightAt(0, cz) + 105 - p * 12, cz); cam.lookAt(40 + p * 30, 40, cz - 900);
-    const on = THREE.MathUtils.smoothstep(t, t0 - 0.2, t0 + 0.6);
+    const on = THREE.MathUtils.smoothstep(t, -0.6, 0.15);
     const head = fb.place(path, t, { intensity: on });
     fireLight.position.copy(head); fireLight.target.position.set(cam.position.x, 0, cz - 300);
     fireLight.intensity = on * (2.2 + 0.4 * Math.sin(t * 17));

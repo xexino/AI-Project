@@ -38,7 +38,10 @@ export async function build({ dur, params = {} }) {
   const cam = new THREE.PerspectiveCamera(50, 1080 / 1920, 1, 20000);
   return { renderer, render(t) {
     const p = easeInOut(t / dur);
-    cam.position.set(260 - p * 60, 1650 - p * 250, 420 - p * 200); cam.lookAt(BURST.x - 40 + p * 30, BURST.y - 120 - p * 200, BURST.z);
+    // after the burst the camera sinks through the cloud deck toward the forest below the blast
+    const down = easeInOut((t - tB - 0.6) / Math.max(0.1, dur - tB - 0.6));
+    cam.position.set(260 - p * 60 - down * 80, 1650 - p * 150 - down * 1000, 420 - p * 200 + down * 120);
+    cam.lookAt(BURST.x - 40 + p * 30, BURST.y - 120 - p * 100 - down * 520, BURST.z + down * 150);
     const pre = t < tB;
     const head = fb.place(path, Math.min(t, tB), { intensity: pre ? 1 : Math.max(0, 1 - (t - tB) * 4), spacing: 0.03, smokeSpacing: 0.05 });
     rock.position.copy(head); rock.visible = pre; rock.rotation.set(t * 0.7, t * 1.1, 0);

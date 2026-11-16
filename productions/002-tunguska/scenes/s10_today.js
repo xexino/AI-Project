@@ -16,6 +16,9 @@ export async function build({ dur }) {
   const SUNP = new THREE.Vector3(-1400, 60, -2600);
   const cam = new THREE.PerspectiveCamera(46, 1080 / 1920, 1, 9000);
   const fog0 = scene.fog.density;
+  // fade to the brand ink colour (#05141a), never to crushed black, so the cut to the end card is seamless
+  const inkMat = new THREE.MeshBasicMaterial({ color: '#05141a', transparent: true, opacity: 0, depthTest: false, depthWrite: false, fog: false, toneMapped: false });
+  const ink = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), inkMat); ink.position.z = -1.01; ink.renderOrder = 5; cam.add(ink); scene.add(cam);
   return { renderer, render(t) {
     const u = t / dur, p = easeInOut(u);
     const el = 1.5 - u * 3.2; sky.set(el, 265);
@@ -25,7 +28,7 @@ export async function build({ dur }) {
     cam.lookAt(look);
     const dark = ease((u - 0.55) / 0.33);
     scene.fog.density = fog0 + dark * dark * 0.05; scene.fog.color.set('#c49a7a').lerp(new THREE.Color('#05141a'), dark);
-    renderer.toneMappingExposure = 0.7 * (1 - dark * 0.92);
+    renderer.toneMappingExposure = 0.7 * (1 - dark * 0.5); inkMat.opacity = Math.min(1, dark * 1.05);
     dot.position.copy(SUNP); const d = cam.position.distanceTo(SUNP);
     dot.material.opacity = ease((u - 0.5) / 0.3); dot.scale.setScalar(d * 0.085 * (1 + 0.04 * Math.sin(t * 3)));
     renderer.render(scene, cam);

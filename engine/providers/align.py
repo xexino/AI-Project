@@ -74,10 +74,21 @@ def align_to_script(text: str, heard: list[tuple[str, float, float]], total: flo
     a = [_norm(w) for w in script]
     b = [_norm(w) for w, _, _ in heard]
     times: list[tuple[float, float] | None] = [None] * len(script)
-    for blk in difflib.SequenceMatcher(None, a, b, autojunk=False).get_matching_blocks():
+    blocks = [blk for blk in difflib.SequenceMatcher(None, a, b, autojunk=False).get_matching_blocks()]
+    for blk in blocks:
         for i in range(blk.size):
             _, s, e = heard[blk.b + i]
             times[blk.a + i] = (s, e)
+    # gaps between two matched anchors with the same number of words on both sides (e.g. a proper name the
+    # recogniser spelled differently: 'Kulik' heard as 'Killick') take the recognised word's timing one-to-one
+    prev_a = prev_b = 0
+    for blk in blocks:
+        ga, gb = blk.a - prev_a, blk.b - prev_b
+        if 0 < ga == gb:
+            for i in range(ga):
+                _, s, e = heard[prev_b + i]
+                times[prev_a + i] = (s, e)
+        prev_a, prev_b = blk.a + blk.size, blk.b + blk.size
     matched = [t is not None for t in times]
     for i in range(len(times)):
         if times[i] is None:
