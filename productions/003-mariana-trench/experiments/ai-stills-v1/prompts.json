@@ -1,0 +1,14 @@
+{
+ "style": "cinematic deep sea documentary photograph, natural colours, volumetric light, film grain, high detail, vertical composition",
+ "negative": "text, watermark, logo, signature, cartoon, illustration, painting, diver, person, bubbles text",
+ "shots": [
+  {"id": "b1", "seed": 11, "prompt": "endless open Pacific Ocean seen from just above the water at morning, calm silver-blue swell reaching a hazy horizon, soft sunlight on the surface, no land, no boats"},
+  {"id": "b2", "seed": 12, "prompt": "view from just below the ocean surface looking down into the deep blue abyss, faint sun rays fading into darkness, particles in the water, nothing else"},
+  {"id": "b3", "seed": 13, "prompt": "enormous deep ocean trench seen from above, steep dark rock walls descending into a narrow flat-floored basin far below, dim blue light, immense scale"},
+  {"id": "b4", "seed": 14, "prompt": "looking up from the deep ocean at one last faint shaft of sunlight far above, fading into pitch black water, marine snow particles"},
+  {"id": "b5", "seed": 15, "prompt": "deep sea research lander descending in total darkness, aluminium frame with orange buoyancy floats, round analogue pressure gauge in the foreground, two LED lamps lighting the water, cyan backscatter"},
+  {"id": "b6", "seed": 16, "prompt": "swarm of small pale cream shrimp-like amphipod crustaceans gathering around a mesh bait bag in the bright LED light of a deep sea lander, black water, macro photograph"},
+  {"id": "b7", "seed": 17, "prompt": "a single translucent pale pink snailfish with a large head, small eyes and tapering tadpole body gliding through the beam of a deep sea lamp, dark blue-black water"},
+  {"id": "b8", "seed": 18, "prompt": "lander lights illuminating flat pale grey-green fine sediment on the floor of the deepest ocean trench, pool of light fading into vast darkness, marine snow, no animals"}
+ ]
+}
