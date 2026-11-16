@@ -1,0 +1,502 @@
+{
+ "schema_version": 1,
+ "id": "001-greenland-shark",
+ "customer_id": "oddlight",
+ "topic": "Greenland shark longevity measured by eye-lens radiocarbon dating",
+ "title": "This Shark Was Born Before the Steam Engine",
+ "language": "en",
+ "target_audience": "18-40, curious international viewers of science shorts",
+ "format": {
+  "aspect_ratio": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 24,
+  "target_duration_s": [
+   20,
+   60
+  ]
+ },
+ "narration": {
+  "provider": "kokoro",
+  "voice": "bm_george",
+  "lang": "en-gb",
+  "speed": 1.0,
+  "aligner": "whisper"
+ },
+ "visual": {
+  "renderer": "threejs",
+  "style": "Dark underwater documentary, single warm light source per shot, film grain.",
+  "grade": {
+   "grain": 5,
+   "vignette": "PI/4.6",
+   "contrast": 1.03,
+   "saturation": 1.04,
+   "bloom": 0
+  }
+ },
+ "scenes": [
+  {
+   "id": "s1",
+   "beat": "HOOK",
+   "text": "There's a shark in the Arctic... that is probably older than the United States.",
+   "lead": 0.5,
+   "tail": 0.35,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.5
+   },
+   "module": "scenes/s1.js",
+   "claims": [
+    "c_age_hook"
+   ],
+   "visual_goal": "Hook: a silhouette glides into the single warm shaft of light under the ice."
+  },
+  {
+   "id": "s2",
+   "beat": "SETUP",
+   "text": "It's called the Greenland shark. It lives in water close to freezing...",
+   "lead": 0.35,
+   "tail": 0.15,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.5
+   },
+   "module": "scenes/s2.js",
+   "claims": [
+    "c_habitat"
+   ],
+   "visual_goal": "Side profile tracking shot, rim light from above."
+  },
+  {
+   "id": "s3",
+   "beat": "SETUP",
+   "text": "and moves slower than you walk.",
+   "lead": 0.35,
+   "tail": 0.55,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.6
+   },
+   "module": "scenes/s3.js",
+   "claims": [
+    "c_speed"
+   ],
+   "visual_goal": "Vast ice ceiling; the shark small, nearly still: slowness and cold."
+  },
+  {
+   "id": "s4",
+   "beat": "STORY",
+   "text": "For decades, no one could tell its age. Sharks don't have the bones scientists usually count.",
+   "lead": 0.4,
+   "tail": 0.3,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.5
+   },
+   "module": "scenes/s4.js",
+   "claims": [
+    "c_no_bones"
+   ],
+   "visual_goal": "Dark lab table, desk lamp: tally marks crossed out (no bones to count)."
+  },
+  {
+   "id": "s5",
+   "beat": "STORY",
+   "text": "So in twenty sixteen, researchers looked into its eyes.",
+   "lead": 0.35,
+   "tail": 0.3,
+   "transition_out": {
+    "type": "zoomin",
+    "d": 0.6
+   },
+   "module": "scenes/s5.js",
+   "claims": [
+    "c_lens_study"
+   ],
+   "visual_goal": "Push-in on the clouded eye with its parasite."
+  },
+  {
+   "id": "s6",
+   "beat": "STORY",
+   "text": "The core of the eye lens forms before birth, and never changes. Carbon dating it gave an answer.",
+   "lead": 0.4,
+   "tail": 0.35,
+   "transition_out": {
+    "type": "fadewhite",
+    "d": 0.5
+   },
+   "module": "scenes/s6.js",
+   "claims": [
+    "c_lens_method"
+   ],
+   "visual_goal": "Inside the lens: glass layers form outward from a glowing core."
+  },
+  {
+   "id": "s7",
+   "beat": "PAYOFF",
+   "text": "The largest shark they studied was around four hundred years old. Give or take a century.",
+   "lead": 0.5,
+   "tail": 0.8,
+   "transition_out": {
+    "type": "cut",
+    "d": 0.0
+   },
+   "module": "scenes/s7.js",
+   "claims": [
+    "c_largest"
+   ],
+   "visual_goal": "Split cutaway: centuries pass above (ships, skies), the shark barely moves below."
+  },
+  {
+   "id": "s8",
+   "beat": "PAYOFF",
+   "text": "And it doesn't become an adult until it's about one hundred and fifty.",
+   "lead": 0.35,
+   "tail": 0.4,
+   "transition_out": {
+    "type": "fadeblack",
+    "d": 0.6
+   },
+   "module": "scenes/s8.js",
+   "claims": [
+    "c_maturity"
+   ],
+   "visual_goal": "Close pass of the ancient, scarred head."
+  },
+  {
+   "id": "s9",
+   "beat": "EXIT",
+   "text": "So the oldest ones down there were young before the steam engine... and they're still in no hurry.",
+   "lead": 0.45,
+   "tail": 1.4,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.6
+   },
+   "module": "scenes/s9.js",
+   "claims": [
+    "c_steam"
+   ],
+   "visual_goal": "The shark sinks away; the light collapses into the ODDLIGHT dot."
+  },
+  {
+   "id": "end",
+   "beat": "END",
+   "text": "",
+   "lead": 0,
+   "tail": 2.6,
+   "transition_out": null,
+   "module": "builtin:endcard",
+   "params": {
+    "footer": [
+     "Source: Nielsen et al., Science (2016)",
+     "Animated reconstruction"
+    ]
+   },
+   "non_factual": true
+  }
+ ],
+ "overlays": [
+  {
+   "type": "label",
+   "text": "lens nucleus  ·  formed before birth",
+   "at": {
+    "scene_start": "s6",
+    "offset": 2.6
+   },
+   "duration": 3.6
+  },
+  {
+   "type": "counter",
+   "scene": "s7",
+   "from": 1624,
+   "to": 2016,
+   "span_fraction": 0.86
+  },
+  {
+   "type": "big",
+   "text": "≈ 400 years",
+   "at": {
+    "word": "four",
+    "scene": "s7"
+   },
+   "until": {
+    "scene_start": "s8"
+   },
+   "y": 1093
+  },
+  {
+   "type": "bigsub",
+   "text": "± 120",
+   "at": {
+    "word": "century",
+    "scene": "s7",
+    "offset": -0.3
+   },
+   "until": {
+    "scene_start": "s8"
+   },
+   "y": 1213
+  }
+ ],
+ "sound": {
+  "bed": {
+   "preset": "drone_bed"
+  },
+  "pad": {
+   "start": {
+    "scene_start": "s7"
+   },
+   "freqs": [
+    110,
+    164.81,
+    246.94,
+    261.63
+   ],
+   "vols": [
+    0.1,
+    0.07,
+    0.04,
+    0.035
+   ]
+  },
+  "cues": [
+   {
+    "preset": "bell",
+    "at": {
+     "t": 0.25
+    }
+   },
+   {
+    "preset": "bell_hi",
+    "at": {
+     "t": 0.25
+    }
+   },
+   {
+    "preset": "crack",
+    "at": {
+     "word": "walk",
+     "scene": "s3",
+     "offset": 0.1
+    }
+   },
+   {
+    "preset": "thump",
+    "at": {
+     "word": "walk",
+     "scene": "s3",
+     "offset": 0.1
+    }
+   },
+   {
+    "preset": "rise",
+    "at": {
+     "scene_start": "s5"
+    },
+    "d": "scene_clip:s5"
+   },
+   {
+    "preset": "pulse",
+    "at": {
+     "word": "answer",
+     "scene": "s6"
+    }
+   },
+   {
+    "preset": "shimmer",
+    "at": {
+     "scene_start": "s6",
+     "offset": 0.3
+    }
+   },
+   {
+    "preset": "whoosh",
+    "at": {
+     "scene_start": "s7",
+     "offset": -0.4
+    }
+   },
+   {
+    "preset": "boom",
+    "at": {
+     "word": "century",
+     "scene": "s7"
+    }
+   },
+   {
+    "preset": "boom_noise",
+    "at": {
+     "word": "century",
+     "scene": "s7"
+    }
+   },
+   {
+    "preset": "bell",
+    "at": {
+     "scene_start": "end",
+     "offset": 0.2
+    },
+    "vol": 0.14,
+    "fade": 3.0
+   },
+   {
+    "preset": "bell_low",
+    "at": {
+     "scene_start": "end",
+     "offset": 0.2
+    }
+   }
+  ]
+ },
+ "music": null,
+ "sources": [
+  {
+   "id": "nielsen2016",
+   "citation": "Nielsen J. et al. (2016) Eye lens radiocarbon reveals centuries of longevity in the Greenland shark (Somniosus microcephalus). Science 353(6300):702-704",
+   "doi": "10.1126/science.aaf1703",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/27516602/",
+   "accessed": "2026-11-16"
+  },
+  {
+   "id": "watanabe2012",
+   "citation": "Watanabe Y.Y., Lydersen C., Fisk A.T., Kovacs K.M. (2012) The slowest fish: swim speed and tail-beat frequency of Greenland sharks. J. Exp. Mar. Biol. Ecol. 426-427:5-11",
+   "doi": "10.1016/j.jembe.2012.04.021",
+   "url": "https://scholar.uwindsor.ca/glierpub/385",
+   "accessed": "2026-11-16"
+  },
+  {
+   "id": "britannica_newcomen",
+   "citation": "Encyclopaedia Britannica, \"Newcomen engine\" (first practical steam engine, 1712)",
+   "url": "https://www.britannica.com/technology/Newcomen-engine",
+   "accessed": "2026-11-16"
+  }
+ ],
+ "claims": [
+  {
+   "id": "c_age_hook",
+   "text": "The oldest Greenland sharks are probably older than the United States (1776): minimum lifespan 272 years.",
+   "sources": [
+    "nielsen2016"
+   ],
+   "status": "verified",
+   "note": "Even the 272-year minimum predates 1776."
+  },
+  {
+   "id": "c_habitat",
+   "text": "Greenland sharks live in near-freezing Arctic/North Atlantic water.",
+   "sources": [
+    "nielsen2016",
+    "watanabe2012"
+   ],
+   "status": "verified"
+  },
+  {
+   "id": "c_speed",
+   "text": "They cruise at ~0.34 m/s (~1.2 km/h), slower than human walking pace.",
+   "sources": [
+    "watanabe2012"
+   ],
+   "status": "verified"
+  },
+  {
+   "id": "c_no_bones",
+   "text": "Sharks lack the calcified bony structures normally used for age counting, so their age was long unknown.",
+   "sources": [
+    "nielsen2016"
+   ],
+   "status": "verified"
+  },
+  {
+   "id": "c_lens_study",
+   "text": "In 2016 researchers radiocarbon-dated the eye lens nuclei of Greenland sharks.",
+   "sources": [
+    "nielsen2016"
+   ],
+   "status": "verified"
+  },
+  {
+   "id": "c_lens_method",
+   "text": "The eye lens nucleus forms before birth and is metabolically inert, so it can be radiocarbon dated.",
+   "sources": [
+    "nielsen2016"
+   ],
+   "status": "verified"
+  },
+  {
+   "id": "c_largest",
+   "text": "The largest shark studied (502 cm) was estimated at 392 ± 120 years.",
+   "sources": [
+    "nielsen2016"
+   ],
+   "status": "verified"
+  },
+  {
+   "id": "c_maturity",
+   "text": "Sexual maturity is reached at roughly 156 ± 22 years.",
+   "sources": [
+    "nielsen2016"
+   ],
+   "status": "verified"
+  },
+  {
+   "id": "c_steam",
+   "text": "A ~400-year-old shark (born c. 1620) would have been young (pre-maturity) when the first practical steam engine appeared (1712).",
+   "sources": [
+    "nielsen2016",
+    "britannica_newcomen"
+   ],
+   "status": "verified",
+   "note": "Narration hedges: 'the oldest ones ... were young before the steam engine'."
+  }
+ ],
+ "cover": {
+  "scene": "s1",
+  "frame": 110,
+  "lines": [
+   "Older than the",
+   "United States."
+  ],
+  "scrim": false
+ },
+ "publishing": {
+  "enabled": false,
+  "platforms": {
+   "tiktok": {
+    "caption": "This shark may be older than the United States. Scientists found out by looking into its eyes. #greenlandshark #ocean #science #animals #oddlight",
+    "ai_label": true
+   },
+   "youtube_shorts": {
+    "title": "This Shark Was Born Before the Steam Engine",
+    "description": "The Greenland shark may live for centuries. In 2016, scientists carbon-dated the lenses of its eyes, which form before birth and never change. The largest one they studied was about 400 years old (give or take 120).\n\nSource: Nielsen et al., Science (2016)\nAnimated reconstruction. Narration voice is AI-generated.\n\n#shorts #greenlandshark #science",
+    "tags": [
+     "greenland shark",
+     "oldest vertebrate",
+     "shark lifespan",
+     "deep sea",
+     "arctic ocean",
+     "science facts"
+    ]
+   },
+   "instagram_reels": {
+    "caption": "There's a shark in the Arctic that's probably older than the United States. Researchers dated it through the lens of its eye.\n\nSource: Nielsen et al., Science (2016). Animated reconstruction; AI narration voice.\n\n#greenlandshark #oceanlife #sciencefacts #arctic #deepsea #oddlight"
+   },
+   "facebook_reels": {
+    "caption": "There's a shark in the Arctic that's probably older than the United States. Source: Nielsen et al., Science (2016). Animated reconstruction; AI narration voice."
+   },
+   "x": {
+    "post": "A shark swimming under the Arctic ice right now may have been born before the steam engine. Scientists aged it by carbon-dating the lens of its eye. (Nielsen et al., Science 2016; animated reconstruction, AI voice)"
+   }
+  }
+ },
+ "qc": {
+  "loudness_lufs": -14.0
+ },
+ "budget": {
+  "max_paid_eur": 0
+ },
+ "legacy": {
+  "script_json": "script.json (v1 pipeline input, kept unchanged)",
+  "baseline": "baseline/ (read-only copies of the v1 outputs, SHA256SUMS)"
+ }
+}

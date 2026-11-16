@@ -1,0 +1,129 @@
+{
+ "schema_version": 1,
+ "id": "002-tunguska",
+ "customer_id": "oddlight",
+ "topic": "The 1908 Tunguska event: an explosion over Siberia that flattened a forest and left no crater",
+ "title": "The Explosion That Flattened 80 Million Trees",
+ "language": "en",
+ "target_audience": "18-40, curious international viewers of science and history shorts",
+ "format": {"aspect_ratio": "9:16", "width": 1080, "height": 1920, "fps": 24, "target_duration_s": [40, 62]},
+ "narration": {"provider": "kokoro", "voice": "bm_george", "lang": "en-gb", "speed": 1.0, "aligner": "whisper"},
+ "visual": {
+  "renderer": "threejs",
+  "style": "Cinematic stylized 3D: instanced taiga, physically based sky, low sun, long shadows, aerial haze. One warm light per shot (fireball, lantern, low sun) as the ODDLIGHT signature.",
+  "grade": {"grain": 4, "vignette": "PI/4.8", "contrast": 1.05, "saturation": 1.06, "bloom": 0.22}
+ },
+ "scenes": [
+  {"id": "s1", "beat": "HOOK", "text": "In nineteen oh eight, something exploded over Siberia... and flattened eighty million trees.", "lead": 0.45, "tail": 0.3,
+   "transition_out": {"type": "fade", "d": 0.4}, "module": "scenes/s1_dawn_fireball.js", "claims": ["c_date", "c_trees"],
+   "visual_goal": "Aerial glide over endless taiga before sunrise; a fireball streaks in, lighting the haze and casting moving shadows."},
+  {"id": "s2", "beat": "SETUP", "text": "It was early morning. A fireball streaked over the Tunguska river.", "lead": 0.3, "tail": 0.25,
+   "transition_out": {"type": "fade", "d": 0.4}, "module": "scenes/s2_river.js", "claims": ["c_date"],
+   "visual_goal": "Low river-valley shot; the fireball passes overhead and its light sweeps across trees and water."},
+  {"id": "s3", "beat": "SETUP", "text": "Sixty-five kilometres away, a farmer at breakfast saw it all.", "lead": 0.3, "tail": 0.35,
+   "transition_out": {"type": "fadewhite", "d": 0.35}, "module": "scenes/s3_cabin.js", "claims": ["c_witness"],
+   "visual_goal": "A log homestead at the forest edge, lamp in the window; the horizon flares white."},
+  {"id": "s4", "beat": "STORY", "text": "The blast levelled about two thousand square kilometres of forest.", "lead": 0.25, "tail": 0.5,
+   "transition_out": {"type": "fade", "d": 0.5}, "module": "scenes/s4_shockwave.js", "claims": ["c_area"],
+   "visual_goal": "High aerial: a dust ring races outward and the trees fall in its path, radially."},
+  {"id": "s5", "beat": "STORY", "text": "The place was so remote, no scientist reached it for nineteen years.", "lead": 0.35, "tail": 0.35,
+   "transition_out": {"type": "fade", "d": 0.5}, "module": "scenes/s5_winters.js", "claims": ["c_kulik_year"],
+   "visual_goal": "The flattened forest through passing seasons: snow covers the fallen trunks, light cycles."},
+  {"id": "s6", "beat": "STORY", "text": "When Leonid Kulik finally did, every fallen tree pointed away from one spot.", "lead": 0.35, "tail": 0.45,
+   "transition_out": {"type": "fade", "d": 0.5}, "module": "scenes/s6_pattern.js", "claims": ["c_kulik_year", "c_radial"],
+   "visual_goal": "Camera rises from an expedition camp lantern to a top-down view of the radial fall pattern."},
+  {"id": "s7", "beat": "PAYOFF", "text": "At the centre, trees still stood... stripped of every branch.", "lead": 0.35, "tail": 0.4,
+   "transition_out": {"type": "fade", "d": 0.45}, "module": "scenes/s7_telegraph_forest.js", "claims": ["c_standing"],
+   "visual_goal": "Ground level among bare upright trunks in mist and low sun; long shadows."},
+  {"id": "s8", "beat": "PAYOFF", "text": "But there was no crater.", "lead": 0.3, "tail": 0.8,
+   "transition_out": {"type": "fadeblack", "d": 0.45}, "module": "scenes/s8_no_crater.js", "claims": ["c_crater"],
+   "visual_goal": "Crane down over the flat bog at ground zero: still water, no hole."},
+  {"id": "s9", "beat": "PAYOFF", "text": "Most likely, a space rock tens of metres wide exploded six to ten kilometres up, with hundreds of times the power of Hiroshima.", "lead": 0.4, "tail": 0.5,
+   "transition_out": {"type": "fadewhite", "d": 0.45}, "module": "scenes/s9_airburst.js", "uses_words": true, "claims": ["c_cause", "c_altitude", "c_energy"],
+   "visual_goal": "From high above the clouds: a glowing rock enters the atmosphere and bursts high above the forest; altitude marker."},
+  {"id": "s10", "beat": "EXIT", "text": "It's still the largest impact in recorded history... and it may never have touched the ground.", "lead": 0.4, "tail": 1.5,
+   "transition_out": {"type": "fade", "d": 0.6}, "module": "scenes/s10_today.js", "claims": ["c_largest", "c_crater"],
+   "visual_goal": "Dusk over the regrown taiga today; the last light collapses into the single ODDLIGHT dot."},
+  {"id": "end", "beat": "END", "text": "", "lead": 0, "tail": 2.6, "transition_out": null, "module": "builtin:endcard",
+   "params": {"footer": ["Sources: Britannica; NASA Earth Observatory; APS News", "Animated reconstruction"]}, "non_factual": true}
+ ],
+ "overlays": [
+  {"type": "label", "text": "30 June 1908  ·  Tunguska, Siberia", "at": {"scene_start": "s2", "offset": 0.4}, "duration": 3.6},
+  {"type": "big", "text": "≈ 2,000 km²", "sub": "of forest flattened", "at": {"word": "two", "scene": "s4"}, "until": {"scene_start": "s5"}, "y": 760},
+  {"type": "counter", "scene": "s5", "from": 1908, "to": 1927, "span_fraction": 0.8},
+  {"type": "label", "text": "Leonid Kulik  ·  expedition of 1927", "at": {"scene_start": "s6", "offset": 0.3}, "duration": 3.8},
+  {"type": "label", "text": "airburst  ·  6–10 km above the ground", "at": {"word": "exploded", "scene": "s9"}, "duration": 4.2}
+ ],
+ "sound": {
+  "bed": {"preset": "wind_bed", "level": 0.5},
+  "pad": null,
+  "cues": [
+   {"preset": "bell", "at": {"t": 0.25}},
+   {"preset": "fireball_roar", "at": {"scene_start": "s1", "offset": 1.0}, "d": 5.0},
+   {"preset": "fireball_roar", "at": {"scene_start": "s2", "offset": 0.2}, "d": 4.2, "level": 0.8},
+   {"preset": "flash_swell", "at": {"scene_start": "s4", "offset": -0.9}},
+   {"preset": "boom", "at": {"word": "blast", "scene": "s4"}},
+   {"preset": "shockwave", "at": {"word": "blast", "scene": "s4", "offset": 0.1}},
+   {"preset": "wind_gust", "at": {"scene_start": "s5", "offset": 0.3}, "d": 4.5},
+   {"preset": "crack", "at": {"word": "crater", "scene": "s8", "offset": 0.15}, "level": 0.5},
+   {"preset": "flash_swell", "at": {"word": "exploded", "scene": "s9", "offset": -0.7}},
+   {"preset": "boom", "at": {"word": "exploded", "scene": "s9", "offset": 0.05}, "level": 0.7},
+   {"preset": "bell", "at": {"scene_start": "end", "offset": 0.2}},
+   {"preset": "bell_low", "at": {"scene_start": "end", "offset": 0.2}}
+  ]
+ },
+ "music": {
+  "provider": "synth",
+  "master_db": -21,
+  "sections": [
+   {"from": {"t": 0.0}, "chords": [["D2", "A2", "D3", "F3"], ["Bb1", "F2", "D3", "F3"]], "chord_s": 3.2, "level": 0.55, "brightness": 0.25},
+   {"from": {"scene_start": "s3"}, "chords": [["G1", "D2", "Bb2", "D3"], ["A1", "E2", "C#3", "E3"]], "chord_s": 2.4, "level": 0.75, "brightness": 0.45},
+   {"from": {"word": "blast", "scene": "s4"}, "chords": [["D1", "D2", "A2", "D3", "F3"]], "chord_s": 5.0, "level": 1.0, "brightness": 0.7},
+   {"from": {"scene_start": "s5"}, "chords": [["F2", "C3", "A3"], ["C2", "G2", "E3"], ["D2", "A2", "F3"], ["Bb1", "F2", "D3"]], "chord_s": 2.9, "level": 0.45, "brightness": 0.2},
+   {"from": {"scene_start": "s8"}, "chords": [["D2", "A2", "D3"]], "chord_s": 3.0, "level": 0.25, "brightness": 0.12},
+   {"from": {"scene_start": "s9"}, "chords": [["Bb1", "F2", "D3", "F3"], ["C2", "G2", "E3", "G3"], ["D2", "A2", "F3", "A3"]], "chord_s": 2.6, "level": 0.8, "brightness": 0.5},
+   {"from": {"scene_start": "s10"}, "chords": [["F2", "C3", "A3", "C4"], ["D2", "A2", "F3", "A3"]], "chord_s": 3.4, "level": 0.6, "brightness": 0.35}
+  ],
+  "hits": [
+   {"at": {"word": "blast", "scene": "s4"}, "level": 1.0},
+   {"at": {"word": "crater", "scene": "s8", "offset": 0.1}, "level": 0.55},
+   {"at": {"word": "exploded", "scene": "s9"}, "level": 0.8}
+  ],
+  "end_fade_s": 2.4
+ },
+ "sources": [
+  {"id": "britannica", "citation": "Encyclopaedia Britannica, \"Tunguska event\"", "url": "https://www.britannica.com/event/Tunguska-event", "accessed": "2026-11-16"},
+  {"id": "nasa_eo", "citation": "NASA Earth Observatory, \"A Cosmic Explosion Over Siberia\"", "url": "https://earthobservatory.nasa.gov/images/154488/a-cosmic-explosion-over-siberia", "accessed": "2026-11-16"},
+  {"id": "space_com", "citation": "Space.com, \"Meteor that blasted millions of trees in Siberia only 'grazed' Earth, new research says\"", "url": "https://www.space.com/tunguska-meteor-impact-explained.html", "accessed": "2026-11-16"},
+  {"id": "aps", "citation": "APS News, \"June 30, 1908: The Tunguska Event\" (2018)", "url": "https://aps.org/apsnews/2018/06/tunguska-event", "accessed": "2026-11-16"},
+  {"id": "earthsky", "citation": "EarthSky, \"What is the Tunguska explosion?\"", "url": "https://earthsky.org/space/what-is-the-tunguska-explosion/", "accessed": "2026-11-16"},
+  {"id": "guinness", "citation": "Guinness World Records, \"Greatest recorded impact event on Earth\"", "url": "https://www.guinnessworldrecords.com/world-records/65001-greatest-recorded-impact-on-earth-not-measured", "accessed": "2026-11-16"}
+ ],
+ "claims": [
+  {"id": "c_date", "text": "The explosion happened on the morning of 30 June 1908 over Siberia, near the Podkamennaya Tunguska river.", "sources": ["britannica", "aps"], "status": "verified"},
+  {"id": "c_trees", "text": "It felled roughly 80 million trees.", "sources": ["space_com"], "status": "verified", "note": "Space.com: more than 80 million trees; Explorersweb gives ~80 million felled or stripped."},
+  {"id": "c_witness", "text": "An eyewitness about 40 miles (~65 km) away saw the event while having breakfast.", "sources": ["aps"], "status": "verified", "note": "APS names Sergei Semenov; the narration says 'a farmer' as APS does."},
+  {"id": "c_area", "text": "About 2,000 square kilometres of forest were flattened.", "sources": ["space_com"], "status": "verified", "note": "Space.com ~2,000 km2; other sources give 2,150 km2. Narration says 'about'."},
+  {"id": "c_kulik_year", "text": "The first scientific expedition to reach the site was Leonid Kulik's, in 1927 (19 years later).", "sources": ["aps"], "status": "verified"},
+  {"id": "c_radial", "text": "Kulik found the fallen trees pointing radially away from a central point.", "sources": ["aps"], "status": "verified"},
+  {"id": "c_standing", "text": "Near the centre, trees were left standing but stripped of their branches.", "sources": ["aps"], "status": "verified"},
+  {"id": "c_crater", "text": "No impact crater was found.", "sources": ["aps", "britannica"], "status": "verified"},
+  {"id": "c_cause", "text": "The leading explanation is the airburst of a space rock (most likely a stony asteroid) tens of metres across.", "sources": ["britannica", "space_com"], "status": "verified", "note": "Size estimates vary (~50-80 m in several sources); narration hedges with 'most likely' and 'tens of metres'."},
+  {"id": "c_altitude", "text": "The explosion likely occurred about 6-10 km above the surface.", "sources": ["nasa_eo"], "status": "verified"},
+  {"id": "c_energy", "text": "Its energy was hundreds of times that of the Hiroshima bomb.", "sources": ["britannica", "earthsky"], "status": "verified", "note": "Britannica: up to ~15 Mt, about 1,000x Hiroshima; EarthSky: ~4 Mt, ~250x. 'Hundreds of times' holds across both."},
+  {"id": "c_largest", "text": "Tunguska is the largest impact event in recorded history.", "sources": ["britannica", "guinness"], "status": "verified"}
+ ],
+ "cover": {"scene": "s4", "frame": 70, "lines": ["It flattened 80 million", "trees. No crater."], "layout": "top"},
+ "publishing": {
+  "enabled": false,
+  "platforms": {
+   "tiktok": {"caption": "In 1908 something exploded over Siberia and flattened 80 million trees... but left no crater. #tunguska #history #space #science #oddlight", "ai_label": true},
+   "youtube_shorts": {"title": "The Explosion That Flattened 80 Million Trees", "description": "On 30 June 1908 a space rock exploded several kilometres above the Siberian taiga. About 2,000 km² of forest went down — and there was no crater.\n\nSources: Britannica; NASA Earth Observatory; APS News; Space.com; EarthSky.\nAnimated reconstruction. Narration voice is AI-generated.\n\n#shorts #tunguska #science", "tags": ["tunguska event", "1908", "asteroid", "airburst", "siberia", "history"]},
+   "instagram_reels": {"caption": "1908. A fireball over Siberia. 80 million trees down. No crater. 🌲☄️\n\nSources: Britannica, NASA Earth Observatory, APS News. Animated reconstruction; AI narration voice.\n\n#tunguska #sciencefacts #history #space #oddlight"},
+   "facebook_reels": {"caption": "1908: an explosion over Siberia flattened 80 million trees and left no crater. Sources: Britannica, NASA Earth Observatory, APS News. Animated reconstruction; AI narration voice."},
+   "x": {"post": "In 1908 a space rock exploded 6–10 km above Siberia and flattened ~2,000 km² of forest. When scientists finally arrived 19 years later: trees pointing away from one spot, and no crater. (NASA Earth Observatory, APS News)"}
+  }
+ },
+ "qc": {"loudness_lufs": -14.0, "max_caption_chars": 24, "black_allow": [{"scene_transition": "s8"}]},
+ "budget": {"max_paid_eur": 0}
+}

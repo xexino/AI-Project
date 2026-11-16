@@ -1,0 +1,216 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cap,OL Caption,64,&H00D6E6ED,&H00D6E6ED,&H661A1405,&H661A1405,0,0,0,0,100,100,0,0,3,14,0,2,120,120,560,1
+Style: Label,OL Caption,42,&H00C7D17F,&H00C7D17F,&H00000000,&H00000000,0,0,0,0,100,100,2,0,1,0,0,8,80,80,260,1
+Style: Year,OL Display,72,&H00D6E6ED,&H00D6E6ED,&H00000000,&H00000000,0,0,0,0,100,100,4,0,1,0,0,8,80,80,120,1
+Style: Big,OL Display,150,&H00D6E6ED,&H00D6E6ED,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,5,60,60,0,1
+Style: BigSub,OL Caption,52,&H00C7D17F,&H00C7D17F,&H00000000,&H00000000,0,0,0,0,100,100,2,0,1,0,0,5,60,60,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 1,0:00:00.50,0:00:00.66,Cap,,0,0,0,,{\c&H001F8AFF}There's{\c&H00D6E6ED} a shark
+Dialogue: 1,0:00:00.66,0:00:00.74,Cap,,0,0,0,,There's {\c&H001F8AFF}a{\c&H00D6E6ED} shark
+Dialogue: 1,0:00:00.74,0:00:01.10,Cap,,0,0,0,,There's a {\c&H001F8AFF}shark{\c&H00D6E6ED}
+Dialogue: 1,0:00:01.10,0:00:01.50,Cap,,0,0,0,,{\c&H001F8AFF}in{\c&H00D6E6ED} the Arctic
+Dialogue: 1,0:00:01.50,0:00:01.62,Cap,,0,0,0,,in {\c&H001F8AFF}the{\c&H00D6E6ED} Arctic
+Dialogue: 1,0:00:01.62,0:00:01.98,Cap,,0,0,0,,in the {\c&H001F8AFF}Arctic{\c&H00D6E6ED}
+Dialogue: 1,0:00:01.98,0:00:02.70,Cap,,0,0,0,,{\c&H001F8AFF}that{\c&H00D6E6ED} is probably
+Dialogue: 1,0:00:02.70,0:00:02.86,Cap,,0,0,0,,that {\c&H001F8AFF}is{\c&H00D6E6ED} probably
+Dialogue: 1,0:00:02.86,0:00:03.26,Cap,,0,0,0,,that is {\c&H001F8AFF}probably{\c&H00D6E6ED}
+Dialogue: 1,0:00:03.26,0:00:03.62,Cap,,0,0,0,,{\c&H001F8AFF}older{\c&H00D6E6ED} than the
+Dialogue: 1,0:00:03.62,0:00:04.06,Cap,,0,0,0,,older {\c&H001F8AFF}than{\c&H00D6E6ED} the
+Dialogue: 1,0:00:04.06,0:00:04.14,Cap,,0,0,0,,older than {\c&H001F8AFF}the{\c&H00D6E6ED}
+Dialogue: 1,0:00:04.14,0:00:04.44,Cap,,0,0,0,,{\c&H001F8AFF}United{\c&H00D6E6ED} States.
+Dialogue: 1,0:00:04.44,0:00:05.33,Cap,,0,0,0,,United {\c&H001F8AFF}States{\c&H00D6E6ED}.
+Dialogue: 1,0:00:05.97,0:00:06.12,Cap,,0,0,0,,{\c&H001F8AFF}It's{\c&H00D6E6ED} called the
+Dialogue: 1,0:00:06.12,0:00:06.33,Cap,,0,0,0,,It's {\c&H001F8AFF}called{\c&H00D6E6ED} the
+Dialogue: 1,0:00:06.33,0:00:06.50,Cap,,0,0,0,,It's called {\c&H001F8AFF}the{\c&H00D6E6ED}
+Dialogue: 1,0:00:06.50,0:00:06.79,Cap,,0,0,0,,{\c&H001F8AFF}Greenland{\c&H00D6E6ED} shark.
+Dialogue: 1,0:00:06.79,0:00:07.77,Cap,,0,0,0,,Greenland {\c&H001F8AFF}shark{\c&H00D6E6ED}.
+Dialogue: 1,0:00:07.92,0:00:08.00,Cap,,0,0,0,,{\c&H001F8AFF}It{\c&H00D6E6ED} lives in
+Dialogue: 1,0:00:08.00,0:00:08.20,Cap,,0,0,0,,It {\c&H001F8AFF}lives{\c&H00D6E6ED} in
+Dialogue: 1,0:00:08.20,0:00:08.46,Cap,,0,0,0,,It lives {\c&H001F8AFF}in{\c&H00D6E6ED}
+Dialogue: 1,0:00:08.46,0:00:08.78,Cap,,0,0,0,,{\c&H001F8AFF}water{\c&H00D6E6ED} close to
+Dialogue: 1,0:00:08.78,0:00:09.20,Cap,,0,0,0,,water {\c&H001F8AFF}close{\c&H00D6E6ED} to
+Dialogue: 1,0:00:09.20,0:00:09.41,Cap,,0,0,0,,water close {\c&H001F8AFF}to{\c&H00D6E6ED}
+Dialogue: 1,0:00:09.41,0:00:10.10,Cap,,0,0,0,,{\c&H001F8AFF}freezing{\c&H00D6E6ED}
+Dialogue: 1,0:00:10.60,0:00:10.68,Cap,,0,0,0,,{\c&H001F8AFF}and{\c&H00D6E6ED} moves slower
+Dialogue: 1,0:00:10.68,0:00:10.92,Cap,,0,0,0,,and {\c&H001F8AFF}moves{\c&H00D6E6ED} slower
+Dialogue: 1,0:00:10.92,0:00:11.40,Cap,,0,0,0,,and moves {\c&H001F8AFF}slower{\c&H00D6E6ED}
+Dialogue: 1,0:00:11.40,0:00:11.96,Cap,,0,0,0,,{\c&H001F8AFF}than{\c&H00D6E6ED} you walk.
+Dialogue: 1,0:00:11.96,0:00:12.10,Cap,,0,0,0,,than {\c&H001F8AFF}you{\c&H00D6E6ED} walk.
+Dialogue: 1,0:00:12.10,0:00:12.85,Cap,,0,0,0,,than you {\c&H001F8AFF}walk{\c&H00D6E6ED}.
+Dialogue: 1,0:00:13.69,0:00:13.75,Cap,,0,0,0,,{\c&H001F8AFF}For{\c&H00D6E6ED} decades,
+Dialogue: 1,0:00:13.75,0:00:14.56,Cap,,0,0,0,,For {\c&H001F8AFF}decades{\c&H00D6E6ED},
+Dialogue: 1,0:00:14.59,0:00:14.83,Cap,,0,0,0,,{\c&H001F8AFF}no{\c&H00D6E6ED} one could
+Dialogue: 1,0:00:14.83,0:00:15.05,Cap,,0,0,0,,no {\c&H001F8AFF}one{\c&H00D6E6ED} could
+Dialogue: 1,0:00:15.05,0:00:15.25,Cap,,0,0,0,,no one {\c&H001F8AFF}could{\c&H00D6E6ED}
+Dialogue: 1,0:00:15.25,0:00:15.45,Cap,,0,0,0,,{\c&H001F8AFF}tell{\c&H00D6E6ED} its age.
+Dialogue: 1,0:00:15.45,0:00:15.61,Cap,,0,0,0,,tell {\c&H001F8AFF}its{\c&H00D6E6ED} age.
+Dialogue: 1,0:00:15.61,0:00:16.36,Cap,,0,0,0,,tell its {\c&H001F8AFF}age{\c&H00D6E6ED}.
+Dialogue: 1,0:00:16.57,0:00:16.77,Cap,,0,0,0,,{\c&H001F8AFF}Sharks{\c&H00D6E6ED} don't have
+Dialogue: 1,0:00:16.77,0:00:17.19,Cap,,0,0,0,,Sharks {\c&H001F8AFF}don't{\c&H00D6E6ED} have
+Dialogue: 1,0:00:17.19,0:00:17.31,Cap,,0,0,0,,Sharks don't {\c&H001F8AFF}have{\c&H00D6E6ED}
+Dialogue: 1,0:00:17.31,0:00:17.45,Cap,,0,0,0,,{\c&H001F8AFF}the{\c&H00D6E6ED} bones scientists
+Dialogue: 1,0:00:17.45,0:00:17.65,Cap,,0,0,0,,the {\c&H001F8AFF}bones{\c&H00D6E6ED} scientists
+Dialogue: 1,0:00:17.65,0:00:18.27,Cap,,0,0,0,,the bones {\c&H001F8AFF}scientists{\c&H00D6E6ED}
+Dialogue: 1,0:00:18.27,0:00:18.97,Cap,,0,0,0,,{\c&H001F8AFF}usually{\c&H00D6E6ED} count.
+Dialogue: 1,0:00:18.97,0:00:19.74,Cap,,0,0,0,,usually {\c&H001F8AFF}count{\c&H00D6E6ED}.
+Dialogue: 1,0:00:20.23,0:00:20.34,Cap,,0,0,0,,{\c&H001F8AFF}So{\c&H00D6E6ED} in twenty
+Dialogue: 1,0:00:20.34,0:00:20.46,Cap,,0,0,0,,So {\c&H001F8AFF}in{\c&H00D6E6ED} twenty
+Dialogue: 1,0:00:20.46,0:00:21.05,Cap,,0,0,0,,So in {\c&H001F8AFF}twenty{\c&H00D6E6ED}
+Dialogue: 1,0:00:21.05,0:00:21.64,Cap,,0,0,0,,{\c&H001F8AFF}sixteen{\c&H00D6E6ED},
+Dialogue: 1,0:00:21.64,0:00:22.07,Cap,,0,0,0,,{\c&H001F8AFF}researchers{\c&H00D6E6ED} looked into
+Dialogue: 1,0:00:22.07,0:00:22.59,Cap,,0,0,0,,researchers {\c&H001F8AFF}looked{\c&H00D6E6ED} into
+Dialogue: 1,0:00:22.59,0:00:22.89,Cap,,0,0,0,,researchers looked {\c&H001F8AFF}into{\c&H00D6E6ED}
+Dialogue: 1,0:00:22.89,0:00:23.09,Cap,,0,0,0,,{\c&H001F8AFF}its{\c&H00D6E6ED} eyes.
+Dialogue: 1,0:00:23.09,0:00:23.77,Cap,,0,0,0,,its {\c&H001F8AFF}eyes{\c&H00D6E6ED}.
+Dialogue: 1,0:00:24.44,0:00:24.50,Cap,,0,0,0,,{\c&H001F8AFF}The{\c&H00D6E6ED} core of
+Dialogue: 1,0:00:24.50,0:00:24.68,Cap,,0,0,0,,The {\c&H001F8AFF}core{\c&H00D6E6ED} of
+Dialogue: 1,0:00:24.68,0:00:24.88,Cap,,0,0,0,,The core {\c&H001F8AFF}of{\c&H00D6E6ED}
+Dialogue: 1,0:00:24.88,0:00:24.98,Cap,,0,0,0,,{\c&H001F8AFF}the{\c&H00D6E6ED} eye lens
+Dialogue: 1,0:00:24.98,0:00:25.26,Cap,,0,0,0,,the {\c&H001F8AFF}eye{\c&H00D6E6ED} lens
+Dialogue: 1,0:00:25.26,0:00:25.60,Cap,,0,0,0,,the eye {\c&H001F8AFF}lens{\c&H00D6E6ED}
+Dialogue: 1,0:00:25.60,0:00:26.12,Cap,,0,0,0,,{\c&H001F8AFF}forms{\c&H00D6E6ED} before birth,
+Dialogue: 1,0:00:26.12,0:00:26.58,Cap,,0,0,0,,forms {\c&H001F8AFF}before{\c&H00D6E6ED} birth,
+Dialogue: 1,0:00:26.58,0:00:27.00,Cap,,0,0,0,,forms before {\c&H001F8AFF}birth{\c&H00D6E6ED},
+Dialogue: 1,0:00:27.00,0:00:27.52,Cap,,0,0,0,,{\c&H001F8AFF}and{\c&H00D6E6ED} never changes.
+Dialogue: 1,0:00:27.52,0:00:27.76,Cap,,0,0,0,,and {\c&H001F8AFF}never{\c&H00D6E6ED} changes.
+Dialogue: 1,0:00:27.76,0:00:28.69,Cap,,0,0,0,,and never {\c&H001F8AFF}changes{\c&H00D6E6ED}.
+Dialogue: 1,0:00:28.88,0:00:29.14,Cap,,0,0,0,,{\c&H001F8AFF}Carbon{\c&H00D6E6ED} dating it
+Dialogue: 1,0:00:29.14,0:00:29.56,Cap,,0,0,0,,Carbon {\c&H001F8AFF}dating{\c&H00D6E6ED} it
+Dialogue: 1,0:00:29.56,0:00:30.02,Cap,,0,0,0,,Carbon dating {\c&H001F8AFF}it{\c&H00D6E6ED}
+Dialogue: 1,0:00:30.02,0:00:30.20,Cap,,0,0,0,,{\c&H001F8AFF}gave{\c&H00D6E6ED} an answer.
+Dialogue: 1,0:00:30.20,0:00:30.38,Cap,,0,0,0,,gave {\c&H001F8AFF}an{\c&H00D6E6ED} answer.
+Dialogue: 1,0:00:30.38,0:00:31.19,Cap,,0,0,0,,gave an {\c&H001F8AFF}answer{\c&H00D6E6ED}.
+Dialogue: 1,0:00:31.83,0:00:31.89,Cap,,0,0,0,,{\c&H001F8AFF}The{\c&H00D6E6ED} largest shark
+Dialogue: 1,0:00:31.89,0:00:32.23,Cap,,0,0,0,,The {\c&H001F8AFF}largest{\c&H00D6E6ED} shark
+Dialogue: 1,0:00:32.23,0:00:32.59,Cap,,0,0,0,,The largest {\c&H001F8AFF}shark{\c&H00D6E6ED}
+Dialogue: 1,0:00:32.59,0:00:32.91,Cap,,0,0,0,,{\c&H001F8AFF}they{\c&H00D6E6ED} studied was
+Dialogue: 1,0:00:32.91,0:00:33.29,Cap,,0,0,0,,they {\c&H001F8AFF}studied{\c&H00D6E6ED} was
+Dialogue: 1,0:00:33.29,0:00:33.79,Cap,,0,0,0,,they studied {\c&H001F8AFF}was{\c&H00D6E6ED}
+Dialogue: 1,0:00:33.79,0:00:34.01,Cap,,0,0,0,,{\c&H001F8AFF}around{\c&H00D6E6ED} four hundred
+Dialogue: 1,0:00:34.01,0:00:34.24,Cap,,0,0,0,,around {\c&H001F8AFF}four{\c&H00D6E6ED} hundred
+Dialogue: 1,0:00:34.24,0:00:34.47,Cap,,0,0,0,,around four {\c&H001F8AFF}hundred{\c&H00D6E6ED}
+Dialogue: 1,0:00:34.47,0:00:35.05,Cap,,0,0,0,,{\c&H001F8AFF}years{\c&H00D6E6ED} old.
+Dialogue: 1,0:00:35.05,0:00:35.93,Cap,,0,0,0,,years {\c&H001F8AFF}old{\c&H00D6E6ED}.
+Dialogue: 1,0:00:35.93,0:00:36.17,Cap,,0,0,0,,{\c&H001F8AFF}Give{\c&H00D6E6ED} or take
+Dialogue: 1,0:00:36.17,0:00:36.45,Cap,,0,0,0,,Give {\c&H001F8AFF}or{\c&H00D6E6ED} take
+Dialogue: 1,0:00:36.45,0:00:36.77,Cap,,0,0,0,,Give or {\c&H001F8AFF}take{\c&H00D6E6ED}
+Dialogue: 1,0:00:36.77,0:00:36.95,Cap,,0,0,0,,{\c&H001F8AFF}a{\c&H00D6E6ED} century.
+Dialogue: 1,0:00:36.95,0:00:37.72,Cap,,0,0,0,,a {\c&H001F8AFF}century{\c&H00D6E6ED}.
+Dialogue: 1,0:00:38.85,0:00:38.91,Cap,,0,0,0,,{\c&H001F8AFF}And{\c&H00D6E6ED} it doesn't
+Dialogue: 1,0:00:38.91,0:00:38.99,Cap,,0,0,0,,And {\c&H001F8AFF}it{\c&H00D6E6ED} doesn't
+Dialogue: 1,0:00:38.99,0:00:39.29,Cap,,0,0,0,,And it {\c&H001F8AFF}doesn't{\c&H00D6E6ED}
+Dialogue: 1,0:00:39.29,0:00:39.57,Cap,,0,0,0,,{\c&H001F8AFF}become{\c&H00D6E6ED} an adult
+Dialogue: 1,0:00:39.57,0:00:39.81,Cap,,0,0,0,,become {\c&H001F8AFF}an{\c&H00D6E6ED} adult
+Dialogue: 1,0:00:39.81,0:00:40.25,Cap,,0,0,0,,become an {\c&H001F8AFF}adult{\c&H00D6E6ED}
+Dialogue: 1,0:00:40.25,0:00:40.97,Cap,,0,0,0,,{\c&H001F8AFF}until{\c&H00D6E6ED} it's about
+Dialogue: 1,0:00:40.97,0:00:41.19,Cap,,0,0,0,,until {\c&H001F8AFF}it's{\c&H00D6E6ED} about
+Dialogue: 1,0:00:41.19,0:00:41.37,Cap,,0,0,0,,until it's {\c&H001F8AFF}about{\c&H00D6E6ED}
+Dialogue: 1,0:00:41.37,0:00:42.20,Cap,,0,0,0,,{\c&H001F8AFF}one{\c&H00D6E6ED} hundred and
+Dialogue: 1,0:00:42.20,0:00:42.62,Cap,,0,0,0,,one {\c&H001F8AFF}hundred{\c&H00D6E6ED} and
+Dialogue: 1,0:00:42.62,0:00:42.83,Cap,,0,0,0,,one hundred {\c&H001F8AFF}and{\c&H00D6E6ED}
+Dialogue: 1,0:00:42.83,0:00:43.38,Cap,,0,0,0,,{\c&H001F8AFF}fifty{\c&H00D6E6ED}.
+Dialogue: 1,0:00:43.87,0:00:43.99,Cap,,0,0,0,,{\c&H001F8AFF}So{\c&H00D6E6ED} the oldest
+Dialogue: 1,0:00:43.99,0:00:44.09,Cap,,0,0,0,,So {\c&H001F8AFF}the{\c&H00D6E6ED} oldest
+Dialogue: 1,0:00:44.09,0:00:44.35,Cap,,0,0,0,,So the {\c&H001F8AFF}oldest{\c&H00D6E6ED}
+Dialogue: 1,0:00:44.35,0:00:44.67,Cap,,0,0,0,,{\c&H001F8AFF}ones{\c&H00D6E6ED} down there
+Dialogue: 1,0:00:44.67,0:00:45.03,Cap,,0,0,0,,ones {\c&H001F8AFF}down{\c&H00D6E6ED} there
+Dialogue: 1,0:00:45.03,0:00:45.53,Cap,,0,0,0,,ones down {\c&H001F8AFF}there{\c&H00D6E6ED}
+Dialogue: 1,0:00:45.53,0:00:45.61,Cap,,0,0,0,,{\c&H001F8AFF}were{\c&H00D6E6ED} young before
+Dialogue: 1,0:00:45.61,0:00:45.83,Cap,,0,0,0,,were {\c&H001F8AFF}young{\c&H00D6E6ED} before
+Dialogue: 1,0:00:45.83,0:00:46.23,Cap,,0,0,0,,were young {\c&H001F8AFF}before{\c&H00D6E6ED}
+Dialogue: 1,0:00:46.23,0:00:46.43,Cap,,0,0,0,,{\c&H001F8AFF}the{\c&H00D6E6ED} steam engine
+Dialogue: 1,0:00:46.43,0:00:46.67,Cap,,0,0,0,,the {\c&H001F8AFF}steam{\c&H00D6E6ED} engine
+Dialogue: 1,0:00:46.67,0:00:47.50,Cap,,0,0,0,,the steam {\c&H001F8AFF}engine{\c&H00D6E6ED}
+Dialogue: 1,0:00:47.77,0:00:47.87,Cap,,0,0,0,,{\c&H001F8AFF}and{\c&H00D6E6ED} they're still
+Dialogue: 1,0:00:47.87,0:00:48.09,Cap,,0,0,0,,and {\c&H001F8AFF}they're{\c&H00D6E6ED} still
+Dialogue: 1,0:00:48.09,0:00:48.43,Cap,,0,0,0,,and they're {\c&H001F8AFF}still{\c&H00D6E6ED}
+Dialogue: 1,0:00:48.43,0:00:48.89,Cap,,0,0,0,,{\c&H001F8AFF}in{\c&H00D6E6ED} no hurry.
+Dialogue: 1,0:00:48.89,0:00:49.09,Cap,,0,0,0,,in {\c&H001F8AFF}no{\c&H00D6E6ED} hurry.
+Dialogue: 1,0:00:49.09,0:00:49.79,Cap,,0,0,0,,in no {\c&H001F8AFF}hurry{\c&H00D6E6ED}.
+Dialogue: 2,0:00:26.64,0:00:30.24,Label,,0,0,0,,{\fad(400,400)}lens nucleus  ·  formed before birth
+Dialogue: 2,0:00:31.33,0:00:31.42,Year,,0,0,0,,1624
+Dialogue: 2,0:00:31.42,0:00:31.50,Year,,0,0,0,,1628
+Dialogue: 2,0:00:31.50,0:00:31.58,Year,,0,0,0,,1632
+Dialogue: 2,0:00:31.58,0:00:31.67,Year,,0,0,0,,1636
+Dialogue: 2,0:00:31.67,0:00:31.75,Year,,0,0,0,,1640
+Dialogue: 2,0:00:31.75,0:00:31.83,Year,,0,0,0,,1645
+Dialogue: 2,0:00:31.83,0:00:31.92,Year,,0,0,0,,1649
+Dialogue: 2,0:00:31.92,0:00:32.00,Year,,0,0,0,,1654
+Dialogue: 2,0:00:32.00,0:00:32.08,Year,,0,0,0,,1659
+Dialogue: 2,0:00:32.08,0:00:32.17,Year,,0,0,0,,1664
+Dialogue: 2,0:00:32.17,0:00:32.25,Year,,0,0,0,,1669
+Dialogue: 2,0:00:32.25,0:00:32.33,Year,,0,0,0,,1674
+Dialogue: 2,0:00:32.33,0:00:32.42,Year,,0,0,0,,1679
+Dialogue: 2,0:00:32.42,0:00:32.50,Year,,0,0,0,,1684
+Dialogue: 2,0:00:32.50,0:00:32.58,Year,,0,0,0,,1689
+Dialogue: 2,0:00:32.58,0:00:32.67,Year,,0,0,0,,1694
+Dialogue: 2,0:00:32.67,0:00:32.75,Year,,0,0,0,,1699
+Dialogue: 2,0:00:32.75,0:00:32.83,Year,,0,0,0,,1704
+Dialogue: 2,0:00:32.83,0:00:32.92,Year,,0,0,0,,1709
+Dialogue: 2,0:00:32.92,0:00:33.00,Year,,0,0,0,,1715
+Dialogue: 2,0:00:33.00,0:00:33.08,Year,,0,0,0,,1720
+Dialogue: 2,0:00:33.08,0:00:33.17,Year,,0,0,0,,1725
+Dialogue: 2,0:00:33.17,0:00:33.25,Year,,0,0,0,,1730
+Dialogue: 2,0:00:33.25,0:00:33.33,Year,,0,0,0,,1736
+Dialogue: 2,0:00:33.33,0:00:33.42,Year,,0,0,0,,1741
+Dialogue: 2,0:00:33.42,0:00:33.50,Year,,0,0,0,,1746
+Dialogue: 2,0:00:33.50,0:00:33.58,Year,,0,0,0,,1752
+Dialogue: 2,0:00:33.58,0:00:33.67,Year,,0,0,0,,1757
+Dialogue: 2,0:00:33.67,0:00:33.75,Year,,0,0,0,,1763
+Dialogue: 2,0:00:33.75,0:00:33.83,Year,,0,0,0,,1768
+Dialogue: 2,0:00:33.83,0:00:33.92,Year,,0,0,0,,1774
+Dialogue: 2,0:00:33.92,0:00:34.00,Year,,0,0,0,,1779
+Dialogue: 2,0:00:34.00,0:00:34.08,Year,,0,0,0,,1785
+Dialogue: 2,0:00:34.08,0:00:34.17,Year,,0,0,0,,1790
+Dialogue: 2,0:00:34.17,0:00:34.25,Year,,0,0,0,,1796
+Dialogue: 2,0:00:34.25,0:00:34.33,Year,,0,0,0,,1801
+Dialogue: 2,0:00:34.33,0:00:34.42,Year,,0,0,0,,1807
+Dialogue: 2,0:00:34.42,0:00:34.50,Year,,0,0,0,,1812
+Dialogue: 2,0:00:34.50,0:00:34.58,Year,,0,0,0,,1818
+Dialogue: 2,0:00:34.58,0:00:34.67,Year,,0,0,0,,1824
+Dialogue: 2,0:00:34.67,0:00:34.75,Year,,0,0,0,,1829
+Dialogue: 2,0:00:34.75,0:00:34.83,Year,,0,0,0,,1835
+Dialogue: 2,0:00:34.83,0:00:34.92,Year,,0,0,0,,1841
+Dialogue: 2,0:00:34.92,0:00:35.00,Year,,0,0,0,,1846
+Dialogue: 2,0:00:35.00,0:00:35.08,Year,,0,0,0,,1852
+Dialogue: 2,0:00:35.08,0:00:35.17,Year,,0,0,0,,1858
+Dialogue: 2,0:00:35.17,0:00:35.25,Year,,0,0,0,,1863
+Dialogue: 2,0:00:35.25,0:00:35.33,Year,,0,0,0,,1869
+Dialogue: 2,0:00:35.33,0:00:35.42,Year,,0,0,0,,1875
+Dialogue: 2,0:00:35.42,0:00:35.50,Year,,0,0,0,,1881
+Dialogue: 2,0:00:35.50,0:00:35.58,Year,,0,0,0,,1886
+Dialogue: 2,0:00:35.58,0:00:35.67,Year,,0,0,0,,1892
+Dialogue: 2,0:00:35.67,0:00:35.75,Year,,0,0,0,,1898
+Dialogue: 2,0:00:35.75,0:00:35.83,Year,,0,0,0,,1904
+Dialogue: 2,0:00:35.83,0:00:35.92,Year,,0,0,0,,1910
+Dialogue: 2,0:00:35.92,0:00:36.00,Year,,0,0,0,,1915
+Dialogue: 2,0:00:36.00,0:00:36.08,Year,,0,0,0,,1921
+Dialogue: 2,0:00:36.08,0:00:36.17,Year,,0,0,0,,1927
+Dialogue: 2,0:00:36.17,0:00:36.25,Year,,0,0,0,,1933
+Dialogue: 2,0:00:36.25,0:00:36.33,Year,,0,0,0,,1939
+Dialogue: 2,0:00:36.33,0:00:36.42,Year,,0,0,0,,1945
+Dialogue: 2,0:00:36.42,0:00:36.50,Year,,0,0,0,,1951
+Dialogue: 2,0:00:36.50,0:00:36.58,Year,,0,0,0,,1957
+Dialogue: 2,0:00:36.58,0:00:36.67,Year,,0,0,0,,1962
+Dialogue: 2,0:00:36.67,0:00:36.75,Year,,0,0,0,,1968
+Dialogue: 2,0:00:36.75,0:00:36.83,Year,,0,0,0,,1974
+Dialogue: 2,0:00:36.83,0:00:36.92,Year,,0,0,0,,1980
+Dialogue: 2,0:00:36.92,0:00:37.00,Year,,0,0,0,,1986
+Dialogue: 2,0:00:37.00,0:00:37.08,Year,,0,0,0,,1992
+Dialogue: 2,0:00:37.08,0:00:37.17,Year,,0,0,0,,1998
+Dialogue: 2,0:00:37.17,0:00:37.25,Year,,0,0,0,,2004
+Dialogue: 2,0:00:37.25,0:00:37.33,Year,,0,0,0,,2010
+Dialogue: 2,0:00:37.33,0:00:37.42,Year,,0,0,0,,2016
+Dialogue: 2,0:00:37.50,0:00:38.50,Year,,0,0,0,,{\fad(0,200)}2016
+Dialogue: 3,0:00:34.01,0:00:38.50,Big,,0,0,0,,{\an5\pos(540,1093)\fad(250,150)}≈ 400 years
+Dialogue: 3,0:00:36.65,0:00:38.50,BigSub,,0,0,0,,{\an5\pos(540,1213)\fad(250,150)}± 120

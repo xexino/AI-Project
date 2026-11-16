@@ -1,0 +1,11 @@
+# Full local production stack (zero paid services). Python 3.12+.
+-r requirements-core.txt
+# narration: Kokoro-82M TTS (Apache-2.0) via ONNX runtime — model files go in models/ (see docs/INSTALL.md)
+kokoro-onnx==0.6.1
+onnxruntime==1.32.0
+# word timing: faster-whisper (MIT); PyAV < 19 is required by faster-whisper 1.2.1
+faster-whisper==1.2.1
+ctranslate2==4.9.0
+av==18.1.0
+# font instancing for brand fonts (only needed when (re)building static font instances)
+fonttools==4.68.0
