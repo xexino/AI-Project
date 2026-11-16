@@ -140,3 +140,12 @@ def test_batch_queue_isolated_projects(mini, tmp_path):
     assert {j["status"] for j in queue.jobs(db)} == {"done"}
     assert (mini / "delivery/final_video.mp4").exists() and (other / "delivery/final_video.mp4").exists()
     assert json.loads((other / "delivery/package_manifest.json").read_text())["project"] == "mini-two"
+
+
+def test_builtin_endcard_receives_brand_params(mini):
+    from engine.stages.visuals import scene_params
+    ctx = build_context(Namespace(project=str(mini), jobs=1, scenes=None, renderer=None, tts=None, aligner=None))
+    end = ctx.project.scene("end")
+    p = scene_params(ctx, {**end, "params": {"footer": ["x"]}})
+    assert p["tagline"] == "The world is stranger than you were told." and p["footer"] == ["x"]
+    assert scene_params(ctx, ctx.project.scene("a")) == {}

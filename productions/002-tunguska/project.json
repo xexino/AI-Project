@@ -705,13 +705,14 @@
   }
  ],
  "cover": {
-  "scene": "s4",
-  "frame": 70,
+  "scene": "s6",
+  "frame": 152,
   "lines": [
-   "It flattened 80 million",
-   "trees. No crater."
+   "80 million trees fell.",
+   "No crater."
   ],
-  "layout": "top"
+  "y": 330,
+  "size": 88
  },
  "publishing": {
   "enabled": false,

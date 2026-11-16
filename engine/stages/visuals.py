@@ -54,6 +54,13 @@ def scene_words(tl: dict, seg: dict) -> list[dict]:
             for w in tl.get("words", []) if w["scene"] == seg["id"]]
 
 
+def scene_params(ctx: Context, s: dict) -> dict:
+    """Brand defaults for the builtin end card (wordmark, tagline, colours), overridden by the scene's own params."""
+    if s["module"] == "builtin:endcard":
+        return {**(ctx.project.data["brand"].get("endcard") or {}), **s.get("params", {})}
+    return s.get("params", {})
+
+
 def config(ctx: Context) -> dict:
     tl = json.loads(ctx.work("timeline.json").read_text()) if ctx.work("timeline.json").exists() else {}
     out = {}
@@ -61,6 +68,7 @@ def config(ctx: Context) -> dict:
         s = dict(ctx.project.scene(seg["id"]))
         if s.get("uses_words"):
             s["params"] = {**s.get("params", {}), "words": scene_words(tl, seg)}
+        s["params"] = scene_params(ctx, s)
         out[s["id"]] = scene_fingerprint(ctx, s, seg["clip"])
     return out
 
@@ -79,6 +87,7 @@ def visuals(ctx: Context) -> dict:
         # scenes that set "uses_words": true receive their narration word timings (scene-local seconds)
         if s.get("uses_words"):
             s["params"] = {**s.get("params", {}), "words": scene_words(tl, seg)}
+        s["params"] = scene_params(ctx, s)
         n = round(seg["clip"] * fps)
         fp = scene_fingerprint(ctx, s, seg["clip"])
         d = ctx.work("frames", s["id"])

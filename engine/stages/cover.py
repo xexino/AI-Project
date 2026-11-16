@@ -26,7 +26,11 @@ def cover(ctx: Context) -> dict:
     y0 = int(c.get("y", 360)); size = int(c.get("size", 92))
     vf = ["vignette=PI/4.2", "noise=alls=4"]
     if c.get("scrim", True):
-        vf.append("drawbox=x=0:y=180:w=iw:h=520:color=black@0.28:t=fill")
+        # soft vertical gradient behind the title (stacked translucent bands; no hard edge)
+        top, h, steps = max(0, y0 - 260), 760, 16
+        for k in range(steps):
+            a = 0.55 * (1 - abs((k + 0.5) / steps * 2 - 1)) ** 0.8 / steps * 4
+            vf.append(f"drawbox=x=0:y={top + k * h // steps}:w=iw:h={h // steps + 1}:color=black@{a:.3f}:t=fill")
     for i, line in enumerate(lines):
         col = bone if i == 0 else accent
         vf.append(f"drawtext=fontfile={FONTS / 'Fraunces-Regular.ttf'}:text='{_esc(line)}':fontcolor=0x{col}:fontsize={size}:x=(w-tw)/2:y={y0 + i * int(size * 1.2)}")

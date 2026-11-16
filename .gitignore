@@ -28,3 +28,5 @@ productions/*/baseline/
 var/
 .pytest_cache/
 comparison/**/*.mp4
+comparison/**/*.png
+!comparison/**/*thumb_180px.png

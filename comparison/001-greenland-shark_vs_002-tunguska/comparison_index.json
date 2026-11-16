@@ -1,0 +1,22 @@
+{
+ "a": "productions/001-greenland-shark/baseline/oddlight_001_greenland_shark_v1.mp4",
+ "b": "productions/002-tunguska/delivery/final_video.mp4",
+ "frames_per_video": 12,
+ "sampling": "centre of each of N equal slices of the full runtime",
+ "contact_sheet_original_shark_v1": "comparison/001-greenland-shark_vs_002-tunguska/contact_sheet_original_shark_v1.jpg",
+ "contact_sheet_new_tunguska": "comparison/001-greenland-shark_vs_002-tunguska/contact_sheet_new_tunguska.jpg",
+ "side_by_side": [
+  "comparison/001-greenland-shark_vs_002-tunguska/side_by_side/pair_00.jpg",
+  "comparison/001-greenland-shark_vs_002-tunguska/side_by_side/pair_01.jpg",
+  "comparison/001-greenland-shark_vs_002-tunguska/side_by_side/pair_02.jpg",
+  "comparison/001-greenland-shark_vs_002-tunguska/side_by_side/pair_03.jpg",
+  "comparison/001-greenland-shark_vs_002-tunguska/side_by_side/pair_04.jpg",
+  "comparison/001-greenland-shark_vs_002-tunguska/side_by_side/pair_05.jpg",
+  "comparison/001-greenland-shark_vs_002-tunguska/side_by_side/pair_06.jpg",
+  "comparison/001-greenland-shark_vs_002-tunguska/side_by_side/pair_07.jpg",
+  "comparison/001-greenland-shark_vs_002-tunguska/side_by_side/pair_08.jpg",
+  "comparison/001-greenland-shark_vs_002-tunguska/side_by_side/pair_09.jpg",
+  "comparison/001-greenland-shark_vs_002-tunguska/side_by_side/pair_10.jpg",
+  "comparison/001-greenland-shark_vs_002-tunguska/side_by_side/pair_11.jpg"
+ ]
+}

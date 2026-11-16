@@ -11,8 +11,9 @@ _TENS = "_ _ twenty thirty forty fifty sixty seventy eighty ninety".split()
 
 
 def number_words(n: int, year_style: bool = False) -> list[str]:
-    """English words for an integer; compound tens are joined ('sixtyfive') to match hyphenated script words."""
-    if year_style and 1100 <= n <= 1999:
+    """British-English words for an integer ('one hundred and fifty'); compound tens are joined ('sixtyfive')
+    to match hyphenated script words. Years 1100-1999 and 2010-2099 read as pairs ('nineteen oh eight', 'twenty sixteen')."""
+    if year_style and (1100 <= n <= 1999 or 2010 <= n <= 2099):
         hi, lo = divmod(n, 100)
         return number_words(hi) + (["hundred"] if lo == 0 else (["oh", _ONES[lo]] if lo < 10 else number_words(lo)))
     if n < 20:
@@ -22,10 +23,10 @@ def number_words(n: int, year_style: bool = False) -> list[str]:
         return [_TENS[t] + (_ONES[o] if o else "")]
     if n < 1000:
         h, r = divmod(n, 100)
-        return [_ONES[h], "hundred"] + (number_words(r) if r else [])
+        return [_ONES[h], "hundred"] + (["and"] + number_words(r) if r else [])
     if n < 1_000_000:
         th, r = divmod(n, 1000)
-        return number_words(th) + ["thousand"] + (number_words(r) if r else [])
+        return number_words(th) + ["thousand"] + ((["and"] if r < 100 else []) + number_words(r) if r else [])
     m, r = divmod(n, 1_000_000)
     return number_words(m) + ["million"] + (number_words(r) if r else [])
 
@@ -88,6 +89,12 @@ def align_to_script(text: str, heard: list[tuple[str, float, float]], total: flo
             for i in range(ga):
                 _, s, e = heard[prev_b + i]
                 times[prev_a + i] = (s, e)
+        elif ga == 1 and gb > 1:          # one script word heard as several ("they're" -> "they are")
+            times[prev_a] = (heard[prev_b][1], heard[prev_b + gb - 1][2])
+        elif gb == 1 and ga > 1:          # several script words heard as one token: split its span evenly
+            _, s, e = heard[prev_b]
+            for i in range(ga):
+                times[prev_a + i] = (s + (e - s) * i / ga, s + (e - s) * (i + 1) / ga)
         prev_a, prev_b = blk.a + blk.size, blk.b + blk.size
     matched = [t is not None for t in times]
     for i in range(len(times)):

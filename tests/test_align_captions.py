@@ -6,7 +6,9 @@ def test_number_words():
     assert number_words(65) == ["sixtyfive"]
     assert number_words(1908, year_style=True) == ["nineteen", "oh", "eight"]
     assert number_words(2000) == ["two", "thousand"]
-    assert number_words(150) == ["one", "hundred", "fifty"]
+    assert number_words(150) == ["one", "hundred", "and", "fifty"]
+    assert number_words(2016, year_style=True) == ["twenty", "sixteen"]
+    assert number_words(2005, year_style=True) == ["two", "thousand", "and", "five"]
 
 
 def test_alignment_handles_digits_and_spelling():
@@ -58,3 +60,10 @@ def test_same_length_gap_takes_recognised_timing():
     heard = [(" When", 0, .1), (" Leonid", .1, .44), (" Killick", .44, .86), (" finally", .86, 1.4)]
     out = align_to_script("When Leonid Kulik finally", heard, 1.5)
     assert out[2]["word"] == "Kulik" and out[2]["matched"] and out[2]["start"] == .44 and out[2]["end"] == .86
+
+
+def test_contraction_and_merged_tokens_use_recognised_spans():
+    out = align_to_script("and they're still here", [(" and", 0, .2), (" they", .2, .4), (" are", .4, .6), (" still", .6, .9), (" here", .9, 1.2)], 1.3)
+    assert out[1]["word"] == "they're" and out[1]["matched"] and (out[1]["start"], out[1]["end"]) == (.2, .6)
+    out = align_to_script("a b c d", [(" a", 0, .2), (" bc", .2, .6), (" d", .6, .8)], 1.0)
+    assert out[1]["matched"] and out[2]["matched"] and out[1]["end"] == out[2]["start"] == .4
