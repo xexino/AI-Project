@@ -120,10 +120,13 @@ def validate(data: dict, project_dir: Path | None = None) -> list[str]:
             elif not isinstance(tr.get("d", 0), (int, float)) or tr.get("d", 0) < 0:
                 p.add(f"{w}.transition_out.d", "must be a non-negative number")
         if mod and project_dir is not None and not mod.startswith("builtin:"):
-            if not (project_dir / mod).is_file():
+            sroot = scene_root(data, project_dir)
+            if not (sroot / mod).is_file():
                 p.add(f"{w}.module", f"scene module not found: {mod}")
-            elif not (project_dir / mod).resolve().is_relative_to(project_dir.resolve()):
-                p.add(f"{w}.module", "scene module must live inside the project directory")
+            elif not (sroot / mod).resolve().is_relative_to(sroot.resolve()):
+                p.add(f"{w}.module", "scene module must live inside the project's scene root")
+        if s.get("references") is not None and (not isinstance(s["references"], list) or not data.get("references")):
+            p.add(f"{w}.references", "must be a list of reference ids, and the project needs a top-level 'references' registry")
         for c in s.get("claims", []):
             if c not in claim_ids:
                 p.add(f"{w}.claims", f"unknown claim id '{c}'")
@@ -150,6 +153,10 @@ def validate(data: dict, project_dir: Path | None = None) -> list[str]:
                 p.add(f"{w}.sources", f"unknown source id '{sref}'")
         if not c.get("sources"):
             p.add(f"{w}.sources", "a factual claim needs at least one source")
+    if data.get("scene_root") and project_dir is not None:
+        sr = (project_dir / data["scene_root"]).resolve()
+        if not sr.is_relative_to((REPO_DIR / "productions").resolve()) or not (sr / "project.json").is_file():
+            p.add("project.scene_root", "must point to another production directory inside productions/")
     budget = data.get("budget", {})
     if not isinstance(budget.get("max_paid_eur", 0), (int, float)) or budget.get("max_paid_eur", 0) < 0:
         p.add("budget.max_paid_eur", "must be a non-negative number")
@@ -178,6 +185,11 @@ class Project:
         return self.data["scenes"]
 
     @property
+    def scene_dir(self) -> Path:
+        """Where scene modules are resolved (the project itself, or a base production for experiments)."""
+        return scene_root(self.data, self.dir)
+
+    @property
     def work(self) -> Path:
         return self.dir / "work"
 
@@ -193,6 +205,10 @@ class Project:
 
     def config_hash_part(self, *keys: str) -> dict:
         return {k: self.data.get(k) for k in keys}
+
+
+def scene_root(data: dict, project_dir: Path) -> Path:
+    return (project_dir / data["scene_root"]).resolve() if data.get("scene_root") else project_dir
 
 
 def load(project_dir: str | Path) -> Project:

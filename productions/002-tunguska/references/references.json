@@ -1,0 +1,531 @@
+{
+ "schema": "oddlight-references/1",
+ "production": "002-tunguska",
+ "source_pack": "REFERENCE_MANIFEST.json (Canva Magic Media, included quota, EUR 0)",
+ "usage": "guidance only — reference images are never composited into the video",
+ "frames": [
+  {
+   "id": "frame_01",
+   "title": "Endless conifer forest under morning mist, a winding river catching warm low sunlight.",
+   "image": "images/frame_01.png",
+   "image_sha256": "1e49b1a3ad37c6dbf305ef80afbfd2e5218056baee8501bc9d57cad56a7a0ae0",
+   "expected_size": [
+    2720,
+    1536
+   ],
+   "metadata": "metadata/frame_01_reference.json",
+   "preview": "previews/frame_01_preview.png",
+   "required": false,
+   "status": "generated",
+   "scenes": [
+    "s1"
+   ],
+   "palette": [
+    "#3a3b2f",
+    "#242720",
+    "#82868b",
+    "#545855",
+    "#c7bdae"
+   ],
+   "lighting": {
+    "direction": "Low sun from upper-left, slightly toward camera (semi-backlit)",
+    "intensity_and_character": "Soft warm sunlight breaking through clouds; mist diffuses it into visible shafts; cool blue-gray fill everywhere else."
+   },
+   "camera": {
+    "angle": "Aerial establishing shot, roughly 300-400 m altitude, pitched ~20 degrees below horizon",
+    "approx_focal_length_mm": 24,
+    "composition": "River leads the eye from lower-center toward the misty horizon in the upper third; forested ridges layer left and right; bright sky break upper-left as the single warm accent."
+   },
+   "composition": {
+    "source_aspect": "16:9",
+    "target_aspect": "9:16",
+    "keep": [
+     "multi-layer haze depth",
+     "single warm sky accent against cool scene",
+     "irregular tree density with clearings"
+    ]
+   },
+   "materials": [
+    "conifer needles (rough, varied tint)",
+    "still water (reflective)",
+    "marsh grass",
+    "low cloud/mist volumes"
+   ],
+   "environment": {
+    "atmosphere": [
+     "valley mist",
+     "aerial perspective haze",
+     "god-ray sky break"
+    ],
+    "layers": [
+     "canopy (0-200m)",
+     "river valley (200-800m)",
+     "ridge 1 (1-2km)",
+     "ridge 2-3 (3-6km)",
+     "sky/horizon"
+    ]
+   },
+   "vertical_guide": {
+    "center_x": 0.42,
+    "note": "river valley + mist bands; sky break in the top quarter"
+   }
+  },
+  {
+   "id": "frame_02",
+   "title": "An isolated early-20th-century hand-hewn log cabin in a small clearing, thin chimney smoke",
+   "image": "images/frame_02.png",
+   "image_sha256": "04a550b14a0a6212825500b35badd267aff4351ae4b8687913bf4d08d45055e7",
+   "expected_size": [
+    1599,
+    903
+   ],
+   "metadata": "metadata/frame_02_reference.json",
+   "preview": "previews/frame_02_preview.png",
+   "required": false,
+   "status": "generated",
+   "scenes": [
+    "s3"
+   ],
+   "palette": [
+    "#4f5040",
+    "#1f221a",
+    "#888e90",
+    "#2e3328",
+    "#3b3c2f"
+   ],
+   "lighting": {
+    "direction": "Soft diffused daylight from upper right, mild warm bias",
+    "intensity_and_character": "Overcast-to-soft-sun morning; gentle shadow under the eaves; smoke and valley mist catch the light."
+   },
+   "camera": {
+    "angle": "Cinematic wide shot, slightly elevated (~4-6 m above ground), looking gently down at the cabin",
+    "approx_focal_length_mm": 35,
+    "composition": "Cabin off-center left on the lower-third line; tall conifer right edge frames the shot; misty forested valley recedes upper-right; smoke column links cabin to sky."
+   },
+   "composition": {
+    "source_aspect": "16:9",
+    "target_aspect": "9:16",
+    "keep": [
+     "cabin silhouette and human scale against forest",
+     "smoke as the warm/living signal",
+     "log texture readability"
+    ]
+   },
+   "materials": [
+    "hand-hewn logs with visible grain and chinking",
+    "wood shingles",
+    "grass/moss ground",
+    "thin smoke volume"
+   ],
+   "environment": {
+    "atmosphere": [
+     "chimney smoke",
+     "valley mist behind the cabin",
+     "soft aerial haze"
+    ],
+    "layers": [
+     "clearing foreground (0-15m)",
+     "cabin (15-30m)",
+     "forest wall (30-80m)",
+     "misty valley (100m-2km)"
+    ]
+   },
+   "vertical_guide": {
+    "center_x": 0.62,
+    "note": "cabin lower third, smoke column rising, spruce frames the right edge"
+   }
+  },
+  {
+   "id": "frame_03",
+   "title": "A white-blue atmospheric flash low over the horizon, dark pre-dawn taiga landscape in fron",
+   "image": "images/frame_03.webp",
+   "image_sha256": "6398e70582f8910a5203e4a25221418073a5d57d592465e6085bd16806a7663e",
+   "expected_size": [
+    1599,
+    903
+   ],
+   "metadata": "metadata/frame_03_reference.json",
+   "preview": "previews/frame_03_preview.png",
+   "required": false,
+   "status": "generated",
+   "scenes": [
+    "s3"
+   ],
+   "palette": [
+    "#232f3e",
+    "#758daf",
+    "#080d11",
+    "#161b20",
+    "#0e171f"
+   ],
+   "lighting": {
+    "direction": "Single intense point source near the horizon, upper-left",
+    "intensity_and_character": "Extremely bright white-blue core with physically plausible atmospheric scattering halo; rims the nearest tree tops; the rest of the scene stays in deep cool shadow — no lightning bolts, no fantasy beams."
+   },
+   "camera": {
+    "angle": "Wide shot from an elevated ridge, horizon in the upper third",
+    "approx_focal_length_mm": 28,
+    "composition": "Flash upper-left as the single luminous pole; dark conifer silhouettes frame left and right edges; valley floor catches faint rim light; strong negative space in the dark sky."
+   },
+   "composition": {
+    "source_aspect": "16:9",
+    "target_aspect": "9:16",
+    "keep": [
+     "single-source lighting logic",
+     "foreground silhouette detail",
+     "enormous brightness contrast with soft roll-off, not clipped"
+    ]
+   },
+   "materials": [
+    "backlit needle silhouettes",
+    "moist ground with faint specular",
+    "scattering haze"
+   ],
+   "environment": {
+    "atmosphere": [
+     "bright scattering halo",
+     "valley mist glow",
+     "subtle blue atmosphere"
+    ],
+    "layers": [
+     "ridge foreground (0-50m)",
+     "valley (0.5-2km)",
+     "far forest line (3-5km)",
+     "flash/sky"
+    ]
+   },
+   "vertical_guide": {
+    "center_x": 0.36,
+    "note": "flash in the upper third over the treeline; cabin light lower"
+   }
+  },
+  {
+   "id": "frame_04",
+   "title": "An enormous orange-white fireball with a long smoke/ember trail, high above a misty taiga ",
+   "image": "images/frame_04.png",
+   "image_sha256": "1caa9fbe8b24a9bee78614f527463df459f842b4d0c92a1784df75812f78eee3",
+   "expected_size": [
+    1599,
+    903
+   ],
+   "metadata": "metadata/frame_04_reference.json",
+   "preview": "previews/frame_04_preview.png",
+   "required": false,
+   "status": "generated",
+   "scenes": [
+    "s1",
+    "s2"
+   ],
+   "palette": [
+    "#4c4c55",
+    "#100c07",
+    "#6f5e5e",
+    "#302f31",
+    "#9f7b64"
+   ],
+   "lighting": {
+    "direction": "From the fireball, upper-right, strongly warm",
+    "intensity_and_character": "Complex luminous core (white centre -> orange rim), believable exposure: sky stays readable, trail self-shadows; warm light scatters in haze and reflects off water; cool blue remnant sky at edges."
+   },
+   "camera": {
+    "angle": "Very wide environmental shot from ground level near a bog pool, tilted up slightly",
+    "approx_focal_length_mm": 21,
+    "composition": "Fireball upper-right with the trail entering from upper-left (strong diagonal); forest silhouettes anchor both lower corners; misty plain and water reflection carry the warm light downward."
+   },
+   "composition": {
+    "source_aspect": "16:9",
+    "target_aspect": "9:16",
+    "keep": [
+     "scale relationship: fireball dwarfs the landscape",
+     "warm core vs cool sky split",
+     "water reflection of the event"
+    ]
+   },
+   "materials": [
+    "emissive plasma core",
+    "volumetric smoke trail",
+    "water specular",
+    "silhouetted needles"
+   ],
+   "environment": {
+    "atmosphere": [
+     "scattering glow around core",
+     "trail smoke",
+     "ground mist",
+     "warm fog tint"
+    ],
+    "layers": [
+     "foreground trees/pool (0-60m)",
+     "plain (0.5-3km)",
+     "far forest (4-6km)",
+     "fireball/sky (atmospheric)"
+    ]
+   },
+   "vertical_guide": {
+    "center_x": 0.74,
+    "note": "fireball upper half, trail from upper-left; bog pool reflection bottom"
+   }
+  },
+  {
+   "id": "frame_05",
+   "title": "A wall of dust and debris sweeping left-to-right across a conifer forest; trees bending an",
+   "image": "images/frame_05.png",
+   "image_sha256": "1acb263e4fb343c3ba046c45a74f5dc9acfc530d021a2ef889f3b3adfce2d4b5",
+   "expected_size": [
+    1599,
+    903
+   ],
+   "metadata": "metadata/frame_05_reference.json",
+   "preview": "previews/frame_05_preview.png",
+   "required": false,
+   "status": "generated",
+   "scenes": [
+    "s4"
+   ],
+   "palette": [
+    "#474233",
+    "#201b12",
+    "#6e6960",
+    "#9c978e",
+    "#c2b9ac"
+   ],
+   "lighting": {
+    "direction": "Sunlight from upper right, heavily diffused through the dust wall",
+    "intensity_and_character": "Warm dusty backscatter inside the wave; neutral daylight outside it; strong directional coherence sells the physics."
+   },
+   "camera": {
+    "angle": "Wide shot from an elevated slope looking across the forest, wave front on a diagonal",
+    "approx_focal_length_mm": 35,
+    "composition": "Already-fallen trunks in the foreground point along the wave direction; standing forest mid-frame bends away; dust wall fills the upper-left; untouched hazy forest upper-right shows what is about to be lost."
+   },
+   "composition": {
+    "source_aspect": "16:9",
+    "target_aspect": "9:16",
+    "keep": [
+     "directional coherence of every falling tree",
+     "readable wave front edge",
+     "sense of speed via streaked debris"
+    ]
+   },
+   "materials": [
+    "splintered wood",
+    "airborne dust volume",
+    "bending green canopy",
+    "dry soil kicked up"
+   ],
+   "environment": {
+    "atmosphere": [
+     "dust wall",
+     "debris streaks",
+     "haze gradient from chaos to calm"
+    ],
+    "layers": [
+     "fallen foreground (0-40m)",
+     "bending rank (40-200m)",
+     "dust front (200-600m)",
+     "calm forest + sky (1km+)"
+    ]
+   },
+   "vertical_guide": {
+    "center_x": 0.3,
+    "note": "dust wall fills the top half; fallen trunks with root plates foreground"
+   }
+  },
+  {
+   "id": "frame_06",
+   "title": "A vast flattened forest from an elevated viewpoint — trunks aligned radially away from a d",
+   "image": "images/frame_06.png",
+   "image_sha256": "184ce06500166577ad73b909346617a4a21170e29b898257eb2ae02a9713d647",
+   "expected_size": [
+    1599,
+    903
+   ],
+   "metadata": "metadata/frame_06_reference.json",
+   "preview": "previews/frame_06_preview.png",
+   "required": false,
+   "status": "generated",
+   "scenes": [
+    "s6"
+   ],
+   "palette": [
+    "#5d5953",
+    "#2f271f",
+    "#999ea6",
+    "#454139",
+    "#51483d"
+   ],
+   "lighting": {
+    "direction": "Flat overcast sky, weak brightness toward the horizon",
+    "intensity_and_character": "Deliberately drained: no warm accent for the first time in the film; soft shadowless light, detail carried by texture not contrast."
+   },
+   "camera": {
+    "angle": "Elevated wide shot (low aerial, ~80-120 m), looking toward the epicentre direction",
+    "approx_focal_length_mm": 28,
+    "composition": "Foreground trunks fan from the bottom edge and converge toward a vanishing region near the horizon centre — the radial pattern IS the composition; pools break up the midground; horizon high in frame to emphasise ground."
+   },
+   "composition": {
+    "source_aspect": "16:9",
+    "target_aspect": "9:16",
+    "keep": [
+     "radial/butterfly alignment toward epicentre",
+     "standing stripped trunks near centre",
+     "bog pools",
+     "drained overcast grade"
+    ]
+   },
+   "materials": [
+    "weathered bark and exposed wood",
+    "wet bog water (matte reflection of sky)",
+    "moss/peat ground"
+   ],
+   "environment": {
+    "atmosphere": [
+     "low haze",
+     "overcast diffusion",
+     "distance desaturation"
+    ],
+    "layers": [
+     "hero trunks (0-50m)",
+     "aligned field (50-500m)",
+     "pools + far field (0.5-3km)",
+     "horizon haze"
+    ]
+   },
+   "vertical_guide": {
+    "center_x": 0.5,
+    "note": "radial trunks converge to the standing poles near the top third"
+   }
+  },
+  {
+   "id": "frame_07",
+   "title": "Ground-level view across the devastated forest; fallen trunks to the horizon, thin smoke s",
+   "image": "images/frame_07.webp",
+   "image_sha256": "92800cfbd37bb26d3371ca4e2e2559abb13dfd861d943e046c09cd98e3a98e1d",
+   "expected_size": [
+    1599,
+    903
+   ],
+   "metadata": "metadata/frame_07_reference.json",
+   "preview": "previews/frame_07_preview.png",
+   "required": false,
+   "status": "generated",
+   "scenes": [
+    "s5"
+   ],
+   "palette": [
+    "#433c3b",
+    "#241e1c",
+    "#5c5a5e",
+    "#acb1b9",
+    "#7b808b"
+   ],
+   "lighting": {
+    "direction": "Dim overcast daylight, faintly brighter at the horizon",
+    "intensity_and_character": "Dramatic overcast: soft low-contrast light, smoke filtering it further; muted, mournful; the only 'warmth' is ash-brown ground tone."
+   },
+   "camera": {
+    "angle": "Ground-level to slightly elevated cinematic wide shot, horizon in the upper third",
+    "approx_focal_length_mm": 32,
+    "composition": "Heavy debris field crosses the foreground diagonally; isolated burnt snags stand as dark verticals against the pale sky; smoke columns give sparse vertical rhythm; large muted sky as negative space."
+   },
+   "composition": {
+    "source_aspect": "16:9",
+    "target_aspect": "9:16",
+    "keep": [
+     "horizon-to-horizon extent of destruction",
+     "sparse vertical snags for rhythm",
+     "muted grade with no warm accent"
+    ]
+   },
+   "materials": [
+    "charred and raw wood",
+    "ash and peat soil",
+    "thin smoke columns",
+    "wet debris sheen"
+   ],
+   "environment": {
+    "atmosphere": [
+     "drifting low smoke",
+     "haze gradient",
+     "overcast diffusion"
+    ],
+    "layers": [
+     "wreckage foreground (0-30m)",
+     "snag field (30-300m)",
+     "smoke plain (0.3-2km)",
+     "sky"
+    ]
+   },
+   "vertical_guide": {
+    "center_x": 0.45,
+    "note": "debris diagonal foreground; snags + smoke wisps mid; drained sky top"
+   }
+  },
+  {
+   "id": "frame_08",
+   "title": "A few small anonymous expedition figures in period field clothing, seen from behind/afar, ",
+   "image": "images/frame_08.png",
+   "image_sha256": null,
+   "expected_size": null,
+   "metadata": "metadata/frame_08_reference.json",
+   "preview": null,
+   "required": false,
+   "status": "pending_quota",
+   "scenes": [
+    "s6"
+   ],
+   "palette": [
+    "#5a564d",
+    "#2c2620",
+    "#9aa0a6",
+    "#4a453c",
+    "#7d8289"
+   ],
+   "lighting": {
+    "direction": "Neutral overcast daylight",
+    "intensity_and_character": "Documentary-plain: soft, even, honest light; no heroic rim light; slight horizon brightness."
+   },
+   "camera": {
+    "angle": "Wide environmental shot, eye level or slightly elevated",
+    "approx_focal_length_mm": 40,
+    "composition": "Figures lower-left third on a rise, facing into the devastation; fallen trunks lead lines from them toward the horizon; big overcast sky above; figures occupy <5% of frame height."
+   },
+   "composition": {
+    "source_aspect": "16:9",
+    "target_aspect": "9:16",
+    "keep": [
+     "tiny human scale against the devastation",
+     "period accuracy of clothing/equipment",
+     "anonymous figures"
+    ]
+   },
+   "materials": [
+    "wool/canvas period clothing",
+    "leather packs",
+    "wood and bark",
+    "peat ground"
+   ],
+   "environment": {
+    "atmosphere": [
+     "light haze",
+     "overcast diffusion"
+    ],
+    "layers": [
+     "trunk foreground (0-10m)",
+     "figures (15-40m)",
+     "trunk field (40-600m)",
+     "horizon haze"
+    ]
+   },
+   "vertical_guide": {
+    "center_x": 0.33,
+    "note": "tiny figures lower third; trunk lines lead to the horizon"
+   }
+  }
+ ],
+ "notes": [
+  "Files in the uploaded pack were named frame1.jpg (PNG content), frame2.png, Fram3.webp, frame4-6.png, frame7.webp; renamed to frame_0N.* here.",
+  "Frame 01 is full resolution (2720x1536); frames 02-07 are 1599x903 (not the 2720x1536 sources listed in the manifest).",
+  "Frame 08 (expedition) was never generated (quota) — metadata-only guidance; its image is expected at images/frame_08.png."
+ ]
+}

@@ -159,6 +159,7 @@ def main(argv: list[str] | None = None) -> int:
     sp.add_argument("--project"); sp.add_argument("--max-attempts", type=int, default=2); sp.add_argument("--job", type=int)
     sp.add_argument("--renderer"); sp.add_argument("--tts"); sp.add_argument("--aligner"); sp.add_argument("--jobs", type=int, default=2)
     sub.add_parser("customers")
+    sp = sub.add_parser("references"); sp.add_argument("--project", required=True); sp.add_argument("--pin", action="store_true")
     sp = sub.add_parser("compare"); sp.add_argument("--a", required=True); sp.add_argument("--b", required=True)
     sp.add_argument("--out", required=True); sp.add_argument("--n", type=int, default=12)
     sp.add_argument("--a-name", default="original"); sp.add_argument("--b-name", default="new")
@@ -182,6 +183,22 @@ def main(argv: list[str] | None = None) -> int:
             for c in customers.list_customers():
                 print(f"{c['id']:<16} {c.get('name', '')}  {c.get('error', '')}")
             return 0
+        if a.cmd == "references":
+            from .references import load_registry, pin
+            p, _, _ = open_project(a.project, quiet=True)
+            reg = load_registry(p)
+            if reg is None:
+                print("no visual references configured"); return 0
+            if a.pin:
+                print("pinned:", ", ".join(pin(reg)) or "nothing changed")
+            rows, warns, errs = reg.check()
+            for r in rows:
+                print(f"{r['id']:<10} {r.get('image_status', '?'):<13} {r.get('width', '')}x{r.get('height', '')}  scenes={','.join(r['scenes'])}")
+            for w in warns:
+                print("WARN ", w)
+            for e in errs:
+                print("ERROR", e)
+            return 1 if errs else 0
         if a.cmd == "compare":
             from .compare import build
             res = build(Path(a.a), Path(a.b), Path(a.out), a.n, a.a_name, a.b_name)

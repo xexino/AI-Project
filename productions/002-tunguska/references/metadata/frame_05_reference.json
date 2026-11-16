@@ -1,0 +1,35 @@
+{
+  "reference_image": "frame_05_shockwave.png",
+  "status": "generated",
+  "canva_media_id": "MAHbEGs6hSs",
+  "source_resolution": [2720, 1536],
+  "scene_purpose": "Make the invisible force visually understandable: a pressure wave tearing through the canopy.",
+  "main_subject": "A wall of dust and debris sweeping left-to-right across a conifer forest; trees bending and snapping in one coherent direction.",
+  "camera": {
+    "angle": "Wide shot from an elevated slope looking across the forest, wave front on a diagonal",
+    "approx_focal_length_mm": 35,
+    "composition": "Already-fallen trunks in the foreground point along the wave direction; standing forest mid-frame bends away; dust wall fills the upper-left; untouched hazy forest upper-right shows what is about to be lost."
+  },
+  "lighting": {
+    "direction": "Sunlight from upper right, heavily diffused through the dust wall",
+    "intensity_and_character": "Warm dusty backscatter inside the wave; neutral daylight outside it; strong directional coherence sells the physics."
+  },
+  "dominant_colors": ["#474233", "#201b12", "#6e6960", "#9c978e", "#c2b9ac"],
+  "foreground_elements": ["freshly fallen trunks with torn root plates", "flying needles and bark fragments"],
+  "midground_elements": ["rank of trees mid-bend at varying angles (coherent direction)", "dust bursts at trunk breaks"],
+  "background_elements": ["advancing dust wall", "hazy untouched forest", "pale sky"],
+  "materials": ["splintered wood", "airborne dust volume", "bending green canopy", "dry soil kicked up"],
+  "environmental_details": ["all motion vectors agree with one wave direction", "bend angle increases toward the wave front"],
+  "atmospheric_effects": ["dust wall", "debris streaks", "haze gradient from chaos to calm"],
+  "depth_layers": ["fallen foreground (0-40m)", "bending rank (40-200m)", "dust front (200-600m)", "calm forest + sky (1km+)"],
+  "animation_opportunities": ["THE key engine moment: fallState(R) radius sweep drives per-instance fall, exactly s4_shockwave.js", "dust front particles advancing with the radius", "camera shake ramp"],
+  "must_preserve": ["directional coherence of every falling tree", "readable wave front edge", "sense of speed via streaked debris"],
+  "can_simplify": ["individual debris to particles({additive:false}) bursts", "dust wall to large soft sprite billboards moving with R", "splinter detail to the stripped coniferGeometry variant"],
+  "engine_mapping": {
+    "world": "world({ skyEl: 8, fog: 0.0016, fogColor: '#c4b3a0' })",
+    "wave": "scenes/lib/world.js fallState(R, softness) with R(t) expanding from EPI; makeForest update(stateFn) sets fall 0->1 and dir away from epicentre — the exact s4_shockwave.js mechanism",
+    "trees": "geometry: geo.living + swap to coniferGeometry({stripped:true}) behind the front",
+    "dust": "particles({ n: 4000, box: wide, size: 1.2, color: '#b8a88e', opacity: 0.35, drift: high }) clustered at radius R",
+    "camera": "fov ~40, elevated, slight roll/shake driven by wave proximity"
+  }
+}

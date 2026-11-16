@@ -6,6 +6,7 @@ same fingerprint resumes from its first missing frame; a scene whose inputs chan
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 import time
@@ -45,8 +46,38 @@ def scene_dependencies(project_dir: Path, module: str) -> list[Path]:
 
 def scene_fingerprint(ctx: Context, s: dict, clip: float) -> str:
     p = ctx.project
-    deps = scene_dependencies(p.dir, s["module"])
-    return fingerprint(s["module"], hash_tree(deps), round(clip, 4), p.fmt["fps"], p.fmt["width"], p.fmt["height"], s.get("params", {}))
+    deps = scene_dependencies(p.scene_dir, s["module"])
+    parts = [s["module"], hash_tree(deps), round(clip, 4), p.fmt["fps"], p.fmt["width"], p.fmt["height"], s.get("params", {})]
+    if s.get("references"):                      # reference images + metadata are dependencies of the scenes they guide
+        parts.append(_registry(ctx).fingerprint_parts(s["references"]))
+    return fingerprint(*parts)
+
+
+def _registry(ctx: Context):
+    from ..references import load_registry
+    if "_registry" not in ctx.options:
+        ctx.options["_registry"] = load_registry(ctx.project)
+    return ctx.options["_registry"]
+
+
+def reuse_frames(ctx: Context, sid: str, fp: str, n: int, dest: Path) -> bool:
+    """Copy (hard-link when possible) frames from another production whose scene has the identical fingerprint."""
+    for rel in ctx.project.data["visual"].get("reuse_frames_from") or []:
+        src = (ctx.project.dir / rel).resolve() / "work" / "frames" / sid
+        m = src / ".fingerprint"
+        if m.is_file() and m.read_text() == fp and len(list(src.glob("f*.png"))) == n:
+            if dest.exists():
+                shutil.rmtree(dest)
+            dest.mkdir(parents=True)
+            for f in sorted(src.glob("f*.png")):
+                try:
+                    os.link(f, dest / f.name)
+                except OSError:
+                    shutil.copy2(f, dest / f.name)
+            atomic_write_text(dest / ".fingerprint", fp)
+            ctx.log.info("scene_reused", scene=sid, source=str(src))
+            return True
+    return False
 
 
 def scene_words(tl: dict, seg: dict) -> list[dict]:
@@ -55,10 +86,16 @@ def scene_words(tl: dict, seg: dict) -> list[dict]:
 
 
 def scene_params(ctx: Context, s: dict) -> dict:
-    """Brand defaults for the builtin end card (wordmark, tagline, colours), overridden by the scene's own params."""
+    """Brand defaults for the builtin end card (wordmark, tagline, colours), overridden by the scene's own params.
+    Scenes that list visual references receive the project's visual look and the references' guidance."""
     if s["module"] == "builtin:endcard":
         return {**(ctx.project.data["brand"].get("endcard") or {}), **s.get("params", {})}
-    return s.get("params", {})
+    params = s.get("params", {})
+    if s.get("references"):
+        params = {**params, "refs": _registry(ctx).scene_guidance(s["references"])}
+        if ctx.project.data["visual"].get("look"):
+            params["look"] = ctx.project.data["visual"]["look"]
+    return params
 
 
 def config(ctx: Context) -> dict:
@@ -97,6 +134,8 @@ def visuals(ctx: Context) -> dict:
             t.unlink()                                   # never trust a partially written frame
         if marker.exists() and marker.read_text() == fp and len(have) == n:
             ctx.log.info("scene_cached", scene=s["id"], frames=n)
+        elif reuse_frames(ctx, s["id"], fp, n, d):
+            pass
         elif only and s["id"] not in only:
             raise EngineError(f"scene {s['id']} is not rendered/current but was excluded by --scenes")
         else:
@@ -117,7 +156,7 @@ def visuals(ctx: Context) -> dict:
         s, seg, n, d, start = job
         t0 = time.time()
         ctx.log.info("scene_render_start", scene=s["id"], frames=n, start=start)
-        renderer.render(project_dir=p.dir, module=s["module"], dur=seg["clip"], fps=fps, width=w, height=h,
+        renderer.render(project_dir=p.scene_dir, module=s["module"], dur=seg["clip"], fps=fps, width=w, height=h,
                         params=s.get("params", {}), out_dir=d, start=start, log=ctx.log)
         got = len(list(d.glob("f*.png")))
         if got != n:

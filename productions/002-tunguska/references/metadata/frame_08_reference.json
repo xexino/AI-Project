@@ -1,0 +1,36 @@
+{
+  "reference_image": "frame_08_scientific_reconstruction.png",
+  "status": "pending_quota",
+  "canva_media_id": null,
+  "source_resolution": null,
+  "note": "Generation blocked by the Canva account's included AI-credit quota at delivery time (no credits were purchased, per budget constraints). The full prompt and this complete spec are ready; regenerate with the prompt in REFERENCE_MANIFEST.json when quota refreshes.",
+  "scene_purpose": "Transition from destruction to scientific investigation (Kulik-era expedition, 1920s), without inventing identifiable historical individuals.",
+  "main_subject": "A few small anonymous expedition figures in period field clothing, seen from behind/afar, dwarfed by the flattened forest.",
+  "camera": {
+    "angle": "Wide environmental shot, eye level or slightly elevated",
+    "approx_focal_length_mm": 40,
+    "composition": "Figures lower-left third on a rise, facing into the devastation; fallen trunks lead lines from them toward the horizon; big overcast sky above; figures occupy <5% of frame height."
+  },
+  "lighting": {
+    "direction": "Neutral overcast daylight",
+    "intensity_and_character": "Documentary-plain: soft, even, honest light; no heroic rim light; slight horizon brightness."
+  },
+  "dominant_colors": ["#5a564d", "#2c2620", "#9aa0a6", "#4a453c", "#7d8289"],
+  "foreground_elements": ["fallen trunk crossing the lower frame", "trampled grass path"],
+  "midground_elements": ["3-5 figures with packs, period coats/boots, simple instruments (tripod, notebooks)", "aligned fallen trunks"],
+  "background_elements": ["devastation to the horizon", "overcast sky with mild texture"],
+  "materials": ["wool/canvas period clothing", "leather packs", "wood and bark", "peat ground"],
+  "environmental_details": ["no faces readable (anonymous, historically safe)", "no modern equipment", "equipment plausible for a 1920s Soviet expedition"],
+  "atmospheric_effects": ["light haze", "overcast diffusion"],
+  "depth_layers": ["trunk foreground (0-10m)", "figures (15-40m)", "trunk field (40-600m)", "horizon haze"],
+  "animation_opportunities": ["figures hold still while camera slowly rises (reveal of scale, matches s10_today.js reflective tone)", "coat/strap micro-movement", "haze drift"],
+  "must_preserve": ["tiny human scale against the devastation", "period accuracy of clothing/equipment", "anonymous figures"],
+  "can_simplify": ["figures to low-poly capsule-based silhouettes with painted vertex colour (engine has no character rig — silhouettes at this distance are sufficient)", "instruments to simple primitives", "far field as frame_06 instancing"],
+  "engine_mapping": {
+    "world": "world({ scorch: 0.6, fogColor: '#9aa0a4', envIntensity: 0.55 }) — same drained recipe as frames 06-07",
+    "figures": "new helper: capsule+sphere silhouette group, 1.7-1.8 units tall at human scale factor, dark wool tones (#3a3630), NO facial detail; place 3-5 with varied poses",
+    "debris": "reuse frame_06 fallen instancing along sightlines",
+    "light": "HemisphereLight + weak sun at high elevation for soft ground contact shadows",
+    "camera": "fov ~38, slow crane up from eye level to +15m"
+  }
+}

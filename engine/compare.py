@@ -55,3 +55,46 @@ def build(a_video: Path, b_video: Path, out: Path, n: int = 12, a_name: str = "o
     (out / "comparison_index.json").write_text(json.dumps({"a": str(a_video), "b": str(b_video), "frames_per_video": n,
         "sampling": "centre of each of N equal slices of the full runtime", **res}, indent=1))
     return res
+
+
+def scene_sheets(a_dir: Path, b_dir: Path, out: Path, scenes: list[str], fractions=(0.2, 0.55, 0.9), registry=None,
+                 scene_refs: dict | None = None) -> list[str]:
+    """Per-scene comparison sheets: original frames | enhanced frames at identical frame indices (+ the guiding
+    reference adapted to 9:16, when available). Rows = fractions of the scene's duration."""
+    out.mkdir(parents=True, exist_ok=True)
+    made = []
+    for sid in scenes:
+        fa, fb = sorted((a_dir / "work" / "frames" / sid).glob("f*.png")), sorted((b_dir / "work" / "frames" / sid).glob("f*.png"))
+        if not fa or len(fa) != len(fb):
+            continue
+        idx = [min(len(fa) - 1, int(len(fa) * f)) for f in fractions]
+        inputs, filt = [], []
+        for k, i in enumerate(idx):
+            inputs += ["-i", str(fa[i]), "-i", str(fb[i])]
+        cols = 2
+        ref = None
+        if registry is not None and scene_refs and scene_refs.get(sid):
+            for rid in scene_refs[sid]:
+                img = registry.resolve(registry.frame(rid).get("image"))
+                if img and img.is_file():
+                    ref = (rid, img, registry.frame(rid).get("vertical_guide", {}).get("center_x", 0.5)); break
+        n = len(idx)
+        parts = []
+        for k in range(n):
+            parts.append(f"[{2 * k}:v]scale=360:640,drawtext=text='original {sid} f{idx[k]}':x=8:y=8:fontsize=18:fontcolor=white:box=1:boxcolor=black@0.6[a{k}]")
+            parts.append(f"[{2 * k + 1}:v]scale=360:640,drawtext=text='reference_v1 {sid} f{idx[k]}':x=8:y=8:fontsize=18:fontcolor=white:box=1:boxcolor=black@0.6[b{k}]")
+        if ref:
+            inputs += ["-i", str(ref[1])]
+            ri = 2 * n
+            parts.append(f"[{ri}:v]crop=ih*9/16:ih:max(0\\,min(iw-ih*9/16\\,iw*{ref[2]}-ih*9/32)):0,scale=360:640,"
+                         f"drawtext=text='reference {ref[0]} (9\\:16 guide)':x=8:y=8:fontsize=18:fontcolor=white:box=1:boxcolor=black@0.6,split={n}" + "".join(f"[r{k}]" for k in range(n)))
+            cols = 3
+        rows = []
+        for k in range(n):
+            parts.append(f"[a{k}][b{k}]" + (f"[r{k}]" if ref else "") + f"hstack=inputs={cols}[row{k}]")
+            rows.append(f"[row{k}]")
+        parts.append("".join(rows) + f"vstack=inputs={n}[o]")
+        o = out / f"scene_{sid}_original_vs_reference_v1.jpg"
+        run(FFMPEG + inputs + ["-filter_complex", ";".join(parts), "-map", "[o]", "-q:v", "4", str(o)])
+        made.append(str(o))
+    return made

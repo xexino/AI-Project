@@ -1,0 +1,35 @@
+{
+  "reference_image": "frame_04_fireball.png",
+  "status": "generated",
+  "canva_media_id": "MAHbEMJxCWE",
+  "source_resolution": [2720, 1536],
+  "scene_purpose": "Communicate the extraordinary scale of the event: an incandescent body crossing the sky, not an impact.",
+  "main_subject": "An enormous orange-white fireball with a long smoke/ember trail, high above a misty taiga river plain at dawn.",
+  "camera": {
+    "angle": "Very wide environmental shot from ground level near a bog pool, tilted up slightly",
+    "approx_focal_length_mm": 21,
+    "composition": "Fireball upper-right with the trail entering from upper-left (strong diagonal); forest silhouettes anchor both lower corners; misty plain and water reflection carry the warm light downward."
+  },
+  "lighting": {
+    "direction": "From the fireball, upper-right, strongly warm",
+    "intensity_and_character": "Complex luminous core (white centre -> orange rim), believable exposure: sky stays readable, trail self-shadows; warm light scatters in haze and reflects off water; cool blue remnant sky at edges."
+  },
+  "dominant_colors": ["#4c4c55", "#100c07", "#6f5e5e", "#302f31", "#9f7b64"],
+  "foreground_elements": ["dark conifer silhouettes left and right", "bog pool with warm reflection", "marsh grass"],
+  "midground_elements": ["misty river plain", "low forest line", "drifting haze lit warm"],
+  "background_elements": ["fireball core", "smoke/ember trail", "gradient dawn sky"],
+  "materials": ["emissive plasma core", "volumetric smoke trail", "water specular", "silhouetted needles"],
+  "environmental_details": ["no mushroom cloud", "no ground impact or crater", "trail implies trajectory and speed"],
+  "atmospheric_effects": ["scattering glow around core", "trail smoke", "ground mist", "warm fog tint"],
+  "depth_layers": ["foreground trees/pool (0-60m)", "plain (0.5-3km)", "far forest (4-6km)", "fireball/sky (atmospheric)"],
+  "animation_opportunities": ["fireball traversal along a lerp path (fireball().place as in s1)", "trail emission", "shadow sweep across the plain", "reflection tracking in the pool"],
+  "must_preserve": ["scale relationship: fireball dwarfs the landscape", "warm core vs cool sky split", "water reflection of the event"],
+  "can_simplify": ["core to layered additive glowTexture sprites + PointLight", "trail to ribbon of fading sprite particles (existing fireball({trail, smoke}) supports this)", "plain to low-poly terrain with fog"],
+  "engine_mapping": {
+    "world": "world({ skyEl: 1, skyAz: 70, fog: 0.0019, fogColor: '#8a8aa0' lerp '#d0a070' by fireball intensity }) — identical recipe to s1_dawn_fireball.js",
+    "fireball": "scenes/lib/world.js fireball(scene, { size: 16, trail: 46, smoke: 70 }); path lerp A->B exactly as s1; raise size for this hero shot",
+    "light": "DirectionalLight '#ffc890' castShadow, intensity flicker 2.2 + 0.4*sin(t*17) (s1 pattern)",
+    "water": "flat plane, MeshStandardMaterial roughness 0.08, envMap from skyEnvironment; or emissive-tinted ribbon",
+    "camera": "fov ~55 wide, ground-level, slight upward tilt"
+  }
+}

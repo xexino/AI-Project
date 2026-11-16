@@ -138,6 +138,18 @@ def structural_checks(ctx: Context, tl: dict) -> list[dict]:
     return checks
 
 
+def _reference_record(ctx: Context) -> dict:
+    f = ctx.work("references", "reference_report.json")
+    if not f.exists():
+        return {"configured": False}
+    r = json.loads(f.read_text())
+    if not r.get("configured"):
+        return {"configured": False}
+    return {"configured": True, "warnings": r["warnings"], "frames_with_images": [x["id"] for x in r["frames"] if x.get("image_status") == "present"],
+            "frames_without_images": [x["id"] for x in r["frames"] if x.get("image_status") != "present"],
+            "note": "References guide art direction only. Similarity to a reference is judged by a human, not by these checks."}
+
+
 def qc(ctx: Context) -> dict:
     tl = json.loads(ctx.work("timeline.json").read_text())
     final = ctx.work("master", "final_video.mp4")
@@ -161,6 +173,7 @@ def qc(ctx: Context) -> dict:
             "claims_checked": fc["claims_checked"], "claims_unresolved": fc["unresolved"],
             "licensing_open_items": lic,
             "ai_disclosure_missing_in": disclosure_missing,
+            "visual_references": _reference_record(ctx),
         },
     }
     rep["checks"] = rep["technical"]["checks"]           # v1-compatible keys

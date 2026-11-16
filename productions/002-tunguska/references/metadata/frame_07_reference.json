@@ -1,0 +1,35 @@
+{
+  "reference_image": "frame_07_aftermath.png",
+  "status": "generated",
+  "canva_media_id": "MAHbEOiFsUw",
+  "source_resolution": [2720, 1536],
+  "scene_purpose": "A moment of visual reflection: the silence after the destruction.",
+  "main_subject": "Ground-level view across the devastated forest; fallen trunks to the horizon, thin smoke still rising from scattered points.",
+  "camera": {
+    "angle": "Ground-level to slightly elevated cinematic wide shot, horizon in the upper third",
+    "approx_focal_length_mm": 32,
+    "composition": "Heavy debris field crosses the foreground diagonally; isolated burnt snags stand as dark verticals against the pale sky; smoke columns give sparse vertical rhythm; large muted sky as negative space."
+  },
+  "lighting": {
+    "direction": "Dim overcast daylight, faintly brighter at the horizon",
+    "intensity_and_character": "Dramatic overcast: soft low-contrast light, smoke filtering it further; muted, mournful; the only 'warmth' is ash-brown ground tone."
+  },
+  "dominant_colors": ["#433c3b", "#241e1c", "#5c5a5e", "#acb1b9", "#7b808b"],
+  "foreground_elements": ["detailed shattered trunks and branch wreckage", "charred bark", "upturned roots"],
+  "midground_elements": ["smoking spots", "standing scorched snags", "layered trunk field"],
+  "background_elements": ["devastation fading into smoke haze", "pale overcast sky"],
+  "materials": ["charred and raw wood", "ash and peat soil", "thin smoke columns", "wet debris sheen"],
+  "environmental_details": ["smoke implies recency (hours after)", "no fire flames, only smoulder", "complex non-repeating debris"],
+  "atmospheric_effects": ["drifting low smoke", "haze gradient", "overcast diffusion"],
+  "depth_layers": ["wreckage foreground (0-30m)", "snag field (30-300m)", "smoke plain (0.3-2km)", "sky"],
+  "animation_opportunities": ["very slow lateral dolly (contemplative, matches s5/s7 pacing)", "smoke drift", "ash motes floating (sparse particles)"],
+  "must_preserve": ["horizon-to-horizon extent of destruction", "sparse vertical snags for rhythm", "muted grade with no warm accent"],
+  "can_simplify": ["debris chaos to scattered stripped instances + a few hero merged-geometry wrecks", "smoke to 4-6 slow additive sprite columns", "ground char to terrainColor scorch lerp"],
+  "engine_mapping": {
+    "world": "world({ scorch: 0.8, fog: 0.0024, fogColor: '#8e9298', envIntensity: 0.5 })",
+    "debris": "makeForest with fall:1 everywhere + random dir jitter ±0.15 rad for realism; hero foreground wrecks from coniferGeometry({stripped:true}) laid horizontally",
+    "smoke": "particles({ n: 400, fall: -0.25, drift: 0.4, color: '#9a9a9a', opacity: 0.18 }) columns at 5-6 seed points",
+    "light": "HemisphereLight only, no sun; raise grain slightly in grade for texture",
+    "camera": "fov ~44, height 3-8m, slow lateral track"
+  }
+}

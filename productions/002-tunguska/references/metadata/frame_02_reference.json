@@ -1,0 +1,35 @@
+{
+  "reference_image": "frame_02_lonely_cabin.png",
+  "status": "generated",
+  "canva_media_id": "MAHbEJfJ3HI",
+  "source_resolution": [2720, 1536],
+  "scene_purpose": "Establish human scale and vulnerability before the event.",
+  "main_subject": "An isolated early-20th-century hand-hewn log cabin in a small clearing, thin chimney smoke, dense taiga behind.",
+  "camera": {
+    "angle": "Cinematic wide shot, slightly elevated (~4-6 m above ground), looking gently down at the cabin",
+    "approx_focal_length_mm": 35,
+    "composition": "Cabin off-center left on the lower-third line; tall conifer right edge frames the shot; misty forested valley recedes upper-right; smoke column links cabin to sky."
+  },
+  "lighting": {
+    "direction": "Soft diffused daylight from upper right, mild warm bias",
+    "intensity_and_character": "Overcast-to-soft-sun morning; gentle shadow under the eaves; smoke and valley mist catch the light."
+  },
+  "dominant_colors": ["#4f5040", "#1f221a", "#888e90", "#2e3328", "#3b3c2f"],
+  "foreground_elements": ["grass and low shrubs around the clearing", "worn ground path"],
+  "midground_elements": ["log cabin with shingle roof, small windows, stone/clay chimney", "chimney smoke", "first rank of conifers"],
+  "background_elements": ["forested slope descending into mist", "hazy far ridge"],
+  "materials": ["hand-hewn logs with visible grain and chinking", "wood shingles", "grass/moss ground", "thin smoke volume"],
+  "environmental_details": ["period-correct construction (no sawn lumber, no metal roof)", "clearing edge irregular", "no modern objects"],
+  "atmospheric_effects": ["chimney smoke", "valley mist behind the cabin", "soft aerial haze"],
+  "depth_layers": ["clearing foreground (0-15m)", "cabin (15-30m)", "forest wall (30-80m)", "misty valley (100m-2km)"],
+  "animation_opportunities": ["smoke drift (particles with slow fall negative = rise)", "subtle tree sway", "mist movement", "slow push-in toward cabin (matches s3_cabin.js)"],
+  "must_preserve": ["cabin silhouette and human scale against forest", "smoke as the warm/living signal", "log texture readability"],
+  "can_simplify": ["log detail to vertex-coloured cylinders + normal-ish noise (paint() pattern from nature.js)", "background forest to instanced far trees", "smoke to additive glowTexture particles"],
+  "engine_mapping": {
+    "world": "world({ skyEl: 6, skyAz: 110, fog: 0.002, fogColor: '#aeb2b0' })",
+    "cabin": "extend scenes/lib/world.js homestead group: stacked CylinderGeometry logs, vertex-painted bark colour (#4a3a2e range), ConeGeometry-free shingle roof from thin BoxGeometry rows",
+    "smoke": "particles({ n: 300, additive: false, fall: -0.4, drift: 0.3, color: '#c9c9c9', opacity: 0.25 }) rising column",
+    "forest": "makeForest(treesIn({ keep: outside clearing radius }))",
+    "light": "sunLight '#ffe8c8' intensity 2, high softness via large shadow normalBias; HemisphereLight fill"
+  }
+}

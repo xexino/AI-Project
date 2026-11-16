@@ -30,3 +30,7 @@ var/
 comparison/**/*.mp4
 comparison/**/*.png
 !comparison/**/*thumb_180px.png
+productions/**/references/images/
+productions/**/work/
+productions/**/delivery/
+productions/**/.delivery.tmp/

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "project": "productions/002-tunguska",
+  "pack": "ultimate-cinematic-visual-reference-pack",
+  "created": "2026-11-16",
+  "generator": {
+    "method": "Canva Magic Media text-to-image via connected Canva account (included AI quota)",
+    "paid_services_used": false,
+    "out_of_pocket_cost_eur": 0,
+    "source_resolution": [2720, 1536],
+    "target_resolution_min": [2048, 1152],
+    "aspect_ratio": "16:9"
+  },
+  "frames": [
+    {"n": 1, "file": "frame_01_siberian_wilderness.png", "metadata": "metadata/frame_01_reference.json", "canva_media_id": "MAHbEAGgsIE", "canva_url": "https://www.canva.com/M/MAHbEAGgsIE", "status": "generated"},
+    {"n": 2, "file": "frame_02_lonely_cabin.png", "metadata": "metadata/frame_02_reference.json", "canva_media_id": "MAHbEJfJ3HI", "canva_url": "https://www.canva.com/M/MAHbEJfJ3HI", "status": "generated"},
+    {"n": 3, "file": "frame_03_mysterious_flash.png", "metadata": "metadata/frame_03_reference.json", "canva_media_id": "MAHbEFE0OlA", "canva_url": "https://www.canva.com/M/MAHbEFE0OlA", "status": "generated"},
+    {"n": 4, "file": "frame_04_fireball.png", "metadata": "metadata/frame_04_reference.json", "canva_media_id": "MAHbEMJxCWE", "canva_url": "https://www.canva.com/M/MAHbEMJxCWE", "status": "generated"},
+    {"n": 5, "file": "frame_05_shockwave.png", "metadata": "metadata/frame_05_reference.json", "canva_media_id": "MAHbEGs6hSs", "canva_url": "https://www.canva.com/M/MAHbEGs6hSs", "status": "generated"},
+    {"n": 6, "file": "frame_06_flattened_forest.png", "metadata": "metadata/frame_06_reference.json", "canva_media_id": "MAHbEI6-Hhw", "canva_url": "https://www.canva.com/M/MAHbEI6-Hhw", "status": "generated"},
+    {"n": 7, "file": "frame_07_aftermath.png", "metadata": "metadata/frame_07_reference.json", "canva_media_id": "MAHbEOiFsUw", "canva_url": "https://www.canva.com/M/MAHbEOiFsUw", "status": "generated"},
+    {"n": 8, "file": "frame_08_scientific_reconstruction.png", "metadata": "metadata/frame_08_reference.json", "canva_media_id": null, "canva_url": null, "status": "pending_quota",
+     "regenerate_prompt": "An early-20th-century Russian scientific expedition observing a vast devastated Siberian forest in the 1920s, from a premium historical science documentary. A few small anonymous human figures seen from behind at a distance, wearing period-appropriate 1920s field clothing with simple period equipment and packs, standing among enormous fallen conifer trunks, the flattened forest stretching to the horizon, realistic human proportions, tiny figures against the enormous landscape, natural atmospheric overcast lighting, documentary-style composition. Wide environmental shot. Photorealistic documentary cinematography, restrained cinematic contrast, muted natural colours, earthy browns, cool atmospheric shadows, realistic highlight roll-off. No text, no watermarks, no borders, no recognizable faces, no modern objects, not a video game or cartoon look.",
+     "aspect_ratio_setting": "LANDSCAPE_16_9"}
+  ],
+  "consistency_contract": {
+    "style_suffix_used_on_every_prompt": "Photorealistic documentary cinematography, restrained cinematic contrast, natural forest greens, earthy browns, cool atmospheric shadows, realistic highlight roll-off. No text, no watermarks, no borders, not a video game or cartoon look.",
+    "setting": "1908 Siberian taiga (frame 08: 1920s expedition)",
+    "negatives": ["no modern objects", "no mushroom cloud", "no crater", "no fantasy lightning", "no identifiable historical individuals"]
+  },
+  "notes": [
+    "Full-resolution PNGs are stored in the project workspace, not committed to Git (large binaries).",
+    "Small previews for quick inspection are in metadata/previews/ (repo-safe, <50 KB each).",
+    "Each frame's companion JSON adapts the reference to the existing engine/three architecture; see THREEJS_IMPLEMENTATION_NOTES.md."
+  ]
+}

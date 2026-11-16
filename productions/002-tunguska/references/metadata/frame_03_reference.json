@@ -1,0 +1,35 @@
+{
+  "reference_image": "frame_03_mysterious_flash.png",
+  "status": "generated",
+  "canva_media_id": "MAHbEFE0OlA",
+  "source_resolution": [2720, 1536],
+  "scene_purpose": "Capture the first extraordinary moment: a silent, impossibly bright light over the distant forest.",
+  "main_subject": "A white-blue atmospheric flash low over the horizon, dark pre-dawn taiga landscape in front, tiny cabin lights in the valley.",
+  "camera": {
+    "angle": "Wide shot from an elevated ridge, horizon in the upper third",
+    "approx_focal_length_mm": 28,
+    "composition": "Flash upper-left as the single luminous pole; dark conifer silhouettes frame left and right edges; valley floor catches faint rim light; strong negative space in the dark sky."
+  },
+  "lighting": {
+    "direction": "Single intense point source near the horizon, upper-left",
+    "intensity_and_character": "Extremely bright white-blue core with physically plausible atmospheric scattering halo; rims the nearest tree tops; the rest of the scene stays in deep cool shadow — no lightning bolts, no fantasy beams."
+  },
+  "dominant_colors": ["#232f3e", "#758daf", "#080d11", "#161b20", "#0e171f"],
+  "foreground_elements": ["dark ridge with moss and low shrubs", "conifer silhouettes with faint blue rim light"],
+  "midground_elements": ["valley with river glint", "tiny warm cabin light (scale anchor)", "mist catching the flash"],
+  "background_elements": ["flash core + scattering halo", "silhouetted far ridges", "dark sky gradient"],
+  "materials": ["backlit needle silhouettes", "moist ground with faint specular", "scattering haze"],
+  "environmental_details": ["detail retained in shadows (not crushed to black)", "flash sits ABOVE the forest, not on the ground"],
+  "atmospheric_effects": ["bright scattering halo", "valley mist glow", "subtle blue atmosphere"],
+  "depth_layers": ["ridge foreground (0-50m)", "valley (0.5-2km)", "far forest line (3-5km)", "flash/sky"],
+  "animation_opportunities": ["flash intensity ramp 0->1 with shadow sweep", "halo expansion", "fog colour lerp toward blue-white (invert the s1 warm lerp)"],
+  "must_preserve": ["single-source lighting logic", "foreground silhouette detail", "enormous brightness contrast with soft roll-off, not clipped"],
+  "can_simplify": ["halo to layered additive sprite billboards (glowTexture with cool stops)", "valley detail to near-black geometry with one emissive cabin-window quad", "mist to fog + one particles() layer"],
+  "engine_mapping": {
+    "world": "world({ skyEl: -2 (pre-dawn), fog: 0.0022, fogColor: '#1a2230', envIntensity: 0.15 })",
+    "flash": "DirectionalLight '#cfe4ff' intensity ramp 0->8 driven in render(t); additive sprite stack via glowTexture([[0,'rgba(240,250,255,1)'],[0.3,'rgba(170,200,255,0.8)'],[1,'rgba(120,160,255,0)']])",
+    "shadows": "fireLight pattern from s1_dawn_fireball.js reused: castShadow DirectionalLight placed at flash position",
+    "forest": "standard makeForest; rely on rim light from the flash direction",
+    "grade": "keep project.json grade; raise bloom locally for this shot only if needed"
+  }
+}

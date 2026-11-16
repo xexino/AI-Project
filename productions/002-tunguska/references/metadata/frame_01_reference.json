@@ -1,0 +1,35 @@
+{
+  "reference_image": "frame_01_siberian_wilderness.png",
+  "status": "generated",
+  "canva_media_id": "MAHbEAGgsIE",
+  "source_resolution": [2720, 1536],
+  "scene_purpose": "Establish scale, isolation and historical atmosphere of the 1908 Siberian taiga before the event.",
+  "main_subject": "Endless conifer forest under morning mist, a winding river catching warm low sunlight.",
+  "camera": {
+    "angle": "Aerial establishing shot, roughly 300-400 m altitude, pitched ~20 degrees below horizon",
+    "approx_focal_length_mm": 24,
+    "composition": "River leads the eye from lower-center toward the misty horizon in the upper third; forested ridges layer left and right; bright sky break upper-left as the single warm accent."
+  },
+  "lighting": {
+    "direction": "Low sun from upper-left, slightly toward camera (semi-backlit)",
+    "intensity_and_character": "Soft warm sunlight breaking through clouds; mist diffuses it into visible shafts; cool blue-gray fill everywhere else."
+  },
+  "dominant_colors": ["#3a3b2f", "#242720", "#82868b", "#545855", "#c7bdae"],
+  "foreground_elements": ["dense conifer canopy with individual crowns readable", "dark green-brown tree mass"],
+  "midground_elements": ["winding river with warm sky reflection", "clearings and marshy banks", "mist pooling in valleys"],
+  "background_elements": ["ridgelines fading through 4-5 haze layers", "cloud deck with one bright break"],
+  "materials": ["conifer needles (rough, varied tint)", "still water (reflective)", "marsh grass", "low cloud/mist volumes"],
+  "environmental_details": ["natural clearings in tree density", "height variation between young and mature trees", "no human presence"],
+  "atmospheric_effects": ["valley mist", "aerial perspective haze", "god-ray sky break"],
+  "depth_layers": ["canopy (0-200m)", "river valley (200-800m)", "ridge 1 (1-2km)", "ridge 2-3 (3-6km)", "sky/horizon"],
+  "animation_opportunities": ["slow aerial glide forward (matches s1 camera)", "mist drift", "subtle cloud movement", "river glint shimmer"],
+  "must_preserve": ["multi-layer haze depth", "single warm sky accent against cool scene", "irregular tree density with clearings"],
+  "can_simplify": ["individual tree crowns beyond 1km (use far forest with castShadow=false)", "river to an emissive-tinted ribbon mesh", "clouds to sky-shader turbidity + fog"],
+  "engine_mapping": {
+    "world": "world({ skyEl: 1.5-3, skyAz: 70, fog: 0.0016-0.0019, fogColor: '#8a8aa0' -> lerp '#d0a070' near sun })",
+    "forest": "near: makeForest(treesIn({spacing: 4.2}), {geometry: geo.living(1)}); far: treesIn({spacing: 7, scale: [13,22]}), castShadow=false, as in s1_dawn_fireball.js",
+    "terrain": "makeTerrain + heightAt (fbm octaves 4); river: add a ribbon mesh following a low fbm contour, MeshStandardMaterial with env reflections",
+    "light": "sunLight colour '#ffd2a0' low elevation; skyEnvironment for ambient",
+    "camera": "PerspectiveCamera fov ~46, slow dolly as in s1"
+  }
+}

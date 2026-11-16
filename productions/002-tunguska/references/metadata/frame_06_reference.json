@@ -1,0 +1,35 @@
+{
+  "reference_image": "frame_06_flattened_forest.png",
+  "status": "generated",
+  "canva_media_id": "MAHbEI6-Hhw",
+  "source_resolution": [2720, 1536],
+  "scene_purpose": "Show the scale of destruction: millions of trees combed flat in a radial pattern.",
+  "main_subject": "A vast flattened forest from an elevated viewpoint — trunks aligned radially away from a distant centre, bog pools scattered across the plain.",
+  "camera": {
+    "angle": "Elevated wide shot (low aerial, ~80-120 m), looking toward the epicentre direction",
+    "approx_focal_length_mm": 28,
+    "composition": "Foreground trunks fan from the bottom edge and converge toward a vanishing region near the horizon centre — the radial pattern IS the composition; pools break up the midground; horizon high in frame to emphasise ground."
+  },
+  "lighting": {
+    "direction": "Flat overcast sky, weak brightness toward the horizon",
+    "intensity_and_character": "Deliberately drained: no warm accent for the first time in the film; soft shadowless light, detail carried by texture not contrast."
+  },
+  "dominant_colors": ["#5d5953", "#2f271f", "#999ea6", "#454139", "#51483d"],
+  "foreground_elements": ["large fallen trunks with bark detail, broken branch stubs, root plates"],
+  "midground_elements": ["thousands of aligned trunks", "dark bog pools", "patches of stripped standing trunks"],
+  "background_elements": ["hazy plain continuing to the horizon", "flat gray cloud deck"],
+  "materials": ["weathered bark and exposed wood", "wet bog water (matte reflection of sky)", "moss/peat ground"],
+  "environmental_details": ["radial alignment readable at every distance", "a few 'telegraph pole' stripped trees still standing near centre (historically accurate)", "no crater"],
+  "atmospheric_effects": ["low haze", "overcast diffusion", "distance desaturation"],
+  "depth_layers": ["hero trunks (0-50m)", "aligned field (50-500m)", "pools + far field (0.5-3km)", "horizon haze"],
+  "animation_opportunities": ["slow aerial drift along the radial direction (matches s6_pattern.js)", "subtle haze movement", "birdless stillness as a statement"],
+  "must_preserve": ["radial/butterfly alignment toward epicentre", "standing stripped trunks near centre", "bog pools", "drained overcast grade"],
+  "can_simplify": ["distant trunks to instanced cylinders with baked vertex colour", "pools to dark flat discs with low roughness", "bark detail beyond 100m"],
+  "engine_mapping": {
+    "world": "world({ scorch: 0.4, snow: 0, skyEl: 25 overcast feel via turbidity 10 + envIntensity 0.6, fogColor: '#9aa0a4' })",
+    "pattern": "scenes/lib/world.js flatRadius(theta) butterfly zone + inFallZone/inStandZone: fallen = makeForest(update fall:1, dir away from EPI); centre: coniferGeometry({stripped:true}) standing — the exact s6_pattern.js data",
+    "terrain": "terrainColor(scorch: 0.4) burnt lerp already implemented",
+    "light": "no DirectionalLight sun; HemisphereLight '#b8bcc0'/'#3a362e' + env only",
+    "camera": "slow high dolly, look-at pinned near EPI horizon"
+  }
+}
