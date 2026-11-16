@@ -1,0 +1,851 @@
+{
+ "schema_version": 1,
+ "id": "003-mariana-trench-ai-stills-v1",
+ "customer_id": "oddlight",
+ "topic": "The Mariana Trench and Challenger Deep: the deepest known place in the ocean, the hadal zone and life at extreme depth",
+ "title": "The Deepest Place on Earth",
+ "language": "en",
+ "target_audience": "18-40, curious international viewers of science shorts",
+ "pilot": {
+  "issue": "https://github.com/xexino/AI-Project/issues/97",
+  "base_branch": "claude/visual-reference-v1",
+  "base_commit": "fddb328413f449c4258ea2f087dccb63c030f0b9",
+  "phase": "PRODUCTION",
+  "final_render_authorized": true,
+  "approvals": {
+   "script": "approved by owner 2026-11-16 (content lock; issue #97 comment)",
+   "format": "approved by owner 2026-11-16: 9:16, 1080x1920, 24 fps",
+   "visual_direction": "approved by owner 2026-11-16: cinematic, realistic-looking procedural 3D ocean",
+   "voiceover_recording": "approved by owner 2026-11-16 (chat: \"Approved, push realism further and render the final video\")",
+   "final_timings": "approved by owner 2026-11-16 (chat: \"Approved, push realism further and render the final video\")",
+   "beat_table": "approved by owner 2026-11-16 (chat: \"Approved, push realism further and render the final video\")",
+   "references_and_assets": "approved by owner 2026-11-16 (chat: \"Approved, push realism further and render the final video\")",
+   "realism": "owner asked to push realism further before the final render (2026-11-16)",
+   "open_items_accepted": "b8 wording kept as written; record fish shown in-world with its Izu-Ogasawara label (no inset)"
+  }
+ },
+ "format": {
+  "aspect_ratio": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 24,
+  "target_duration_s": [
+   40,
+   62
+  ]
+ },
+ "narration": {
+  "provider": "kokoro",
+  "voice": "bm_george",
+  "lang": "en-gb",
+  "speed": 1.0,
+  "aligner": "whisper",
+  "pronunciations": {
+   "hadal": "hˈeɪdəl"
+  }
+ },
+ "visual": {
+  "renderer": "threejs",
+  "style": "TEST: AI-generated stills (local model, see assets.json), animated with eased push-in/pan and drifting marine snow.",
+  "grade": {
+   "grain": 3,
+   "vignette": "PI/4.8",
+   "contrast": 1.03,
+   "saturation": 1.0,
+   "bloom": 0.18
+  },
+  "reuse_frames_from": [
+   "../.."
+  ]
+ },
+ "editorial_rules": {
+  "phrase_once": true,
+  "one_hero_per_beat": true,
+  "continuous_camera": true
+ },
+ "scenes": [
+  {
+   "id": "b1",
+   "beat": "HOOK",
+   "text": "At the surface, the ocean seems to have no end.",
+   "lead": 0.6,
+   "tail": 0.3,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/ai_still.js",
+   "params": {
+    "image": "experiments/ai-stills-v1/images/b1.png",
+    "move": {
+     "zoom": [
+      1.0,
+      1.08
+     ],
+     "pan": [
+      [
+       0,
+       -0.01
+      ],
+      [
+       0,
+       0.015
+      ]
+     ]
+    },
+    "image_sha256": "e9577e586340ab0127e74a5673b6ba657a6bb7da00b1b9391553a4d126d54eb6"
+   },
+   "non_factual": true,
+   "hero": "The open ocean surface, horizon to horizon",
+   "camera": "40 m above the sea on the trench axis, 34 km from Challenger Deep; slow forward drift toward the horizon; pitch eases from -8° to -30° (looking down at the water) by the end of the line.",
+   "event": "Low silver-blue sun, gentle swell; no other object in frame. The tilt down anticipates the dive.",
+   "visual_goal": "Endless ocean from just above the surface."
+  },
+  {
+   "id": "b2",
+   "beat": "SETUP",
+   "text": "But beneath the western Pacific, the seafloor drops into a world nearly eleven kilometres down.",
+   "lead": 0.15,
+   "tail": 0.3,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/ai_still.js",
+   "params": {
+    "image": "experiments/ai-stills-v1/images/b2.png",
+    "move": {
+     "zoom": [
+      1.0,
+      1.18
+     ],
+     "pan": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       -0.02
+      ]
+     ]
+    },
+    "image_sha256": "488d86a6b9427c138c5f640d465f6813974b5f6c29e8eb7f2e24e0f6c47c1d1f"
+   },
+   "claims": [
+    "c_location",
+    "c_depth"
+   ],
+   "hero": "The trench cut into the seabed, revealed as one immense cross-section",
+   "camera": "Plunges through the surface just after 'beneath', pitching to look straight down; descends to ~2,500 m while travelling along the trench axis toward Challenger Deep, then raises its gaze down the trench.",
+   "event": "On 'seafloor' the seabed fades in below as a sonar-style relief; the trench opens beneath the camera by 'down'.",
+   "visual_goal": "Dive through the surface; the trench is revealed below."
+  },
+  {
+   "id": "b3",
+   "beat": "SETUP",
+   "text": "This is Challenger Deep, inside the Mariana Trench: the deepest known point in the ocean, measured at about ten thousand nine hundred thirty-five metres.",
+   "lead": 0.2,
+   "tail": 0.35,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/ai_still.js",
+   "params": {
+    "image": "experiments/ai-stills-v1/images/b3.png",
+    "move": {
+     "zoom": [
+      1.04,
+      1.22
+     ],
+     "pan": [
+      [
+       0,
+       0.02
+      ],
+      [
+       0,
+       -0.03
+      ]
+     ]
+    },
+    "image_sha256": "c8790c5fe1e370385afa7d6e780b97ac8016ec254e2e7a3a2a09b8bf435a31fc"
+   },
+   "claims": [
+    "c_deepest",
+    "c_depth"
+   ],
+   "hero": "The deepest basin of the trench, ringed by one bathymetric contour",
+   "camera": "Glide down the trench axis from ~2,500 m to ~5,600 m (still above the hadal zone), looking ahead at the deepest basin.",
+   "event": "Depth contours glow on the trench relief; one ring is drawn around the deepest basin starting on 'Challenger'; the basin floor brightens slightly on 'ten'.",
+   "visual_goal": "Bathymetric view of the trench; the deepest basin is marked."
+  },
+  {
+   "id": "b4",
+   "beat": "STORY",
+   "text": "Sunlight vanishes far above it. Below six thousand metres lies the hadal zone:",
+   "lead": 0.2,
+   "tail": 0.25,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/ai_still.js",
+   "params": {
+    "image": "experiments/ai-stills-v1/images/b4.png",
+    "move": {
+     "zoom": [
+      1.16,
+      1.02
+     ],
+     "pan": [
+      [
+       0,
+       -0.04
+      ],
+      [
+       0,
+       0.02
+      ]
+     ]
+    },
+    "image_sha256": "6ec071b559d422589cc24187112d8df3caf1db7fb4a26920739a3e4d13561a8a"
+   },
+   "claims": [
+    "c_sunlight",
+    "c_hadal"
+   ],
+   "hero": "A single narrow beam of sunlight, far above, fading to black",
+   "camera": "Tilts up toward the distant surface during the first sentence, then tilts back down and keeps descending into the trench.",
+   "event": "The beam dims to nothing by the end of 'above it'; on 'six thousand' the 6,000 m contour glows once along the trench walls and recedes as the camera passes below it.",
+   "visual_goal": "Last light from above disappears; crossing into the hadal zone."
+  },
+  {
+   "id": "b5",
+   "beat": "STORY",
+   "text": "near-freezing, pitch-dark, under pressure more than a thousand times the air at sea level.",
+   "lead": 0.15,
+   "tail": 0.35,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/ai_still.js",
+   "params": {
+    "image": "experiments/ai-stills-v1/images/b5.png",
+    "move": {
+     "zoom": [
+      1.3,
+      1.42
+     ],
+     "pan": [
+      [
+       0.01,
+       0.16
+      ],
+      [
+       -0.01,
+       0.2
+      ]
+     ]
+    },
+    "image_sha256": "a609aa7dac6b4d583aa788c9ea20c0bca82b844646886f8318d2ef289867bf61"
+   },
+   "claims": [
+    "c_conditions"
+   ],
+   "hero": "The pressure gauge on a descending research lander",
+   "camera": "Catches up with a descending lander in total darkness and slides past its gauge in a close three-quarter view.",
+   "event": "The sonar relief is gone: only the lander's lamps light the water. The gauge needle sweeps once to its high end on 'thousand'.",
+   "visual_goal": "Pitch-dark water; the only light is the lander; the gauge reads extreme pressure."
+  },
+  {
+   "id": "b6",
+   "beat": "STORY",
+   "text": "And still, life persists. Small animals inhabit these trenches, surviving in the darkness.",
+   "lead": 0.2,
+   "tail": 0.3,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/ai_still.js",
+   "params": {
+    "image": "experiments/ai-stills-v1/images/b6.png",
+    "move": {
+     "zoom": [
+      1.04,
+      1.18
+     ],
+     "pan": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       0.01
+      ]
+     ]
+    },
+    "image_sha256": "c91fe36facb6b3e0f936f03463ce1af5dbce6284f5445e9e5022468f2dac0b8d"
+   },
+   "claims": [
+    "c_life"
+   ],
+   "hero": "Pale hadal amphipods drifting into the lander's light",
+   "camera": "Settles beside the lander's bait bag and slowly circles it.",
+   "event": "From 'life' onward, small pale amphipods swim in from the dark toward the bait. No bioluminescence; they are seen only where the lamp reaches.",
+   "visual_goal": "Small crustaceans gather in the lamp light."
+  },
+  {
+   "id": "b7",
+   "beat": "STORY",
+   "text": "The deepest fish ever filmed was found higher up, at eight thousand three hundred thirty-six metres, in another Pacific trench.",
+   "lead": 0.2,
+   "tail": 0.35,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/ai_still.js",
+   "params": {
+    "image": "experiments/ai-stills-v1/images/b7.png",
+    "move": {
+     "zoom": [
+      1.1,
+      1.02
+     ],
+     "pan": [
+      [
+       -0.03,
+       0
+      ],
+      [
+       0.03,
+       0
+      ]
+     ]
+    },
+    "image_sha256": "dfdbb31e4059db2918084cb43c554f8279caf3476b34ba7ad022e03cbe12dee9"
+   },
+   "claims": [
+    "c_fish"
+   ],
+   "hero": "One snailfish gliding through the light",
+   "camera": "Holds level while one translucent snailfish crosses the lamp light, then tilts down as the lander continues its descent.",
+   "event": "The fish enters on 'fish' and glides past in slow tail beats; it leaves the light before the line ends, staying well above the trench floor.",
+   "visual_goal": "A single snailfish; labelled as a record from a different trench."
+  },
+  {
+   "id": "b8",
+   "beat": "PAYOFF",
+   "text": "At the bottom, our maps are still incomplete. Earth's deepest frontier is not another planet. It's beneath us.",
+   "lead": 0.2,
+   "tail": 1.0,
+   "transition_out": {
+    "type": "fadeblack",
+    "d": 0.6
+   },
+   "module": "scenes/ai_still.js",
+   "params": {
+    "image": "experiments/ai-stills-v1/images/b8.png",
+    "move": {
+     "zoom": [
+      1.18,
+      1.0
+     ],
+     "pan": [
+      [
+       0,
+       0.02
+      ],
+      [
+       0,
+       0
+      ]
+     ]
+    },
+    "image_sha256": "59a9dcd35ec2137e01fa1ebc7d4e0693a3c906a0b5e9f58b8e57466d12e27655"
+   },
+   "claims": [
+    "c_maps"
+   ],
+   "hero": "The dark, vast floor of Challenger Deep",
+   "camera": "Follows the lander down to the floor; after touchdown it slowly pulls back and rises, so the lander's pool of light becomes a small island in the dark. (Change from the draft plan's 'forward drift' — pending owner approval.)",
+   "event": "The floor emerges from black on 'bottom'; the lander settles in its own light; the darkness around it grows as the camera withdraws.",
+   "visual_goal": "Arrival on the deepest floor; quiet scale."
+  },
+  {
+   "id": "end",
+   "beat": "END",
+   "text": "",
+   "lead": 0,
+   "tail": 2.6,
+   "transition_out": null,
+   "module": "builtin:endcard",
+   "params": {
+    "footer": [
+     "Sources: NOAA; WHOI; Greenaway et al. 2021; NHM London",
+     "Animated reconstruction · illustrative scale"
+    ]
+   },
+   "non_factual": true
+  }
+ ],
+ "overlays": [
+  {
+   "type": "big",
+   "text": "≈ 11 KM DOWN",
+   "voices": {
+    "scene": "b2",
+    "text": "nearly eleven kilometres down"
+   },
+   "at": {
+    "word": "nearly",
+    "scene": "b2"
+   },
+   "until": {
+    "scene_start": "b3"
+   },
+   "size": 120,
+   "y": 760
+  },
+  {
+   "type": "big",
+   "text": "CHALLENGER DEEP",
+   "voices": {
+    "scene": "b3",
+    "text": "Challenger Deep"
+   },
+   "at": {
+    "word": "challenger",
+    "scene": "b3"
+   },
+   "until": {
+    "word": "deepest",
+    "scene": "b3"
+   },
+   "size": 104,
+   "y": 760
+  },
+  {
+   "type": "big",
+   "text": "10,935 m",
+   "voices": {
+    "scene": "b3",
+    "text": "ten thousand nine hundred thirty-five metres"
+   },
+   "at": {
+    "word": "ten",
+    "scene": "b3"
+   },
+   "until": {
+    "scene_start": "b4"
+   },
+   "size": 150,
+   "y": 760
+  },
+  {
+   "type": "big",
+   "text": "HADAL ZONE",
+   "sub": "below 6,000 m",
+   "voices": {
+    "scene": "b4",
+    "text": "Below six thousand metres lies the hadal zone"
+   },
+   "at": {
+    "word": "below",
+    "scene": "b4"
+   },
+   "until": {
+    "scene_start": "b5"
+   },
+   "size": 120,
+   "y": 760
+  },
+  {
+   "type": "big",
+   "text": "> 1,000×",
+   "sub": "sea-level pressure",
+   "voices": {
+    "scene": "b5",
+    "text": "under pressure more than a thousand times the air at sea level"
+   },
+   "at": {
+    "word": "under",
+    "scene": "b5"
+   },
+   "until": {
+    "scene_start": "b6"
+   },
+   "size": 150,
+   "y": 380
+  },
+  {
+   "type": "big",
+   "text": "8,336 m",
+   "sub": "Izu-Ogasawara Trench",
+   "voices": {
+    "scene": "b7",
+    "text": "eight thousand three hundred thirty-six metres, in another Pacific trench"
+   },
+   "at": {
+    "word": "eight",
+    "scene": "b7"
+   },
+   "until": {
+    "scene_start": "b8"
+   },
+   "size": 150,
+   "y": 760
+  },
+  {
+   "type": "big",
+   "text": "STILL BEING EXPLORED",
+   "at": {
+    "word": "beneath",
+    "scene": "b8"
+   },
+   "until": {
+    "scene_start": "end"
+   },
+   "size": 84,
+   "y": 760
+  }
+ ],
+ "sound": {
+  "bed": {
+   "preset": "drone_bed"
+  },
+  "pad": null,
+  "seed": 3,
+  "cues": [
+   {
+    "preset": "whoosh",
+    "at": {
+     "word": "beneath",
+     "scene": "b2",
+     "offset": -0.3
+    },
+    "level": 0.6
+   },
+   {
+    "preset": "rise",
+    "at": {
+     "scene_start": "b3"
+    },
+    "d": 3.0,
+    "level": 0.5
+   },
+   {
+    "preset": "bell_low",
+    "at": {
+     "word": "challenger",
+     "scene": "b3",
+     "offset": 0.1
+    },
+    "level": 0.6
+   },
+   {
+    "preset": "pulse",
+    "at": {
+     "word": "thousand",
+     "scene": "b5"
+    },
+    "level": 0.7
+   },
+   {
+    "preset": "thump",
+    "at": {
+     "word": "bottom",
+     "scene": "b8",
+     "offset": 2.0
+    },
+    "level": 0.6
+   }
+  ],
+  "audio_from": "../.."
+ },
+ "music": {
+  "provider": "synth",
+  "master_db": -23,
+  "sections": [
+   {
+    "from": {
+     "t": 0.0
+    },
+    "chords": [
+     [
+      "D2",
+      "A2",
+      "D3",
+      "F3"
+     ],
+     [
+      "Bb1",
+      "F2",
+      "D3",
+      "F3"
+     ]
+    ],
+    "chord_s": 3.4,
+    "level": 0.5,
+    "brightness": 0.3
+   },
+   {
+    "from": {
+     "scene_start": "b3"
+    },
+    "chords": [
+     [
+      "G1",
+      "D2",
+      "Bb2",
+      "D3"
+     ],
+     [
+      "A1",
+      "E2",
+      "C#3",
+      "E3"
+     ]
+    ],
+    "chord_s": 3.0,
+    "level": 0.6,
+    "brightness": 0.35
+   },
+   {
+    "from": {
+     "scene_start": "b5"
+    },
+    "chords": [
+     [
+      "D1",
+      "A1",
+      "D2",
+      "F2"
+     ]
+    ],
+    "chord_s": 4.0,
+    "level": 0.55,
+    "brightness": 0.2
+   },
+   {
+    "from": {
+     "scene_start": "b6"
+    },
+    "chords": [
+     [
+      "F2",
+      "C3",
+      "A3"
+     ],
+     [
+      "C2",
+      "G2",
+      "E3"
+     ],
+     [
+      "D2",
+      "A2",
+      "F3"
+     ]
+    ],
+    "chord_s": 3.0,
+    "level": 0.45,
+    "brightness": 0.25
+   },
+   {
+    "from": {
+     "scene_start": "b8"
+    },
+    "chords": [
+     [
+      "D2",
+      "A2",
+      "D3",
+      "E3",
+      "A3"
+     ]
+    ],
+    "chord_s": 6.0,
+    "level": 0.5,
+    "brightness": 0.3
+   }
+  ],
+  "hits": [],
+  "end_fade_s": 2.0
+ },
+ "sources": [
+  {
+   "id": "noaa_oceandepth",
+   "citation": "NOAA National Ocean Service, \"How deep is the ocean?\"",
+   "url": "https://oceanservice.noaa.gov/facts/oceandepth.html",
+   "accessed": "2026-11-16"
+  },
+  {
+   "id": "noaa_oe_depth",
+   "citation": "NOAA Ocean Exploration, \"How deep is the ocean?\"",
+   "url": "https://oceanexplorer.noaa.gov/ocean-fact/ocean-depth/",
+   "accessed": "2026-11-16"
+  },
+  {
+   "id": "greenaway2021",
+   "citation": "Greenaway, S.F., Sullivan, K.D., Umfress, S.H., Beittel, A.B., Wagner, K.D. (2021). Revised depth of the Challenger Deep from submersible transects. Deep-Sea Research Part I 178: 103644",
+   "doi": "10.1016/j.dsr.2021.103644",
+   "url": "https://doi.org/10.1016/j.dsr.2021.103644",
+   "accessed": "2026-11-16"
+  },
+  {
+   "id": "whoi_trenches",
+   "citation": "Woods Hole Oceanographic Institution, Ocean Learning Hub, \"Ocean trenches\"",
+   "url": "https://www.whoi.edu/ocean-learning-hub/ocean-topics/how-the-ocean-works/seafloor-below/ocean-trenches/",
+   "accessed": "2026-11-16"
+  },
+  {
+   "id": "noaa_deep",
+   "citation": "NOAA Ocean Exploration, \"What is the 'deep' ocean?\"",
+   "url": "https://oceanexplorer.noaa.gov/ocean-fact/deep-ocean/",
+   "accessed": "2026-11-16"
+  },
+  {
+   "id": "noaa_fish",
+   "citation": "NOAA Ocean Exploration, \"What is the deepest-living fish?\"",
+   "url": "https://oceanexplorer.noaa.gov/ocean-fact/what-is-the-deepest-living-fish/",
+   "accessed": "2026-11-16"
+  },
+  {
+   "id": "nhm_fish",
+   "citation": "Natural History Museum London, \"Deepest-ever fish filmed at a depth of 8,336 metres\" (J. Ashworth, 5 April 2023)",
+   "url": "https://www.nhm.ac.uk/discover/news/2023/april/deepest-ever-fish-filmed-depth-8336-metres.html",
+   "accessed": "2026-11-16"
+  },
+  {
+   "id": "kobayashi2012",
+   "citation": "Kobayashi, H. et al. (2012). The hadal amphipod Hirondellea gigas possessing a unique cellulase for digesting wooden debris buried in the deepest seafloor. PLoS ONE 7(8): e42727",
+   "doi": "10.1371/journal.pone.0042727",
+   "url": "https://doi.org/10.1371/journal.pone.0042727",
+   "accessed": "2026-11-16"
+  },
+  {
+   "id": "pmc_cd_microbes",
+   "citation": "Challenger Deep seawater and sediment microbial communities (PMC11291871), hydrostatic pressure up to ~115 MPa",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11291871/",
+   "accessed": "2026-11-16"
+  }
+ ],
+ "claims": [
+  {
+   "id": "c_location",
+   "text": "Challenger Deep lies beneath the western Pacific Ocean, at the southern end of the Mariana Trench.",
+   "sources": [
+    "noaa_oceandepth"
+   ],
+   "status": "verified"
+  },
+  {
+   "id": "c_deepest",
+   "text": "Challenger Deep, in the Mariana Trench, is the deepest known point in the ocean.",
+   "sources": [
+    "noaa_oceandepth",
+    "noaa_oe_depth",
+    "whoi_trenches"
+   ],
+   "status": "verified"
+  },
+  {
+   "id": "c_depth",
+   "text": "Its depth was measured at about 10,935 m (Greenaway et al. 2021: 10,935 m ± 6 m at 95% confidence, below mean sea level, from June 2020 submersible transects) — i.e. nearly 11 km.",
+   "sources": [
+    "greenaway2021",
+    "noaa_oceandepth",
+    "noaa_oe_depth"
+   ],
+   "status": "verified",
+   "note": "Uncertainty: published estimates differ by method and survey (WHOI's hub cites 10,911 m; a 2010 mapping estimate was 10,984 m; Kobayashi 2012 cites 10,994 m). Narration says 'about'; on-screen figure follows NOAA and Greenaway et al."
+  },
+  {
+   "id": "c_sunlight",
+   "text": "Sunlight does not reach the trench: ocean depths greater than 1,000 m are completely devoid of sunlight.",
+   "sources": [
+    "noaa_deep"
+   ],
+   "status": "verified"
+  },
+  {
+   "id": "c_hadal",
+   "text": "Trench depths below 6,000 m make up the hadal zone.",
+   "sources": [
+    "whoi_trenches"
+   ],
+   "status": "verified"
+  },
+  {
+   "id": "c_conditions",
+   "text": "Hadal trenches are near-freezing ('constant temperatures just above freezing'), have no light, and pressures more than 1,000 times the surface (up to ~115 MPa at Challenger Deep).",
+   "sources": [
+    "whoi_trenches",
+    "pmc_cd_microbes"
+   ],
+   "status": "verified",
+   "note": "Not citing NOAA 'deep ocean' page for pressure: its '40 to over 110 times' range appears inconsistent with ~1,100 atm at ~11 km."
+  },
+  {
+   "id": "c_life",
+   "text": "Small animals live in hadal trenches, including the amphipod Hirondellea gigas, a resident of the Challenger Deep floor.",
+   "sources": [
+    "kobayashi2012",
+    "whoi_trenches"
+   ],
+   "status": "verified"
+  },
+  {
+   "id": "c_fish",
+   "text": "The deepest fish ever filmed is a snailfish (genus Pseudoliparis, species unidentified) at 8,336 m in the Izu-Ogasawara Trench (filmed 2022, announced April 2023) — not in Challenger Deep, and above Challenger Deep's depth.",
+   "sources": [
+    "noaa_fish",
+    "nhm_fish"
+   ],
+   "status": "verified"
+  },
+  {
+   "id": "c_maps",
+   "text": "The seafloor remains incompletely mapped: about 26% had been mapped in high resolution as of June 2024.",
+   "sources": [
+    "noaa_oe_depth"
+   ],
+   "status": "verified",
+   "note": "Supports the general statement. Challenger Deep itself has been mapped at high resolution (multibeam); the narration line should be read as the deep seafloor in general — flagged for owner review."
+  }
+ ],
+ "cover": {
+  "scene": "b3",
+  "frame": 200,
+  "lines": [
+   "The deepest place",
+   "on Earth"
+  ],
+  "y": 330,
+  "size": 84
+ },
+ "publishing": {
+  "enabled": false,
+  "platforms": {}
+ },
+ "qc": {
+  "loudness_lufs": -14.0,
+  "max_caption_chars": 24
+ },
+ "budget": {
+  "max_paid_eur": 0
+ },
+ "scene_root": "../..",
+ "experiment": {
+  "of": "003-mariana-trench",
+  "purpose": "owner-requested fast test of AI-generated imagery (2026-11-16)",
+  "differs_in": "visuals of beats b1-b8 only",
+  "ai_imagery": true
+ }
+}
