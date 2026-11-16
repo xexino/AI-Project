@@ -175,7 +175,7 @@ export async function build({ params }) {
     scene.background = above ? null : wc.color.clone();
     scene.fog.color.copy(above ? new THREE.Color('#b9c8d2') : wc.color.clone().lerp(new THREE.Color('#02100f'), sm(B5, B5 + 1.0, g)));
     scene.fog.density = above ? 0.00004 : lerp(wc.density, 0.045, sm(B5, B5 + 1.0, g));
-    renderer.toneMappingExposure = above ? 0.5 : lerp(0.9, 1.25, sm(B5, B5 + 1, g));
+    renderer.toneMappingExposure = above ? 0.8 : lerp(0.9, 1.25, sm(B5, B5 + 1, g));
     observer.position.copy(camera.position).add(V(0, 0.3, 0)); observer.intensity = deep ? 2.6 : 0;
     sea.mesh.visible = depth < 2500; sea.update(g, camera);
     sunBeams.forEach(({ o, c: cb }) => cb.set(o, o.clone().add(V(0.12, -1, 0.05)), (1 - sm(150, 700, depth)) * sm(B2, B2 + 0.6, g)));
@@ -183,7 +183,7 @@ export async function build({ params }) {
     // trench views
     const op = sm(wSeafloor - 0.3, wSeafloor + 1.6, g) * (1 - sm(wHadal, B5 + 0.8, g));
     cont.uniforms.uOpacity.value = op; contours.visible = op > 0.002;
-    cont.uniforms.uCam.value.copy(camera.position);
+    cont.uniforms.uCam.value.copy(camera.position); cont.uniforms.uBg.value.copy(scene.background || col);
     const ringFade = 1 - sm(B4, B4 + 1.5, g);
     cont.uniforms.uRingP.value = sm(wChall, wChall + 1.6, g) * (ringFade > 0.01 ? 1 : 0);
     cont.uniforms.uBasin.value = sm(wTen, wTen + 0.8, g) * ringFade;

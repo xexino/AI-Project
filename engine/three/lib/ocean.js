@@ -117,7 +117,7 @@ export function contourMaterial({ minor = 250, major = 1000, line = '#64d2de', b
     uOpacity: { value: 1 }, uMinor: { value: minor }, uMajor: { value: major }, uLine: { value: new THREE.Color(line) },
     uBase: { value: new THREE.Color(base) }, uFar: { value: far }, uCam: { value: new THREE.Vector3() },
     uIso: { value: 6000 }, uIsoK: { value: 0 }, uRingC: { value: new THREE.Vector2() }, uRingR: { value: 2000 }, uRingP: { value: 0 },
-    uBasin: { value: 0 }, uBasinDepth: { value: 10600 }, uLightDir: { value: new THREE.Vector3(0.4, 1, 0.3).normalize() },
+    uBasin: { value: 0 }, uBasinDepth: { value: 10600 }, uBg: { value: new THREE.Color(0, 0, 0) }, uLightDir: { value: new THREE.Vector3(0.4, 1, 0.3).normalize() },
   };
   const m = new THREE.ShaderMaterial({ uniforms: u, transparent: additive, depthWrite: !additive, blending: additive ? THREE.AdditiveBlending : THREE.NormalBlending, fog: false,
     vertexShader: `varying vec3 vW; varying vec3 vN;
@@ -126,7 +126,7 @@ export function contourMaterial({ minor = 250, major = 1000, line = '#64d2de', b
       void main(){ vec4 w=modelMatrix*vec4(position,1.); vW=w.xyz; vN=normalize(mat3(modelMatrix)*normal); gl_Position=projectionMatrix*viewMatrix*w;
         #include <logdepthbuf_vertex>
       }`,
-    fragmentShader: `uniform float uOpacity,uMinor,uMajor,uFar,uIso,uIsoK,uRingR,uRingP,uBasin,uBasinDepth; uniform vec3 uLine,uBase,uCam,uLightDir; uniform vec2 uRingC;
+    fragmentShader: `uniform float uOpacity,uMinor,uMajor,uFar,uIso,uIsoK,uRingR,uRingP,uBasin,uBasinDepth; uniform vec3 uLine,uBase,uCam,uLightDir,uBg; uniform vec2 uRingC;
       varying vec3 vW; varying vec3 vN;
       #include <logdepthbuf_pars_fragment>
       float iso(float d, float step, float px){ float f=abs(fract(d/step+0.5)-0.5)*step; return 1.-smoothstep(0., px, f); }
@@ -143,7 +143,7 @@ export function contourMaterial({ minor = 250, major = 1000, line = '#64d2de', b
         float ring=(1.-smoothstep(0.,uRingR*0.035,abs(r-uRingR)))*step(ang,uRingP); c+=vec3(1.0,0.92,0.72)*ring*1.6;
         c+=uLine*0.08*uBasin*smoothstep(uBasinDepth-150.,uBasinDepth+250.,d)*(1.-smoothstep(uRingR*0.8,uRingR*1.4,r));
         float fade=1.-smoothstep(uFar*0.45,uFar,length(uCam-vW));
-        gl_FragColor=vec4(c*fade*uOpacity,1.);
+        gl_FragColor=vec4(uOpacity<0.0 ? c : mix(uBg, c*fade, uOpacity),1.);   // fades from/to the water colour
         #include <tonemapping_fragment>
         #include <colorspace_fragment>
       }` });

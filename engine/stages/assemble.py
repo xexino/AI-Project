@@ -35,12 +35,18 @@ def build_graph(ctx: Context, tl: dict, clips: list[Path], ass: Path, music: Pat
     for c in clips:
         inputs += ["-i", str(c)]
     chain, prev = [], "0:v"
+    have = tl["scenes"][0]["clip"]                      # length of the stream built so far
     for i in range(1, len(clips)):
         s_prev, s = tl["scenes"][i - 1], tl["scenes"][i]
         tr = s_prev["transition"]; kind, d = tr["type"], tr["d"]
         if kind in ("cut", "none") or d <= 0:
             kind, d = "fade", 1 / fps
         off = s["start"] if tr["d"] > 0 else s["start"] - d
+        if off >= have - 0.5 / fps:
+            # xfade silently drops everything after a transition that starts past the end of its first input
+            raise EngineError(f"transition {s_prev['id']}->{s['id']} starts at {off:.3f}s but the video built so far is only "
+                              f"{have:.3f}s long (consecutive zero-length cuts lose a frame each; use a 1-frame fade instead)")
+        have = off + s["clip"]
         chain.append(f"[{prev}][{i}:v]xfade=transition={kind}:duration={d:.4f}:offset={off:.4f}[x{i}]")
         prev = f"x{i}"
     chain += grade_chain(ctx.project.data["visual"].get("grade", {}), ass, prev)

@@ -170,3 +170,38 @@ def test_animatic_is_isolated_from_production_frames(mini):
     assert not (mini / "work" / "frames").exists() and not (mini / "work" / "master").exists()   # production outputs untouched
     rep2 = animatic(ctx, scale=0.5, fps=6)
     assert all(s["cached"] for s in rep2["scenes"].values())                                      # re-run reuses its own frames
+
+
+def test_assembly_refuses_transitions_past_the_end_of_the_stream():
+    """Two consecutive zero-length cuts used to make xfade drop the rest of the video silently."""
+    from engine.stages.assemble import build_graph
+    from engine.util import EngineError
+
+    class Ctx:
+        class project:
+            data = {"visual": {"grade": {}}, "sound": {}, "qc": {"loudness_lufs": -14.0}}
+        options = {}
+
+    def tl_with(tr):
+        scenes, t = [], 0.0
+        for i in range(3):
+            slot = 2.0
+            scenes.append({"id": f"s{i}", "start": t, "slot": slot, "clip": slot + tr["d"], "transition": tr})
+            t += slot
+        return {"fps": 24, "duration": t, "scenes": scenes, "words": []}
+    with pytest.raises(EngineError, match="starts at"):
+        build_graph(Ctx(), tl_with({"type": "cut", "d": 0}), [None] * 3, "x.ass", None)
+    build_graph(Ctx(), tl_with({"type": "fade", "d": 1 / 24}), [None] * 3, "x.ass", None)        # one-frame fades are fine
+
+
+@needs_ffmpeg
+def test_qc_measures_the_video_stream_not_the_container(tmp_path):
+    """A file whose audio is longer than its video must fail the 'video stream covers the timeline' check."""
+    from engine.stages.qc import technical_checks
+    v = tmp_path / "short_video.mp4"
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "testsrc2=s=108x192:r=24:d=2", "-f", "lavfi", "-i", "sine=f=440:d=5",
+                    "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac", str(v)], check=True)
+    tl = {"duration": 5.0, "scenes": [{"id": "a", "start": 0, "slot": 5.0, "clip": 5.0, "transition": {"type": "none", "d": 0}}], "words": []}
+    checks, _ = technical_checks(v, tl, {"width": 108, "height": 192, "fps": 24, "aspect_ratio": "9:16"}, {"loudness_lufs": -14.0})
+    c = next(c for c in checks if c["check"].startswith("video stream covers"))
+    assert not c["pass"] and "2.000s of video" in c["detail"]

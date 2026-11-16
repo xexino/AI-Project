@@ -77,6 +77,13 @@ def technical_checks(v: Path, tl: dict, fmt: dict, q: dict, brand_endcard: bool 
     fz = _sh("ffmpeg", "-hide_banner", "-i", str(v), "-vf", "freezedetect=n=0.0005:d=0.6", "-an", "-f", "null", "-").stderr
     freezes = re.findall(r"freeze_start: ([\d.]+)", fz)
     check("no frozen video > 0.6s", len(freezes) == 0, freezes or "none")
+    nb = _sh("ffprobe", "-v", "error", "-select_streams", "v:0", "-count_packets", "-show_entries", "stream=nb_read_packets,r_frame_rate", "-of", "json", str(v)).stdout
+    try:
+        st = json.loads(nb)["streams"][0]; num, den = (int(x) for x in st["r_frame_rate"].split("/")); vdur = int(st["nb_read_packets"]) * den / num
+    except (KeyError, IndexError, ValueError, ZeroDivisionError, json.JSONDecodeError):
+        vdur = -1.0
+    check(f"video stream covers the timeline (±{q.get('duration_tolerance_s', 0.1)}s)", abs(vdur - tl["duration"]) <= q.get("duration_tolerance_s", 0.1),
+          f"{vdur:.3f}s of video vs {tl['duration']:.3f}s timeline")
     vol = _sh("ffmpeg", "-hide_banner", "-i", str(v), "-af", "volumedetect", "-vn", "-f", "null", "-").stderr
     mx = re.findall(r"max_volume: (-?[\d.]+) dB", vol)
     check("audio is not silent", bool(mx) and float(mx[0]) > -30, f"max {mx[0] if mx else '?'} dB")
