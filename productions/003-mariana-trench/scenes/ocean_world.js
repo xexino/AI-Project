@@ -46,7 +46,7 @@ export async function build({ params }) {
   const sea = seaSurface(scene, { sunDir: sky.sun.toArray(), sky: '#a9bfcd', deep: '#0b3550', origin: [0, Z0], size: 9000, seg: 600, horizon: [1200, 4200] });
   const sunBeams = [[-60, -260], [90, -420], [-170, -520], [30, -150], [160, -300], [-20, -640]]
     .map(([x, dz], i) => ({ o: V(x, 0, Z0 - 9 * B2 + dz), c: lightCone(scene, { length: 300 + 40 * i, radius: 18 + 6 * i, color: '#a8d8ea', strength: 0.16 }) }));
-  const farBeam = lightCone(scene, { length: 1100, radius: 230, color: '#b4dcf0', strength: 1.4 });
+  const farBeam = lightCone(scene, { length: 1100, radius: 420, color: '#b4dcf0', strength: 2.2 });
 
   // trench: physically lit relief + additive bathymetric contours on the same geometry
   const tg = terrainGeometry({ size: 90000, seg: 360 });
@@ -70,16 +70,16 @@ export async function build({ params }) {
   const L = makeLander(scene, { lampColor: '#d2efe9' });
   const swarm = amphipodSwarm(scene);
   const fish = snailfish(scene);
-  const coneA = lightCone(scene, { length: 6, radius: 2.4, color: '#bfe8e2', strength: 0.08 }), coneB = lightCone(scene, { length: 14, radius: 5.2, color: '#bfe8e2', strength: 0.11 });
+  const coneA = lightCone(scene, { length: 6, radius: 2.4, color: '#bfe8e2', strength: 0.11 }), coneB = lightCone(scene, { length: 14, radius: 5.2, color: '#bfe8e2', strength: 0.17 });
   const tmpO = V(0, 0, 0), tmpD = V(0, 0, 0), tmpO2 = V(0, 0, 0), tmpD2 = V(0, 0, 0);
   const litA = inCone(tmpO, tmpD, 0.5, 6), litB = inCone(tmpO2, tmpD2, 0.5, 14);
-  const snow = driftParticles(scene, { n: 2600, box: [22, 22, 22], size: 0.03, color: '#b6d6d0', lit: (x, y, z) => Math.max(litA(x, y, z), litB(x, y, z)) });
+  const snow = driftParticles(scene, { n: 3200, box: [22, 22, 22], size: 0.045, color: '#b6d6d0', lit: (x, y, z) => Math.max(litA(x, y, z), litB(x, y, z)) });
 
   // ---------- camera choreography ----------
   // phase A (b1–b4): free camera, travelling -z along the trench axis toward Challenger Deep at the origin
   const pA2 = V(0, 40 - 1.2 * B2, Z0 - 9 * B2);
   const pB3 = V(0, -2500, 25500), pB4 = V(0, -5600, 8600), pB5 = V(0, -7000, 3600);
-  const basinLook = V(0, -10400, 0), beamPt = V(300, -520, 5400), downLook = V(0, -9200, -2500);
+  const basinLook = V(0, -10400, 0), beamPt = V(300, -520, 5400), downLook = V(-2000, -12500, 100);   // ends looking where the lander's lights appear
   function phaseA(g) {
     if (g < B2) {
       const p = V(0, 40 - 1.2 * g, Z0 - 9 * g);
@@ -101,12 +101,12 @@ export async function build({ params }) {
     const p = V(0, y, lerp(pB4.z, pB5.z, ss((g - B4) / (B5 - B4))));
     const base = basinLook.clone().sub(p).normalize().lerp(downLook.clone().sub(p).normalize(), sm(B4, B5, g)).normalize();
     const up = beamPt.clone().sub(p).normalize();
-    const u = sm(B4 - 0.1, B4 + 0.7, g) * (1 - sm(wIt + 0.3, wBelow + 0.3, g));
+    const u = sm(B4 - 0.1, B4 + 0.7, g) * (1 - sm(word('b4', 'above') + 0.2, wIt + 0.6, g));   // tilt back down as the beam fades
     return { p, d: base.lerp(up, u).normalize() };
   }
   const endA = phaseA(B5 - 1e-4);
   // phase B (b5–b8): camera relative to the descending lander
-  const O5 = V(6, 22, 12);
+  const O5 = V(4, 11, 7);
   const L5 = endA.p.clone().sub(O5);
   const yFloor0 = floorY(0, 0) + 0.06;
   const knots = [[B5, L5.y], [B6, -7480], [wFish, -8240], [wEight, -8336], [B8, -8420], [tLand, yFloor0]];
@@ -130,9 +130,10 @@ export async function build({ params }) {
   function phaseB(g) {
     let O, A;
     if (g < B6) {
-      const k = eio(sm(B5, wMore, g)); O = O5.clone().lerp(gaugeO, k); A = V(0, 1, 0).lerp(gaugeA, sm(B5 + 0.5, wMore, g));
+      const k = eio(sm(B5, wMore, g)), h = sm(wMore, B6 + 1.0, g);   // after arriving: slow drift around and toward the gauge (never a frozen hold)
+      O = O5.clone().lerp(gaugeO, k).applyAxisAngle(V(0, 1, 0), 0.22 * h).multiplyScalar(1 - 0.1 * h); A = V(0, 1, 0).lerp(gaugeA, sm(B5 + 0.5, wMore, g));
     } else if (g < B7) {
-      const k = sm(B6, B6 + 1.6, g); O = orbit(gaugeO, baitO, k).applyAxisAngle(V(0, 1, 0), 0.28 * sm(B6 + 1.6, B7, g)); A = gaugeA.clone().lerp(baitA, k);
+      const k = sm(B6, B6 + 1.6, g); O = orbit(gaugeO.clone().applyAxisAngle(V(0, 1, 0), 0.22 * sm(wMore, B6 + 1.0, g)).multiplyScalar(1 - 0.1 * sm(wMore, B6 + 1.0, g)), baitO, k).applyAxisAngle(V(0, 1, 0), 0.28 * sm(B6 + 1.6, B7, g)); A = gaugeA.clone().lerp(baitA, k);
     } else if (g < B8) {
       const k = sm(B7, B7 + 1.4, g); O = baitO.clone().applyAxisAngle(V(0, 1, 0), 0.28).lerp(fishO, k);
       A = baitA.clone().lerp(fishA, k).add(V(0, -0.5 * sm(wEight + 2.2, B8, g), 0));
@@ -149,7 +150,7 @@ export async function build({ params }) {
     p.y = Math.max(p.y, floorY(p.x, p.z) + 0.6);
     let d = lp.clone().add(A).sub(p).normalize();
     const blend = sm(B5, B5 + 1.4, g);
-    if (blend < 1) d = endA.d.clone().lerp(d, blend).normalize();
+    if (blend < 1) d = endA.d.clone().lerp(d, blend).normalize();   // (continuous with the end of b4)
     return { p, d, lp };
   }
 
@@ -173,13 +174,13 @@ export async function build({ params }) {
     sky.sky.visible = above; sky.sky.position.copy(camera.position);
     const wc = waterColumn(depth, col);
     scene.background = above ? null : wc.color.clone();
-    scene.fog.color.copy(above ? new THREE.Color('#b9c8d2') : wc.color.clone().lerp(new THREE.Color('#02100f'), sm(B5, B5 + 1.0, g)));
+    scene.fog.color.copy(above ? new THREE.Color('#b9c8d2') : wc.color.clone().lerp(new THREE.Color('#041a18'), sm(B5, B5 + 1.0, g)));
     scene.fog.density = above ? 0.00004 : lerp(wc.density, 0.045, sm(B5, B5 + 1.0, g));
     renderer.toneMappingExposure = above ? 0.8 : lerp(0.9, 1.25, sm(B5, B5 + 1, g));
     observer.position.copy(camera.position).add(V(0, 0.3, 0)); observer.intensity = deep ? 2.6 : 0;
     sea.mesh.visible = depth < 2500; sea.update(g, camera);
     sunBeams.forEach(({ o, c: cb }) => cb.set(o, o.clone().add(V(0.12, -1, 0.05)), (1 - sm(150, 700, depth)) * sm(B2, B2 + 0.6, g)));
-    farBeam.set(beamPt.clone().setY(0), beamPt.clone().setY(-1100), (1 - sm(word('b4', 'above'), wIt + 0.35, g)) * sm(B2 + 1, B3, g));
+    farBeam.set(beamPt.clone().setY(0), beamPt.clone().setY(-1100), (1 - sm(word('b4', 'above') + 0.5, wIt + 1.05, g)) * sm(B2 + 1, B3, g));   // fades as the camera tilts away
     // trench views
     const op = sm(wSeafloor - 0.3, wSeafloor + 1.6, g) * (1 - sm(wHadal, B5 + 0.8, g));
     cont.uniforms.uOpacity.value = op; contours.visible = op > 0.002;

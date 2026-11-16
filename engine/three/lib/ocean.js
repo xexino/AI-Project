@@ -17,7 +17,7 @@ export function oceanRenderer({ exposure = 1.0, logDepth = true } = {}) {
 // Water colour and visibility by depth (m): silver-blue surface -> twilight cobalt -> abyssal navy -> hadal near-black.
 const STOPS = [
   [0, '#3d7f9c', 0.0020], [150, '#1e5a84', 0.0022], [600, '#0d2f5e', 0.0026], [1500, '#06173a', 0.0030],
-  [4000, '#020a1c', 0.0034], [6000, '#01060f', 0.0040], [11000, '#000204', 0.0045],
+  [4000, '#061a30', 0.0034], [6000, '#061826', 0.0040], [11000, '#020d13', 0.0045],   // never pure black: deep water keeps a faint tone
 ];
 export function waterColumn(depth, out = new THREE.Color()) {
   const d = Math.max(0, depth);
@@ -100,7 +100,7 @@ export function driftParticles(scene, { n = 1800, box = [40, 40, 40], size = 0.0
           pos[i * 3 + k] = o.getComponent(k) + (((raw % span) + span) % span) - span / 2;
         }
         const w = lit ? lit(pos[i * 3], pos[i * 3 + 1], pos[i * 3 + 2]) : 0;
-        const b = brightness * (0.18 + 0.82 * w) * (0.6 + 0.4 * base[i * 3]);
+        const b = brightness * (0.3 + 0.7 * w) * (0.6 + 0.4 * base[i * 3]);
         col[i * 3] = c0.r * b; col[i * 3 + 1] = c0.g * b; col[i * 3 + 2] = c0.b * b;
       }
       geo.attributes.position.needsUpdate = true; geo.attributes.color.needsUpdate = true;
