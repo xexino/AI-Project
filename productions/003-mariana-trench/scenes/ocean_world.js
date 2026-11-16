@@ -44,7 +44,8 @@ export async function build({ params }) {
   // sky + sea surface (b1, start of b2)
   const sky = makeSky({ elevation: 30, azimuth: 65, turbidity: 4, rayleigh: 1.2, mie: 0.004 }); scene.add(sky.sky);
   const sea = seaSurface(scene, { sunDir: sky.sun.toArray(), sky: '#a9bfcd', deep: '#0b3550', origin: [0, Z0], size: 9000, seg: 600, horizon: [1200, 4200] });
-  const sunBeams = [V(-60, 0, Z0 - 9 * B2 - 260), V(90, 0, Z0 - 9 * B2 - 420)].map((o) => ({ o, c: lightCone(scene, { length: 380, radius: 55, color: '#9fd0e6', strength: 0.10 }) }));
+  const sunBeams = [[-60, -260], [90, -420], [-170, -520], [30, -150], [160, -300], [-20, -640]]
+    .map(([x, dz], i) => ({ o: V(x, 0, Z0 - 9 * B2 + dz), c: lightCone(scene, { length: 300 + 40 * i, radius: 18 + 6 * i, color: '#a8d8ea', strength: 0.16 }) }));
   const farBeam = lightCone(scene, { length: 1100, radius: 230, color: '#b4dcf0', strength: 1.4 });
 
   // trench: physically lit relief + additive bathymetric contours on the same geometry
@@ -58,21 +59,21 @@ export async function build({ params }) {
   for (let i = 0; i < fg.attributes.position.count; i++) {
     const x = fg.attributes.position.getX(i), z = fg.attributes.position.getZ(i);
     const n = 0.85 + 0.3 * (floorDetail(x * 3.1, z * 3.1) + 1) / 3;
-    c.set('#6b655c').multiplyScalar(n); fc[i * 3] = c.r; fc[i * 3 + 1] = c.g; fc[i * 3 + 2] = c.b;
+    c.set('#8a9184').multiplyScalar(n); fc[i * 3] = c.r; fc[i * 3 + 1] = c.g; fc[i * 3 + 2] = c.b;
   }
   fg.setAttribute('color', new THREE.BufferAttribute(fc, 3));
-  const sed = sedimentTexture(); sed.repeat.set(65, 65);
+  const sed = sedimentTexture({ base: [150, 156, 140] }); sed.repeat.set(65, 65);
   const floorPatch = new THREE.Mesh(fg, new THREE.MeshStandardMaterial({ vertexColors: true, map: sed, bumpMap: sed, bumpScale: 2.5, roughness: 0.97 })); scene.add(floorPatch);
   const floorY = (x, z) => heightAt(x, z) + floorDetail(x, z);
 
   // lander, fauna, particles
-  const L = makeLander(scene);
+  const L = makeLander(scene, { lampColor: '#d2efe9' });
   const swarm = amphipodSwarm(scene);
   const fish = snailfish(scene);
-  const coneA = lightCone(scene, { length: 6, radius: 2.4, strength: 0.07 }), coneB = lightCone(scene, { length: 14, radius: 5.2, strength: 0.09 });
+  const coneA = lightCone(scene, { length: 6, radius: 2.4, color: '#bfe8e2', strength: 0.08 }), coneB = lightCone(scene, { length: 14, radius: 5.2, color: '#bfe8e2', strength: 0.11 });
   const tmpO = V(0, 0, 0), tmpD = V(0, 0, 0), tmpO2 = V(0, 0, 0), tmpD2 = V(0, 0, 0);
   const litA = inCone(tmpO, tmpD, 0.5, 6), litB = inCone(tmpO2, tmpD2, 0.5, 14);
-  const snow = driftParticles(scene, { n: 1600, box: [22, 22, 22], size: 0.035, color: '#a9bfcc', lit: (x, y, z) => Math.max(litA(x, y, z), litB(x, y, z)) });
+  const snow = driftParticles(scene, { n: 2600, box: [22, 22, 22], size: 0.03, color: '#b6d6d0', lit: (x, y, z) => Math.max(litA(x, y, z), litB(x, y, z)) });
 
   // ---------- camera choreography ----------
   // phase A (b1–b4): free camera, travelling -z along the trench axis toward Challenger Deep at the origin
@@ -87,7 +88,7 @@ export async function build({ params }) {
     if (g < B3) {
       const k = (g - B2) / (B3 - B2);
       const p = V(0, lerp(pA2.y, pB3.y, eio(k)), lerp(pA2.z, pB3.z, ss(k)));
-      const dA = dirPitch(lerp(-30, -78, sm(0, 0.16, k)));
+      const dA = dirPitch(lerp(-30, -56, sm(0, 0.16, k)));          // oblique, so the sun shafts read as rays
       const dB = basinLook.clone().sub(p).normalize();
       return { p, d: dA.lerp(dB, sm(0.32, 0.95, k)).normalize() };
     }
@@ -172,7 +173,7 @@ export async function build({ params }) {
     sky.sky.visible = above; sky.sky.position.copy(camera.position);
     const wc = waterColumn(depth, col);
     scene.background = above ? null : wc.color.clone();
-    scene.fog.color.copy(above ? new THREE.Color('#b9c8d2') : wc.color);
+    scene.fog.color.copy(above ? new THREE.Color('#b9c8d2') : wc.color.clone().lerp(new THREE.Color('#02100f'), sm(B5, B5 + 1.0, g)));
     scene.fog.density = above ? 0.00004 : lerp(wc.density, 0.045, sm(B5, B5 + 1.0, g));
     renderer.toneMappingExposure = above ? 0.5 : lerp(0.9, 1.25, sm(B5, B5 + 1, g));
     observer.position.copy(camera.position).add(V(0, 0.3, 0)); observer.intensity = deep ? 2.6 : 0;

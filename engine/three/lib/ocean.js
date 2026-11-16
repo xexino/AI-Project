@@ -38,9 +38,9 @@ export function seaSurface(scene, { size = 60000, seg = 256, sunDir = [0.3, 0.25
   // wave slopes evaluated per pixel; each component fades out once it is smaller than a few pixels (no aliasing)
   const waves = `
     vec2 slope(vec2 p, float t, float dist){ vec2 d=vec2(0.);
-      vec4 W[6]; W[0]=vec4(0.8,0.6,90.,1.6); W[1]=vec4(-0.4,0.9,47.,0.9); W[2]=vec4(0.95,-0.3,23.,0.45);
-      W[3]=vec4(0.2,-1.,11.,0.22); W[4]=vec4(-0.7,-0.5,5.3,0.1); W[5]=vec4(0.5,-0.8,2.6,0.045);
-      for(int i=0;i<6;i++){ vec2 dir=normalize(W[i].xy); float k=6.2831/W[i].z; float ph=k*dot(dir,p)-sqrt(9.8*k)*t;
+      vec4 W[8]; W[0]=vec4(0.8,0.6,110.,1.4); W[1]=vec4(-0.5,0.85,61.,0.8); W[2]=vec4(0.95,-0.2,33.,0.42); W[3]=vec4(0.3,-0.95,19.,0.22);
+      W[4]=vec4(-0.85,-0.45,11.,0.12); W[5]=vec4(0.6,0.75,6.3,0.07); W[6]=vec4(-0.2,0.98,3.7,0.035); W[7]=vec4(0.9,-0.6,2.2,0.02);
+      for(int i=0;i<8;i++){ vec2 dir=normalize(W[i].xy); float k=6.2831/W[i].z; float ph=k*dot(dir,p)-sqrt(9.8*k)*t;
         float fade=1.-smoothstep(W[i].z*6.,W[i].z*30.,dist); d+=fade*W[i].w*k*cos(ph)*dir; }
       return d; }`;
   const m = new THREE.ShaderMaterial({ uniforms: u, side: THREE.DoubleSide, fog: false,
@@ -57,8 +57,10 @@ export function seaSurface(scene, { size = 60000, seg = 256, sunDir = [0.3, 0.25
         #include <logdepthbuf_fragment>
         vec3 v=normalize(uCam-vW); float dist=length(uCam-vW); vec3 n;
         vec2 sl=slope(vW.xz-uRef,uTime,dist); n=normalize(vec3(-sl.x,1.,-sl.y));
-        if(uCam.y>0.){ float fr=0.04+0.96*pow(1.-max(dot(n,v),0.),5.); vec3 r=reflect(-v,n);
-          float gl=pow(max(dot(r,uSun),0.),900.)*1.6; vec3 c=mix(uDeep,uSky,fr)+uSunC*gl;
+        if(uCam.y>0.){ float fr=0.02+0.98*pow(1.-max(dot(n,v),0.),5.); vec3 r=reflect(-v,n);
+          vec3 skyR=mix(uSky*0.62,uSky*1.12,pow(1.-clamp(r.y,0.,1.),3.));
+          float gl=pow(max(dot(r,uSun),0.),700.)*2.2+pow(max(dot(r,uSun),0.),60.)*0.12;
+          vec3 body=uDeep*(0.85+0.3*clamp(sl.x*2.+sl.y,-.5,.5)); vec3 c=mix(body,skyR,fr)+uSunC*gl;
           c=mix(c,uSky*0.92,smoothstep(uHz.x,uHz.y,dist)); gl_FragColor=vec4(c,1.); }
         else { float tr=pow(max(dot(-n,v),0.),3.); vec3 c=mix(uDeep*1.2,uSky*1.25,tr); c+=uSunC*pow(max(dot(-v,-uSun),0.),40.)*0.8;
           c=mix(c,uDeep*0.6,smoothstep(80.,1600.,dist)); gl_FragColor=vec4(c,1.); }
@@ -139,7 +141,7 @@ export function contourMaterial({ minor = 250, major = 1000, line = '#64d2de', b
         float isoL=1.-smoothstep(0.,px*3.,abs(d-uIso)); c+=uLine*isoL*uIsoK*1.8;
         vec2 q=vW.xz-uRingC; float r=length(q); float ang=(atan(q.y,q.x)+3.14159265)/6.2831853;
         float ring=(1.-smoothstep(0.,uRingR*0.035,abs(r-uRingR)))*step(ang,uRingP); c+=vec3(1.0,0.92,0.72)*ring*1.6;
-        c+=uLine*0.14*uBasin*smoothstep(uBasinDepth-150.,uBasinDepth+250.,d)*(1.-smoothstep(uRingR*0.8,uRingR*1.4,r));
+        c+=uLine*0.08*uBasin*smoothstep(uBasinDepth-150.,uBasinDepth+250.,d)*(1.-smoothstep(uRingR*0.8,uRingR*1.4,r));
         float fade=1.-smoothstep(uFar*0.45,uFar,length(uCam-vW));
         gl_FragColor=vec4(c*fade*uOpacity,1.);
         #include <tonemapping_fragment>

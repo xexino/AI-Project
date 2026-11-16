@@ -10,16 +10,18 @@
   "issue": "https://github.com/xexino/AI-Project/issues/97",
   "base_branch": "claude/visual-reference-v1",
   "base_commit": "fddb328413f449c4258ea2f087dccb63c030f0b9",
-  "phase": "PRE-PRODUCTION",
-  "final_render_authorized": false,
+  "phase": "PRODUCTION",
+  "final_render_authorized": true,
   "approvals": {
    "script": "approved by owner 2026-11-16 (content lock; issue #97 comment)",
    "format": "approved by owner 2026-11-16: 9:16, 1080x1920, 24 fps",
    "visual_direction": "approved by owner 2026-11-16: cinematic, realistic-looking procedural 3D ocean",
-   "voiceover_recording": "PENDING owner review",
-   "final_timings": "PENDING owner review",
-   "beat_table": "PENDING owner review",
-   "references_and_assets": "PENDING owner review"
+   "voiceover_recording": "approved by owner 2026-11-16 (chat: \"Approved, push realism further and render the final video\")",
+   "final_timings": "approved by owner 2026-11-16 (chat: \"Approved, push realism further and render the final video\")",
+   "beat_table": "approved by owner 2026-11-16 (chat: \"Approved, push realism further and render the final video\")",
+   "references_and_assets": "approved by owner 2026-11-16 (chat: \"Approved, push realism further and render the final video\")",
+   "realism": "owner asked to push realism further before the final render (2026-11-16)",
+   "open_items_accepted": "b8 wording kept as written; record fish shown in-world with its Izu-Ogasawara label (no inset)"
   }
  },
  "format": {
@@ -409,9 +411,163 @@
    "preset": "drone_bed"
   },
   "pad": null,
-  "cues": []
+  "seed": 3,
+  "cues": [
+   {
+    "preset": "whoosh",
+    "at": {
+     "word": "beneath",
+     "scene": "b2",
+     "offset": -0.3
+    },
+    "level": 0.6
+   },
+   {
+    "preset": "rise",
+    "at": {
+     "scene_start": "b3"
+    },
+    "d": 3.0,
+    "level": 0.5
+   },
+   {
+    "preset": "bell_low",
+    "at": {
+     "word": "challenger",
+     "scene": "b3",
+     "offset": 0.1
+    },
+    "level": 0.6
+   },
+   {
+    "preset": "pulse",
+    "at": {
+     "word": "thousand",
+     "scene": "b5"
+    },
+    "level": 0.7
+   },
+   {
+    "preset": "thump",
+    "at": {
+     "word": "bottom",
+     "scene": "b8",
+     "offset": 2.0
+    },
+    "level": 0.6
+   }
+  ]
  },
- "music": null,
+ "music": {
+  "provider": "synth",
+  "master_db": -23,
+  "sections": [
+   {
+    "from": {
+     "t": 0.0
+    },
+    "chords": [
+     [
+      "D2",
+      "A2",
+      "D3",
+      "F3"
+     ],
+     [
+      "Bb1",
+      "F2",
+      "D3",
+      "F3"
+     ]
+    ],
+    "chord_s": 3.4,
+    "level": 0.5,
+    "brightness": 0.3
+   },
+   {
+    "from": {
+     "scene_start": "b3"
+    },
+    "chords": [
+     [
+      "G1",
+      "D2",
+      "Bb2",
+      "D3"
+     ],
+     [
+      "A1",
+      "E2",
+      "C#3",
+      "E3"
+     ]
+    ],
+    "chord_s": 3.0,
+    "level": 0.6,
+    "brightness": 0.35
+   },
+   {
+    "from": {
+     "scene_start": "b5"
+    },
+    "chords": [
+     [
+      "D1",
+      "A1",
+      "D2",
+      "F2"
+     ]
+    ],
+    "chord_s": 4.0,
+    "level": 0.55,
+    "brightness": 0.2
+   },
+   {
+    "from": {
+     "scene_start": "b6"
+    },
+    "chords": [
+     [
+      "F2",
+      "C3",
+      "A3"
+     ],
+     [
+      "C2",
+      "G2",
+      "E3"
+     ],
+     [
+      "D2",
+      "A2",
+      "F3"
+     ]
+    ],
+    "chord_s": 3.0,
+    "level": 0.45,
+    "brightness": 0.25
+   },
+   {
+    "from": {
+     "scene_start": "b8"
+    },
+    "chords": [
+     [
+      "D2",
+      "A2",
+      "D3",
+      "E3",
+      "A3"
+     ]
+    ],
+    "chord_s": 6.0,
+    "level": 0.5,
+    "brightness": 0.3
+   }
+  ],
+  "hits": [],
+  "end_fade_s": 2.0
+ },
  "sources": [
   {
    "id": "noaa_oceandepth",
@@ -554,7 +710,16 @@
    "note": "Supports the general statement. Challenger Deep itself has been mapped at high resolution (multibeam); the narration line should be read as the deep seafloor in general — flagged for owner review."
   }
  ],
- "cover": null,
+ "cover": {
+  "scene": "b3",
+  "frame": 200,
+  "lines": [
+   "The deepest place",
+   "on Earth"
+  ],
+  "y": 330,
+  "size": 84
+ },
  "publishing": {
   "enabled": false,
   "platforms": {}

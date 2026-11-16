@@ -3,6 +3,15 @@
 // tick marks only (no numbers), so it never adds on-screen text. Units: metres; origin = bottom centre of the frame.
 import * as THREE from 'three';
 
+function netTexture() {
+  const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d');
+  g.fillStyle = '#3a2c24'; g.fillRect(0, 0, 256, 256);                          // bait (dark fish flesh) behind the mesh
+  for (let i = 0; i < 400; i++) { g.fillStyle = `rgba(${90 + (i * 37) % 60},${70 + (i * 17) % 40},60,0.35)`; g.fillRect((i * 97) % 256, (i * 57) % 256, 10, 6); }
+  g.strokeStyle = '#d8d2c2'; g.lineWidth = 3;
+  for (let k = -256; k < 512; k += 22) { g.beginPath(); g.moveTo(k, 0); g.lineTo(k + 256, 256); g.stroke(); g.beginPath(); g.moveTo(k, 256); g.lineTo(k + 256, 0); g.stroke(); }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(2, 1); return t;
+}
+
 function dialTexture() {
   const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d');
   g.fillStyle = '#d9d6cc'; g.beginPath(); g.arc(128, 128, 124, 0, Math.PI * 2); g.fill();
@@ -19,7 +28,8 @@ export function makeLander(scene, { lampColor = '#dfe9ff' } = {}) {
   const g = new THREE.Group();
   const alu = new THREE.MeshStandardMaterial({ color: '#9aa0a3', roughness: 0.45, metalness: 0.6 });
   const dark = new THREE.MeshStandardMaterial({ color: '#2b2f33', roughness: 0.6, metalness: 0.3 });
-  const hat = new THREE.MeshStandardMaterial({ color: '#c99626', roughness: 0.55 });
+  const hat = new THREE.MeshStandardMaterial({ color: '#d27f1c', roughness: 0.5 });
+  const glass = new THREE.MeshStandardMaterial({ color: '#0b1418', roughness: 0.05, metalness: 0.9 });
   const tube = (a, b, r = 0.022) => {
     const v = new THREE.Vector3().subVectors(b, a); const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, v.length(), 10), alu);
     m.position.copy(a).addScaledVector(v, 0.5); m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), v.clone().normalize()); g.add(m);
@@ -29,12 +39,15 @@ export function makeLander(scene, { lampColor = '#dfe9ff' } = {}) {
   for (let i = 0; i < 4; i++) {
     const a = legs[i], b = legs[(i + 1) % 4];
     tube(a, a.clone().setY(1.75)); tube(a, b); tube(a.clone().setY(0.9), b.clone().setY(0.9)); tube(a.clone().setY(1.75), b.clone().setY(1.75));
+    tube(a.clone().setY(0.05), b.clone().setY(0.85), 0.012);                         // diagonal braces
   }
   for (const x of [-0.24, 0.24]) {                     // buoyancy spheres in hard hats on top
     const s = new THREE.Mesh(new THREE.SphereGeometry(0.24, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2), hat); s.position.set(x, 1.78, 0); g.add(s);
     const s2 = new THREE.Mesh(new THREE.SphereGeometry(0.235, 32, 16, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), dark); s2.position.set(x, 1.78, 0); g.add(s2);
   }
   const cam = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.075, 0.42, 24), dark); cam.rotation.z = Math.PI / 2; cam.position.set(-0.3, 1.25, 0.12); g.add(cam);
+  const lensC = new THREE.Mesh(new THREE.CircleGeometry(0.06, 32), glass); lensC.rotation.y = -Math.PI / 2; lensC.position.set(-0.512, 1.25, 0.12); g.add(lensC);
+  for (const y of [0.35, 1.4]) { const cbl = new THREE.Mesh(new THREE.TorusGeometry(0.16, 0.008, 6, 24, Math.PI), dark); cbl.position.set(0.1, y, 0.44); g.add(cbl); }   // cable loops
   const ballast = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.12, 0.5), dark); ballast.position.set(0, -0.06, 0); g.add(ballast);
   // pressure gauge on the +x face
   const housing = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.13, 0.07, 40), alu); housing.rotation.z = Math.PI / 2; housing.position.set(0.5, 1.05, 0); g.add(housing);
@@ -57,10 +70,8 @@ export function makeLander(scene, { lampColor = '#dfe9ff' } = {}) {
     g.add(sp, sp.target); lights.push(sp);
   }
   // bait bag hanging on the -x side
-  const bag = new THREE.Mesh(new THREE.SphereGeometry(0.11, 18, 12), new THREE.MeshStandardMaterial({ color: '#3f322a', roughness: 0.95 }));
+  const bag = new THREE.Mesh(new THREE.SphereGeometry(0.11, 24, 16), new THREE.MeshStandardMaterial({ map: netTexture(), roughness: 0.9 }));
   bag.scale.set(1, 1.25, 1); bag.position.set(-0.62, 0.38, 0.05); g.add(bag);
-  const net = new THREE.Mesh(new THREE.SphereGeometry(0.118, 12, 9), new THREE.MeshBasicMaterial({ color: '#bfb7a8', wireframe: true, transparent: true, opacity: 0.35 }));
-  net.scale.copy(bag.scale); net.position.copy(bag.position); g.add(net);
   tube(V(-0.45, 0.9, 0.05), V(-0.62, 0.5, 0.05), 0.006);
   scene.add(g);
   return {
