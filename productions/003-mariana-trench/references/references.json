@@ -1,0 +1,237 @@
+{
+ "schema": "oddlight-references/1",
+ "production": "003-mariana-trench",
+ "note": "Licensed/official research references for art direction. Guidance only: never composited into the video. No stock footage, no AI-generated imagery.",
+ "frames": [
+  {
+   "id": "ref_01",
+   "title": "Marianas Trench Marine National Monument (map)",
+   "image": "images/ref_01_marianas_monument_map.jpg",
+   "expected_size": [
+    700,
+    910
+   ],
+   "metadata": "metadata/ref_01.json",
+   "preview": "previews/ref_01_preview.jpg",
+   "required": false,
+   "status": "present",
+   "credit": "NOAA",
+   "license": "Public domain (U.S. Government work)",
+   "use": "guidance only",
+   "scenes": [
+    "b2",
+    "b3"
+   ],
+   "palette": [
+    "#2f6fa3",
+    "#9cc3dd",
+    "#e8e2c8"
+   ],
+   "lighting": "n/a (map)",
+   "camera": "n/a",
+   "composition": {
+    "source_aspect": "700:910",
+    "target_aspect": "9:16",
+    "keep": "geography: crescent-shaped trench east of the Mariana arc, western Pacific"
+   },
+   "materials": "n/a",
+   "environment": "trench arc curving south-west to Challenger Deep at its southern end",
+   "vertical_guide": {
+    "center_x": 0.5,
+    "note": "9:16 crop centre used for the board only"
+   },
+   "image_sha256": "c12df9bc2d1da270454f81f33b897dd5457134b57b943c39ae2561e7e86a1415"
+  },
+  {
+   "id": "ref_02",
+   "title": "GEBCO 2019 and multibeam bathymetry of Challenger Deep and Sirena Deep",
+   "image": "images/ref_02_gebco_challenger_sirena.jpg",
+   "expected_size": [
+    1920,
+    1400
+   ],
+   "metadata": "metadata/ref_02.json",
+   "preview": "previews/ref_02_preview.jpg",
+   "required": false,
+   "status": "present",
+   "credit": "Cassandra Bongiovanni, Heather A. Stewart and Alan J. Jamieson (Geoscience Data Journal, doi:10.1002/gdj3.122)",
+   "license": "CC BY 4.0",
+   "use": "guidance only",
+   "scenes": [
+    "b3"
+   ],
+   "palette": [
+    "#22325f",
+    "#3d6db0",
+    "#d9a3c3"
+   ],
+   "lighting": "hillshaded relief",
+   "camera": "plan view + profiles",
+   "composition": {
+    "source_aspect": "1920:1400",
+    "target_aspect": "9:16",
+    "keep": "bathymetric visual language (contours, deep blue → shallow teal tint), elongated flat-floored basins along the trench axis"
+   },
+   "materials": "n/a",
+   "environment": "long narrow trench axis with separate deep basins",
+   "vertical_guide": {
+    "center_x": 0.45,
+    "note": "9:16 crop centre used for the board only"
+   },
+   "image_sha256": "281df4ee2e59fb1c61752d3bc76000bacaa8a240635a8b087dd4593be9f0ecc2"
+  },
+  {
+   "id": "ref_03",
+   "title": "ROV Deep Discoverer in the Mariana Trench at ~6,000 m (2016 Deepwater Exploration of the Marianas)",
+   "image": "images/ref_03_deep_discoverer_mariana_6000m.jpg",
+   "expected_size": [
+    800,
+    450
+   ],
+   "metadata": "metadata/ref_03.json",
+   "preview": "previews/ref_03_preview.jpg",
+   "required": false,
+   "status": "present",
+   "credit": "NOAA Office of Ocean Exploration and Research (Ocean Exploration 'What is the deep ocean?' page)",
+   "license": "Public domain (U.S. Government work) — credit line to be confirmed on the NOAA image page",
+   "use": "guidance only",
+   "scenes": [
+    "b4",
+    "b5"
+   ],
+   "palette": [
+    "#01060c",
+    "#0c3a40",
+    "#4fa7a0"
+   ],
+   "lighting": "artificial lamps only; strong falloff; backscatter",
+   "camera": "vehicle-mounted, close",
+   "composition": {
+    "source_aspect": "800:450",
+    "target_aspect": "9:16",
+    "keep": "total darkness beyond artificial light, cyan-green backscatter around lamps, a single lit vehicle as the only light source"
+   },
+   "materials": "sediment-dusted slope",
+   "environment": "hadal slope, no sunlight",
+   "vertical_guide": {
+    "center_x": 0.45,
+    "note": "9:16 crop centre used for the board only"
+   },
+   "image_sha256": "01bca5a0b46cd9a39f089eaaf7be48fa6debff411d9ca9c78599609ff462a884"
+  },
+  {
+   "id": "ref_04",
+   "title": "Hirondellea gigas (hadal amphipod)",
+   "image": "images/ref_04_hirondellea_gigas.jpg",
+   "expected_size": [
+    797,
+    598
+   ],
+   "metadata": "metadata/ref_04.json",
+   "preview": "previews/ref_04_preview.jpg",
+   "required": false,
+   "status": "present",
+   "credit": "Daiju Azuma",
+   "license": "CC BY-SA 2.5",
+   "use": "guidance only",
+   "scenes": [
+    "b6"
+   ],
+   "palette": [
+    "#f0dcc0",
+    "#d9b896",
+    "#000000"
+   ],
+   "lighting": "studio flash on black",
+   "camera": "macro, lateral",
+   "composition": {
+    "source_aspect": "797:598",
+    "target_aspect": "9:16",
+    "keep": "morphology and colour of the amphipod model (pale cream body, curved segmented form, long antennae); not composited"
+   },
+   "materials": "translucent pale chitin",
+   "environment": "specimen photograph",
+   "vertical_guide": {
+    "center_x": 0.5,
+    "note": "9:16 crop centre used for the board only"
+   },
+   "image_sha256": "348a916f42f9edbc674f8de1d023f5992e3515c9742be8c9b79d1518d860b5d1"
+  },
+  {
+   "id": "ref_05",
+   "title": "Pseudoliparis swirei, Mariana snailfish (Gerringer et al. 2017, Zootaxa 4358)",
+   "image": "images/ref_05_pseudoliparis_swirei.png",
+   "expected_size": [
+    481,
+    639
+   ],
+   "metadata": "metadata/ref_05.json",
+   "preview": "previews/ref_05_preview.jpg",
+   "required": false,
+   "status": "present",
+   "credit": "Gerringer M.E., Linley T.D., Jamieson A.J., Goetze E., Drazen J.C. (2017)",
+   "license": "CC BY 3.0",
+   "use": "guidance only",
+   "scenes": [
+    "b7"
+   ],
+   "palette": [
+    "#f1cbbf",
+    "#c8d3e0",
+    "#5e6e7c"
+   ],
+   "lighting": "lander lights on dark water / lab photo",
+   "camera": "lateral",
+   "composition": {
+    "source_aspect": "481:639",
+    "target_aspect": "9:16",
+    "keep": "snailfish body plan (tadpole shape, large head, small eye, scaleless pale-pink translucent skin, broad pectoral fins). The 8,336 m record fish is a different, unidentified Pseudoliparis species filmed in the Izu-Ogasawara Trench; the model is a genus-level likeness, not that individual"
+   },
+   "materials": "gelatinous translucent skin",
+   "environment": "hadal water column",
+   "vertical_guide": {
+    "center_x": 0.5,
+    "note": "9:16 crop centre used for the board only"
+   },
+   "image_sha256": "7ccbb93dc8ffab60d08e25ab22049afc434367c3b476eacf2a44acef0bfd6ae7"
+  },
+  {
+   "id": "ref_06",
+   "title": "Challenger Deep floor with a stalked anemone, seen from DSV Limiting Factor (2022)",
+   "image": "images/ref_06_challenger_deep_floor_anemone.jpg",
+   "expected_size": [
+    1920,
+    2560
+   ],
+   "metadata": "metadata/ref_06.json",
+   "preview": "previews/ref_06_preview.jpg",
+   "required": false,
+   "status": "present",
+   "credit": "Victor Vescovo (Wikimedia user Vlvescovo)",
+   "license": "CC0 1.0",
+   "use": "guidance only",
+   "scenes": [
+    "b8"
+   ],
+   "palette": [
+    "#7b9a8f",
+    "#3e5a55",
+    "#0b1514"
+   ],
+   "lighting": "submersible lamps, falloff to black",
+   "camera": "through viewport, looking down",
+   "composition": {
+    "source_aspect": "1920:2560",
+    "target_aspect": "9:16",
+    "keep": "fine pale sediment, soft relief, lamp falloff into darkness on the deepest floor"
+   },
+   "materials": "fine sediment",
+   "environment": "Challenger Deep floor",
+   "vertical_guide": {
+    "center_x": 0.5,
+    "note": "9:16 crop centre used for the board only"
+   },
+   "image_sha256": "840786c1dfbf0aed1eca674e43fd805265af7d18ecaf769778b44fa1a2a91f40"
+  }
+ ]
+}

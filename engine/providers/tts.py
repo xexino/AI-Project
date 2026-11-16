@@ -13,7 +13,7 @@ MODELS = REPO_DIR / "models"
 class TTSProvider:
     info: ProviderInfo
 
-    def synthesize(self, text: str, voice: str, lang: str, speed: float):  # -> (np.ndarray, int)
+    def synthesize(self, text: str, voice: str, lang: str, speed: float, pronunciations: dict | None = None):  # -> (np.ndarray, int)
         raise NotImplementedError
 
 
@@ -39,8 +39,23 @@ class KokoroTTS(TTSProvider):
             self._k = Kokoro(str(self.model), str(self.voices))
         return self._k
 
-    def synthesize(self, text: str, voice: str, lang: str, speed: float):
-        return self._load().create(text, voice=voice, speed=speed, lang=lang)
+    def synthesize(self, text: str, voice: str, lang: str, speed: float, pronunciations: dict | None = None):
+        if not pronunciations:
+            return self._load().create(text, voice=voice, speed=speed, lang=lang)
+        return self._load().create(self.phonemes(text, lang, pronunciations), voice=voice, speed=speed, lang=lang, is_phonemes=True)
+
+    def phonemes(self, text: str, lang: str, pronunciations: dict) -> str:
+        """Phonemise the text with the model's own G2P, then replace the default phonemes of each listed word with the
+        given IPA (narration.pronunciations, e.g. {"hadal": "hˈeɪdəl"}). Display text and captions are unchanged."""
+        tok = self._load().tokenizer
+        ph = tok.phonemize(text, lang)
+        for word, ipa in pronunciations.items():
+            default = tok.phonemize(word, lang).strip()
+            if word.lower() in text.lower():
+                if default not in ph:
+                    raise ProviderUnavailable(f"pronunciation override for '{word}': default phonemes '{default}' not found in '{ph}'")
+                ph = ph.replace(default, ipa)
+        return ph
 
 
 @register("tts", "mock")
@@ -50,7 +65,7 @@ class MockTTS(TTSProvider):
     def __init__(self, **_: object) -> None:
         self.info = ProviderInfo("tts", "mock", paid=False, model="sine", license="n/a (test only)")
 
-    def synthesize(self, text: str, voice: str, lang: str, speed: float):
+    def synthesize(self, text: str, voice: str, lang: str, speed: float, pronunciations: dict | None = None):
         import numpy as np
         sr = 24000
         words = [w for w in text.replace("...", " ").split() if w.strip()]

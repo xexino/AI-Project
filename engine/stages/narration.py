@@ -18,7 +18,8 @@ def narration(ctx: Context) -> dict:
     for s in ctx.project.scenes:
         if not s["text"].strip():
             continue
-        audio, sr = tts.synthesize(s["text"], voice=n["voice"], lang=n["lang"], speed=n["speed"])
+        extra = {"pronunciations": n["pronunciations"]} if n.get("pronunciations") else {}
+        audio, sr = tts.synthesize(s["text"], voice=n["voice"], lang=n["lang"], speed=n["speed"], **extra)
         nz = np.where(np.abs(audio) > 0.01)[0]
         if len(nz) == 0:
             raise EngineError(f"TTS returned silence for scene {s['id']}")

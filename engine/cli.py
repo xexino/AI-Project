@@ -10,6 +10,8 @@
   python -m engine customers                                list customers / brands
   python -m engine dashboard [--out var/dashboard.html]     static HTML overview
   python -m engine compare --a A.mp4 --b B.mp4 --out DIR    visual comparison package (evenly sampled frames)
+  python -m engine beats    --project productions/<id>      timed beat table + on-screen text rule check (needs timing)
+  python -m engine animatic --project productions/<id> [--scale 0.25 --fps 8]   low-cost preview (never the final render)
 Publishing is not implemented as an action: packages are prepared for manual upload only."""
 from __future__ import annotations
 
@@ -18,6 +20,7 @@ import json
 import shutil
 import sys
 import time
+from argparse import Namespace
 from pathlib import Path
 
 from . import customers, providers
@@ -144,6 +147,28 @@ def cmd_deliver(a) -> int:
     return 0
 
 
+def cmd_beats(a) -> int:
+    """Write the timed beat table (Markdown + JSON) from the measured timeline and check the on-screen text rules."""
+    from .editorial_rules import beat_rows, beat_table_md, check_phrase_once
+    from .references import load_registry
+    p, _, _ = open_project(a.project, quiet=True)
+    tlf = p.work / "timeline.json"
+    if not tlf.exists():
+        print("no timeline yet: run `produce --until timing` first"); return 1
+    tl = json.loads(tlf.read_text())
+    assets = json.loads((p.dir / "assets.json").read_text()) if (p.dir / "assets.json").exists() else {}
+    problems = check_phrase_once(p.data, tl)
+    rows = beat_rows(p.data, tl, load_registry(p), assets)
+    out = Path(a.out) if a.out else p.work / "preproduction"
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "beat_table.md").write_text(beat_table_md(p.data["title"], rows, tl["duration"], problems), encoding="utf-8")
+    atomic_write_json(out / "beat_table.json", {"project": p.id, "duration": tl["duration"], "rule_problems": problems, "beats": rows})
+    print(f"{'PASS' if not problems else 'FAIL'}: {len(rows)} beats, {tl['duration']:.2f}s -> {relpath(out / 'beat_table.md')}")
+    for x in problems:
+        print("  -", x)
+    return 0 if not problems else 1
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="python -m engine", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -164,6 +189,9 @@ def main(argv: list[str] | None = None) -> int:
     sp.add_argument("--out", required=True); sp.add_argument("--n", type=int, default=12)
     sp.add_argument("--a-name", default="original"); sp.add_argument("--b-name", default="new")
     sp = sub.add_parser("dashboard"); sp.add_argument("--out", default=str(REPO_DIR / "var" / "dashboard.html"))
+    sp = sub.add_parser("beats"); sp.add_argument("--project", required=True); sp.add_argument("--out")
+    sp = sub.add_parser("animatic"); sp.add_argument("--project", required=True); sp.add_argument("--scale", type=float, default=0.25)
+    sp.add_argument("--fps", type=int, default=8); sp.add_argument("--scenes"); sp.add_argument("--renderer")
     a = ap.parse_args(argv)
     try:
         if a.cmd == "doctor":
@@ -182,6 +210,14 @@ def main(argv: list[str] | None = None) -> int:
         if a.cmd == "customers":
             for c in customers.list_customers():
                 print(f"{c['id']:<16} {c.get('name', '')}  {c.get('error', '')}")
+            return 0
+        if a.cmd == "beats":
+            return cmd_beats(a)
+        if a.cmd == "animatic":
+            from .animatic import animatic
+            ctx = build_context(Namespace(project=a.project, jobs=1, scenes=None, renderer=a.renderer, tts=None, aligner=None))
+            rep = animatic(ctx, scale=a.scale, fps=a.fps, scenes=a.scenes.split(",") if a.scenes else None)
+            print(json.dumps({k: rep[k] for k in ("video", "contact_sheet", "resolution", "fps", "render_wall_seconds", "child_cpu_seconds", "child_peak_rss_mb")}, indent=1))
             return 0
         if a.cmd == "references":
             from .references import load_registry, pin

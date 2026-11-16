@@ -95,6 +95,15 @@ def align_to_script(text: str, heard: list[tuple[str, float, float]], total: flo
             _, s, e = heard[prev_b]
             for i in range(ga):
                 times[prev_a + i] = (s + (e - s) * i / ga, s + (e - s) * (i + 1) / ga)
+        elif 1 < ga < gb:                 # hyphenated compounds heard as separate words ('near-freezing' -> 'near freezing')
+            j = prev_b
+            for i in range(ga):
+                acc, j0 = "", j
+                while j < blk.b and len(acc) < len(a[prev_a + i]):
+                    acc += b[j]; j += 1
+                if acc != a[prev_a + i]:
+                    break
+                times[prev_a + i] = (heard[j0][1], heard[j - 1][2])
         prev_a, prev_b = blk.a + blk.size, blk.b + blk.size
     matched = [t is not None for t in times]
     for i in range(len(times)):

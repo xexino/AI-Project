@@ -85,6 +85,26 @@ def scene_words(tl: dict, seg: dict) -> list[dict]:
             for w in tl.get("words", []) if w["scene"] == seg["id"]]
 
 
+def scene_timeline(tl: dict, seg: dict) -> dict:
+    """For scenes with "uses_timeline": true (one continuous world rendered across several narration beats):
+    the scene's start on the global timeline plus every scene start and narrated word in global seconds, so the
+    module can place the camera at global time t0 + t and key events to words in any beat."""
+    return {"t0": round(seg["start"], 4), "duration": tl["duration"],
+            "scenes": [{"id": x["id"], "start": round(x["start"], 4), "slot": round(x["slot"], 4)} for x in tl["scenes"]],
+            "words": [{"word": w["word"], "scene": w["scene"], "start": w["start"], "end": w["end"]} for w in tl.get("words", [])]}
+
+
+def scene_inputs(ctx: Context, tl: dict, seg: dict) -> dict:
+    """The scene definition with every per-render parameter resolved (words, global timeline, references)."""
+    s = dict(ctx.project.scene(seg["id"]))
+    if s.get("uses_words"):
+        s["params"] = {**s.get("params", {}), "words": scene_words(tl, seg)}
+    if s.get("uses_timeline"):
+        s["params"] = {**s.get("params", {}), "timeline": scene_timeline(tl, seg)}
+    s["params"] = scene_params(ctx, s)
+    return s
+
+
 def scene_params(ctx: Context, s: dict) -> dict:
     """Brand defaults for the builtin end card (wordmark, tagline, colours), overridden by the scene's own params.
     Scenes that list visual references receive the project's visual look and the references' guidance."""
@@ -102,10 +122,7 @@ def config(ctx: Context) -> dict:
     tl = json.loads(ctx.work("timeline.json").read_text()) if ctx.work("timeline.json").exists() else {}
     out = {}
     for seg in tl.get("scenes", []):
-        s = dict(ctx.project.scene(seg["id"]))
-        if s.get("uses_words"):
-            s["params"] = {**s.get("params", {}), "words": scene_words(tl, seg)}
-        s["params"] = scene_params(ctx, s)
+        s = scene_inputs(ctx, tl, seg)
         out[s["id"]] = scene_fingerprint(ctx, s, seg["clip"])
     return out
 
@@ -120,11 +137,8 @@ def visuals(ctx: Context) -> dict:
     jobs = []
     outputs = {}
     for seg in tl["scenes"]:
-        s = dict(p.scene(seg["id"]))
-        # scenes that set "uses_words": true receive their narration word timings (scene-local seconds)
-        if s.get("uses_words"):
-            s["params"] = {**s.get("params", {}), "words": scene_words(tl, seg)}
-        s["params"] = scene_params(ctx, s)
+        # "uses_words": scene-local narration word timings; "uses_timeline": the global timeline (continuous worlds)
+        s = scene_inputs(ctx, tl, seg)
         n = round(seg["clip"] * fps)
         fp = scene_fingerprint(ctx, s, seg["clip"])
         d = ctx.work("frames", s["id"])

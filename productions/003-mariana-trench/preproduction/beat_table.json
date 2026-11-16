@@ -1,0 +1,384 @@
+{
+ "project": "003-mariana-trench",
+ "duration": 59.5,
+ "rule_problems": [],
+ "beats": [
+  {
+   "id": "b1",
+   "beat": "HOOK",
+   "start": 0.0,
+   "end": 4.042,
+   "vo": [
+    0.6,
+    3.42
+   ],
+   "narration": "At the surface, the ocean seems to have no end.",
+   "hero": "The open ocean surface, horizon to horizon",
+   "on_screen_text": [],
+   "captions_shown": "At the surface, the ocean seems to have no end.",
+   "camera": "40 m above the sea on the trench axis, 34 km from Challenger Deep; slow forward drift toward the horizon; pitch eases from -8° to -30° (looking down at the water) by the end of the line.",
+   "event": "Low silver-blue sun, gentle swell; no other object in frame. The tilt down anticipates the dive.",
+   "claims": [],
+   "references": [],
+   "assets": [
+    "font-inter",
+    "font-fraunces",
+    "tts-kokoro",
+    "renderer-threejs",
+    "aligner-whisper",
+    "sfx-synth",
+    "brand-endcard",
+    "visuals-mariana"
+   ],
+   "transition": "cut 0 → b2"
+  },
+  {
+   "id": "b2",
+   "beat": "SETUP",
+   "start": 4.042,
+   "end": 10.75,
+   "vo": [
+    4.192,
+    10.132
+   ],
+   "narration": "But beneath the western Pacific, the seafloor drops into a world nearly eleven kilometres down.",
+   "hero": "The trench cut into the seabed, revealed as one immense cross-section",
+   "on_screen_text": [
+    {
+     "text": "≈ 11 KM DOWN",
+     "from": 7.77,
+     "to": 10.75,
+     "replaces_caption": "nearly eleven kilometres down."
+    }
+   ],
+   "captions_shown": "But beneath the western Pacific, the seafloor drops into a world",
+   "camera": "Plunges through the surface just after 'beneath', pitching to look straight down; descends to ~2,500 m while travelling along the trench axis toward Challenger Deep, then raises its gaze down the trench.",
+   "event": "On 'seafloor' the seabed fades in below as a sonar-style relief; the trench opens beneath the camera by 'down'.",
+   "claims": [
+    "c_location",
+    "c_depth"
+   ],
+   "references": [
+    {
+     "id": "ref_01",
+     "title": "Marianas Trench Marine National Monument (map)",
+     "credit": "NOAA",
+     "license": "Public domain (U.S. Government work)",
+     "use": "guidance only"
+    }
+   ],
+   "assets": [
+    "font-inter",
+    "font-fraunces",
+    "tts-kokoro",
+    "renderer-threejs",
+    "aligner-whisper",
+    "sfx-synth",
+    "brand-endcard",
+    "visuals-mariana"
+   ],
+   "transition": "cut 0 → b3"
+  },
+  {
+   "id": "b3",
+   "beat": "SETUP",
+   "start": 10.75,
+   "end": 21.208,
+   "vo": [
+    10.95,
+    20.43
+   ],
+   "narration": "This is Challenger Deep, inside the Mariana Trench: the deepest known point in the ocean, measured at about ten thousand nine hundred thirty-five metres.",
+   "hero": "The deepest basin of the trench, ringed by one bathymetric contour",
+   "on_screen_text": [
+    {
+     "text": "CHALLENGER DEEP",
+     "from": 11.23,
+     "to": 14.85,
+     "replaces_caption": "Challenger Deep,"
+    },
+    {
+     "text": "10,935 m",
+     "from": 18.07,
+     "to": 21.21,
+     "replaces_caption": "ten thousand nine hundred thirty-five metres."
+    }
+   ],
+   "captions_shown": "This is inside the Mariana Trench: the deepest known point in the ocean, measured at about",
+   "camera": "Glide down the trench axis from ~2,500 m to ~5,600 m (still above the hadal zone), looking ahead at the deepest basin.",
+   "event": "Depth contours glow on the trench relief; one ring is drawn around the deepest basin starting on 'Challenger'; the basin floor brightens slightly on 'ten'.",
+   "claims": [
+    "c_deepest",
+    "c_depth"
+   ],
+   "references": [
+    {
+     "id": "ref_01",
+     "title": "Marianas Trench Marine National Monument (map)",
+     "credit": "NOAA",
+     "license": "Public domain (U.S. Government work)",
+     "use": "guidance only"
+    },
+    {
+     "id": "ref_02",
+     "title": "GEBCO 2019 and multibeam bathymetry of Challenger Deep and Sirena Deep",
+     "credit": "Cassandra Bongiovanni, Heather A. Stewart and Alan J. Jamieson (Geoscience Data Journal, doi:10.1002/gdj3.122)",
+     "license": "CC BY 4.0",
+     "use": "guidance only"
+    }
+   ],
+   "assets": [
+    "font-inter",
+    "font-fraunces",
+    "tts-kokoro",
+    "renderer-threejs",
+    "aligner-whisper",
+    "sfx-synth",
+    "brand-endcard",
+    "visuals-mariana"
+   ],
+   "transition": "cut 0 → b4"
+  },
+  {
+   "id": "b4",
+   "beat": "STORY",
+   "start": 21.208,
+   "end": 27.292,
+   "vo": [
+    21.408,
+    26.628
+   ],
+   "narration": "Sunlight vanishes far above it. Below six thousand metres lies the hadal zone:",
+   "hero": "A single narrow beam of sunlight, far above, fading to black",
+   "on_screen_text": [
+    {
+     "text": "HADAL ZONE below 6,000 m",
+     "from": 23.91,
+     "to": 27.29,
+     "replaces_caption": "Below six thousand metres lies the hadal zone:"
+    }
+   ],
+   "captions_shown": "Sunlight vanishes far above it.",
+   "camera": "Tilts up toward the distant surface during the first sentence, then tilts back down and keeps descending into the trench.",
+   "event": "The beam dims to nothing by the end of 'above it'; on 'six thousand' the 6,000 m contour glows once along the trench walls and recedes as the camera passes below it.",
+   "claims": [
+    "c_sunlight",
+    "c_hadal"
+   ],
+   "references": [
+    {
+     "id": "ref_03",
+     "title": "ROV Deep Discoverer in the Mariana Trench at ~6,000 m (2016 Deepwater Exploration of the Marianas)",
+     "credit": "NOAA Office of Ocean Exploration and Research (Ocean Exploration 'What is the deep ocean?' page)",
+     "license": "Public domain (U.S. Government work) — credit line to be confirmed on the NOAA image page",
+     "use": "guidance only"
+    }
+   ],
+   "assets": [
+    "font-inter",
+    "font-fraunces",
+    "tts-kokoro",
+    "renderer-threejs",
+    "aligner-whisper",
+    "sfx-synth",
+    "brand-endcard",
+    "visuals-mariana"
+   ],
+   "transition": "cut 0 → b5"
+  },
+  {
+   "id": "b5",
+   "beat": "STORY",
+   "start": 27.292,
+   "end": 33.333,
+   "vo": [
+    27.442,
+    32.782
+   ],
+   "narration": "near-freezing, pitch-dark, under pressure more than a thousand times the air at sea level.",
+   "hero": "The pressure gauge on a descending research lander",
+   "on_screen_text": [
+    {
+     "text": "> 1,000× sea-level pressure",
+     "from": 29.52,
+     "to": 33.33,
+     "replaces_caption": "under pressure more than a thousand times the air at sea level."
+    }
+   ],
+   "captions_shown": "near-freezing, pitch-dark,",
+   "camera": "Catches up with a descending lander in total darkness and slides past its gauge in a close three-quarter view.",
+   "event": "The sonar relief is gone: only the lander's lamps light the water. The gauge needle sweeps once to its high end on 'thousand'.",
+   "claims": [
+    "c_conditions"
+   ],
+   "references": [
+    {
+     "id": "ref_03",
+     "title": "ROV Deep Discoverer in the Mariana Trench at ~6,000 m (2016 Deepwater Exploration of the Marianas)",
+     "credit": "NOAA Office of Ocean Exploration and Research (Ocean Exploration 'What is the deep ocean?' page)",
+     "license": "Public domain (U.S. Government work) — credit line to be confirmed on the NOAA image page",
+     "use": "guidance only"
+    }
+   ],
+   "assets": [
+    "font-inter",
+    "font-fraunces",
+    "tts-kokoro",
+    "renderer-threejs",
+    "aligner-whisper",
+    "sfx-synth",
+    "brand-endcard",
+    "visuals-mariana"
+   ],
+   "transition": "cut 0 → b6"
+  },
+  {
+   "id": "b6",
+   "beat": "STORY",
+   "start": 33.333,
+   "end": 39.875,
+   "vo": [
+    33.533,
+    39.153
+   ],
+   "narration": "And still, life persists. Small animals inhabit these trenches, surviving in the darkness.",
+   "hero": "Pale hadal amphipods drifting into the lander's light",
+   "on_screen_text": [],
+   "captions_shown": "And still, life persists. Small animals inhabit these trenches, surviving in the darkness.",
+   "camera": "Settles beside the lander's bait bag and slowly circles it.",
+   "event": "From 'life' onward, small pale amphipods swim in from the dark toward the bait. No bioluminescence; they are seen only where the lamp reaches.",
+   "claims": [
+    "c_life"
+   ],
+   "references": [
+    {
+     "id": "ref_04",
+     "title": "Hirondellea gigas (hadal amphipod)",
+     "credit": "Daiju Azuma",
+     "license": "CC BY-SA 2.5",
+     "use": "guidance only"
+    }
+   ],
+   "assets": [
+    "font-inter",
+    "font-fraunces",
+    "tts-kokoro",
+    "renderer-threejs",
+    "aligner-whisper",
+    "sfx-synth",
+    "brand-endcard",
+    "visuals-mariana"
+   ],
+   "transition": "cut 0 → b7"
+  },
+  {
+   "id": "b7",
+   "beat": "STORY",
+   "start": 39.875,
+   "end": 48.583,
+   "vo": [
+    40.075,
+    47.815
+   ],
+   "narration": "The deepest fish ever filmed was found higher up, at eight thousand three hundred thirty-six metres, in another Pacific trench.",
+   "hero": "One snailfish gliding through the light",
+   "on_screen_text": [
+    {
+     "text": "8,336 m Izu-Ogasawara Trench",
+     "from": 43.7,
+     "to": 48.58,
+     "replaces_caption": "eight thousand three hundred thirty-six metres, in another Pacific trench."
+    }
+   ],
+   "captions_shown": "The deepest fish ever filmed was found higher up, at",
+   "camera": "Holds level while one translucent snailfish crosses the lamp light, then tilts down as the lander continues its descent.",
+   "event": "The fish enters on 'fish' and glides past in slow tail beats; it leaves the light before the line ends, staying well above the trench floor.",
+   "claims": [
+    "c_fish"
+   ],
+   "references": [
+    {
+     "id": "ref_05",
+     "title": "Pseudoliparis swirei, Mariana snailfish (Gerringer et al. 2017, Zootaxa 4358)",
+     "credit": "Gerringer M.E., Linley T.D., Jamieson A.J., Goetze E., Drazen J.C. (2017)",
+     "license": "CC BY 3.0",
+     "use": "guidance only"
+    }
+   ],
+   "assets": [
+    "font-inter",
+    "font-fraunces",
+    "tts-kokoro",
+    "renderer-threejs",
+    "aligner-whisper",
+    "sfx-synth",
+    "brand-endcard",
+    "visuals-mariana"
+   ],
+   "transition": "cut 0 → b8"
+  },
+  {
+   "id": "b8",
+   "beat": "PAYOFF",
+   "start": 48.583,
+   "end": 56.917,
+   "vo": [
+    48.783,
+    55.583
+   ],
+   "narration": "At the bottom, our maps are still incomplete. Earth's deepest frontier is not another planet. It's beneath us.",
+   "hero": "The dark, vast floor of Challenger Deep",
+   "on_screen_text": [
+    {
+     "text": "STILL BEING EXPLORED",
+     "from": 55.0,
+     "to": 56.92,
+     "replaces_caption": null
+    }
+   ],
+   "captions_shown": "At the bottom, our maps are still incomplete. Earth's deepest frontier is not another planet. It's beneath us.",
+   "camera": "Follows the lander down to the floor; after touchdown it slowly pulls back and rises, so the lander's pool of light becomes a small island in the dark. (Change from the draft plan's 'forward drift' — pending owner approval.)",
+   "event": "The floor emerges from black on 'bottom'; the lander settles in its own light; the darkness around it grows as the camera withdraws.",
+   "claims": [
+    "c_maps"
+   ],
+   "references": [
+    {
+     "id": "ref_06",
+     "title": "Challenger Deep floor with a stalked anemone, seen from DSV Limiting Factor (2022)",
+     "credit": "Victor Vescovo (Wikimedia user Vlvescovo)",
+     "license": "CC0 1.0",
+     "use": "guidance only"
+    }
+   ],
+   "assets": [
+    "font-inter",
+    "font-fraunces",
+    "tts-kokoro",
+    "renderer-threejs",
+    "aligner-whisper",
+    "sfx-synth",
+    "brand-endcard",
+    "visuals-mariana"
+   ],
+   "transition": "fadeblack 0.6 → end"
+  },
+  {
+   "id": "end",
+   "beat": "END",
+   "start": 56.917,
+   "end": 59.5,
+   "vo": null,
+   "narration": "",
+   "hero": "",
+   "on_screen_text": [],
+   "captions_shown": "",
+   "camera": "",
+   "event": "",
+   "claims": [],
+   "references": [],
+   "assets": [],
+   "transition": "none"
+  }
+ ]
+}

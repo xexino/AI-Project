@@ -14,7 +14,8 @@ from pathlib import Path
 
 from ..pipeline import Context
 from ..util import EngineError, atomic_write_json
-from .captions import chunk_words, chunk_windows
+from ..editorial_rules import voiced_indices
+from .captions import caption_chunks, chunk_windows
 
 
 def _sh(*c: str) -> subprocess.CompletedProcess:
@@ -113,7 +114,7 @@ def structural_checks(ctx: Context, tl: dict) -> list[dict]:
     ws = tl["words"]
     order_bad = [w["word"] for a, w in zip(ws, ws[1:]) if w["start"] < a["start"] - 1e-6]
     outside = [w["word"] for w in ws if w["end"] > tl["duration"] or w["start"] < 0]
-    chunks = chunk_words(ws); wins = chunk_windows(chunks)
+    chunks = caption_chunks(tl, voiced_indices(tl, d.get("overlays", []))); wins = chunk_windows(chunks)   # what is burned in
     short = [" ".join(x["word"] for x in c) for c, (a, b) in zip(chunks, wins) if b - a < q.get("min_caption_s", 0.08)]
     overlap = [i for i in range(len(wins) - 1) if wins[i][1] > wins[i + 1][0] + 1e-6]
     check("caption timing monotonic, inside the video, no overlaps", not order_bad and not outside and not overlap,

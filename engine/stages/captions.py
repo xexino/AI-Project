@@ -5,13 +5,17 @@ Overlay types (project.json "overlays"):
   counter {"scene", "from", "to", "span_fraction"}          rolling number (e.g. years) during a scene
   big     {"text", "at", "until", "y", "sub"?}              large display number/word; optional smaller sub-line
   bigsub  {"text", "at", "until", "y"}                      the smaller line on its own anchor
+Optional on big/bigsub: "size" (px at 1920 tall). Optional on any overlay: "voices": {"scene", "text"} — the overlay
+is the on-screen form of that spoken phrase, so the burned-in captions hide those words (each phrase shown once).
+The SRT/VTT sidecars always keep the full narration (accessibility).
 """
 from __future__ import annotations
 
 import json
 
+from ..editorial_rules import check_phrase_once, voiced_indices
 from ..pipeline import Context
-from ..util import atomic_write_text
+from ..util import EngineError, atomic_write_text
 from .audio import resolve_at
 
 
@@ -53,6 +57,20 @@ def chunk_windows(chunks: list[list[dict]]) -> list[tuple[float, float]]:
     return out
 
 
+def caption_chunks(tl: dict, hidden: set[int] | None = None) -> list[list[dict]]:
+    """Caption chunks of the burned-in captions: narration words minus those an overlay shows instead."""
+    if not hidden:
+        return chunk_words(tl["words"])
+    chunks, run = [], []
+    for i, w in enumerate(tl["words"]):
+        if i in hidden:
+            if run:
+                chunks += chunk_words(run); run = []
+        else:
+            run.append(w)
+    return chunks + (chunk_words(run) if run else [])
+
+
 def build_ass(tl: dict, brand: dict, overlays: list[dict], fmt: dict) -> str:
     cs = brand.get("caption_style", {})
     pal = brand.get("palette", {})
@@ -82,7 +100,7 @@ Style: BigSub,OL Caption,{sz(52)},{SIGNAL},{SIGNAL},&H00000000,&H00000000,0,0,0,
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
     ev = []
-    chunks = chunk_words(tl["words"])
+    chunks = caption_chunks(tl, voiced_indices(tl, overlays))
     for (cs_, ce), ch in zip(chunk_windows(chunks), chunks):
         for wi, w in enumerate(ch):
             a = w["start"]; b = ch[wi + 1]["start"] if wi + 1 < len(ch) else ce
@@ -107,9 +125,11 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             a = resolve_at(ov["at"], tl); b = resolve_at(ov["until"], tl)
             y = round(ov.get("y", int(1920 * 0.46) + 210) * scale)
             style = "Big" if typ == "big" else "BigSub"
-            ev.append(f"Dialogue: 3,{ass_time(a)},{ass_time(b)},{style},,0,0,0,,{{\\an5\\pos({W // 2},{y})\\fad(250,150)}}{ov['text']}")
+            fs = f"\\fs{sz(ov['size'])}" if ov.get("size") else ""
+            ev.append(f"Dialogue: 3,{ass_time(a)},{ass_time(b)},{style},,0,0,0,,{{\\an5\\pos({W // 2},{y}){fs}\\fad(250,150)}}{ov['text']}")
             if typ == "big" and ov.get("sub"):
-                ev.append(f"Dialogue: 3,{ass_time(a + 0.3)},{ass_time(b)},BigSub,,0,0,0,,{{\\an5\\pos({W // 2},{y + sz(120)})\\fad(250,150)}}{ov['sub']}")
+                dy = sz(max(120, round(ov["size"] * 0.85))) if ov.get("size") else sz(120)
+                ev.append(f"Dialogue: 3,{ass_time(a + 0.3)},{ass_time(b)},BigSub,,0,0,0,,{{\\an5\\pos({W // 2},{y + dy})\\fad(250,150)}}{ov['sub']}")
         else:
             raise ValueError(f"unknown overlay type '{typ}'")
     return head + "\n".join(ev) + "\n"
@@ -128,6 +148,10 @@ def build_srt_vtt(tl: dict) -> tuple[str, str]:
 def captions(ctx: Context) -> dict:
     tl = json.loads(ctx.work("timeline.json").read_text())
     d = ctx.project.data
+    if (d.get("editorial_rules") or {}).get("phrase_once"):
+        problems = check_phrase_once(d, tl)
+        if problems:
+            raise EngineError("on-screen text breaks the project's editorial rules:\n  - " + "\n  - ".join(problems))
     ass = ctx.work("captions", "captions.ass")
     atomic_write_text(ass, build_ass(tl, d["brand"], d.get("overlays", []), d["format"]))
     srt_txt, vtt_txt = build_srt_vtt(tl)
