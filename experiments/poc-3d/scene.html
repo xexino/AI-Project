@@ -1,0 +1,226 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:#000;overflow:hidden}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js"}}</script>
+</head><body>
+<script type="module">
+// ODDLIGHT proof shot — S1 "under the ice". Deterministic: window.renderFrame(i) draws frame i.
+import * as THREE from 'three';
+
+const W = 1080, H = 1920, FPS = 24;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.body.appendChild(renderer.domElement);
+
+const INK = new THREE.Color('#05141a');
+const SODIUM = new THREE.Color('#ff8a1f');
+const BEAM = new THREE.Color('#ffa850');
+const scene = new THREE.Scene();
+scene.background = INK;
+scene.fog = new THREE.FogExp2(INK, 0.055);
+
+const camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 200);
+
+// --- seeded random so every render is identical
+let seed = 7;
+const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+// --- lights
+scene.add(new THREE.HemisphereLight('#2a5a66', '#020608', 0.35));
+const spot = new THREE.SpotLight(SODIUM, 900, 40, 0.22, 0.6, 1.6);
+spot.position.set(0, 9, 0);
+spot.target.position.set(0, -6, 0);
+scene.add(spot, spot.target);
+const rim = new THREE.DirectionalLight('#3f8f9a', 0.25);
+rim.position.set(-4, 6, -6);
+scene.add(rim);
+// warm bounce lighting the ice underside around the hole
+const bounce = new THREE.PointLight('#ff9a40', 60, 14, 1.4);
+bounce.position.set(0, 7.6, 0);
+scene.add(bounce);
+
+// --- ice ceiling with a round hole
+const iceShape = new THREE.Shape();
+iceShape.moveTo(-60, -60); iceShape.lineTo(60, -60); iceShape.lineTo(60, 60); iceShape.lineTo(-60, 60);
+const hole = new THREE.Path(); hole.absarc(0, 0, 1.35, 0, Math.PI * 2, true);
+iceShape.holes.push(hole);
+const iceGeo = new THREE.ShapeGeometry(iceShape, 64);
+// subdivide-ish roughness via a second displaced plane
+const ice = new THREE.Mesh(iceGeo, new THREE.MeshStandardMaterial({
+  color: '#0d2a33', roughness: 0.55, metalness: 0.0, side: THREE.DoubleSide }));
+ice.rotation.x = Math.PI / 2; ice.position.y = 9;
+scene.add(ice);
+// ice underside texture: many faint chunks
+const chunkMat = new THREE.MeshStandardMaterial({ color: '#12343d', roughness: 0.7 });
+for (let i = 0; i < 260; i++) {
+  const s = 0.4 + rnd() * 1.6;
+  const r = 1.7 + s * 1.2 + rnd() * 26, a = rnd() * Math.PI * 2;
+  const m = new THREE.Mesh(new THREE.IcosahedronGeometry(s, 1), chunkMat);
+  m.position.set(Math.cos(a) * r, 9 - s * 0.35, Math.sin(a) * r);
+  m.scale.y = 0.35; m.rotation.set(rnd() * 3, rnd() * 3, rnd() * 3);
+  scene.add(m);
+}
+// bright sky disc above the hole
+const sky = new THREE.Mesh(new THREE.CircleGeometry(1.6, 64),
+  new THREE.MeshBasicMaterial({ color: new THREE.Color('#ffc27a').multiplyScalar(2.2), fog: false }));
+sky.rotation.x = Math.PI / 2; sky.position.y = 9.3;
+scene.add(sky);
+
+// --- volumetric light shaft (additive cone, soft falloff)
+const shaftMat = new THREE.ShaderMaterial({
+  transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide,
+  uniforms: { uTime: { value: 0 }, uColor: { value: BEAM.clone() }, uBoost: { value: 1 } },
+  vertexShader: `varying vec2 vUv; varying vec3 vN; varying vec3 vV;
+    void main(){ vUv=uv; vec4 mv=modelViewMatrix*vec4(position,1.); vN=normalize(normalMatrix*normal); vV=normalize(-mv.xyz); gl_Position=projectionMatrix*mv; }`,
+  fragmentShader: `varying vec2 vUv; varying vec3 vN; varying vec3 vV; uniform float uTime; uniform vec3 uColor; uniform float uBoost;
+    void main(){
+      float edge = pow(abs(dot(vN, vV)), 1.6);              // soft edges
+      float len  = smoothstep(0.0, 0.95, vUv.y);             // fade toward the bottom
+      float ripple = 0.85 + 0.15*sin(vUv.x*40.0 + uTime*1.3) * sin(vUv.y*9.0 - uTime*0.7);
+      float glow = mix(0.55, 1.0, vUv.y);
+      gl_FragColor = vec4(uColor * edge * len * ripple * glow * 0.24 * uBoost, 1.0);
+    }`
+});
+const shaft = new THREE.Mesh(new THREE.CylinderGeometry(1.3, 4.2, 18, 96, 1, true), shaftMat);
+shaft.position.y = 0; // spans y 9 .. -9
+scene.add(shaft);
+const shaftInner = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 2.2, 18, 96, 1, true), shaftMat.clone());
+shaftInner.material.uniforms.uBoost.value = 0.8;
+scene.add(shaftInner);
+
+// --- marine snow
+const N = 4500, pos = new Float32Array(N * 3), base = new Float32Array(N * 3), col = new Float32Array(N * 3);
+for (let i = 0; i < N; i++) {
+  base[i*3] = (rnd() - 0.5) * 30; base[i*3+1] = (rnd() - 0.5) * 20; base[i*3+2] = (rnd() - 0.5) * 24;
+}
+const snowGeo = new THREE.BufferGeometry();
+snowGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+snowGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+const snow = new THREE.Points(snowGeo, new THREE.PointsMaterial({
+  size: 0.06, map: (() => { const c = document.createElement('canvas'); c.width = c.height = 64; const g = c.getContext('2d'); const gr = g.createRadialGradient(32,32,0,32,32,32); gr.addColorStop(0,'rgba(255,255,255,1)'); gr.addColorStop(0.35,'rgba(255,255,255,0.6)'); gr.addColorStop(1,'rgba(255,255,255,0)'); g.fillStyle = gr; g.fillRect(0,0,64,64); return new THREE.CanvasTexture(c); })(), vertexColors: true, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false }));
+scene.add(snow);
+
+// --- shark: lathe body (length along +x), procedurally swum
+const L = 6.0;
+const prof = [];
+for (let i = 0; i <= 60; i++) {
+  const u = i / 60;                         // 0 = tail end, 1 = snout
+  let r = 0.78 * Math.pow(u, 0.62) * Math.pow(1 - u, 0.2) * 1.55;
+  if (u > 0.97) r *= (1 - u) / 0.03 * 0.6 + 0.4 * ((1 - u) / 0.03);
+  prof.push(new THREE.Vector2(Math.max(r, 0.002), u * L));
+}
+const bodyGeo = new THREE.LatheGeometry(prof, 72);
+bodyGeo.rotateZ(-Math.PI / 2);              // lathe y-axis -> +x
+bodyGeo.translate(-L / 2, 0, 0);
+bodyGeo.scale(1, 0.9, 1);                  // slightly flattened, blunt
+// mottled skin via vertex colours
+const bc = new Float32Array(bodyGeo.attributes.position.count * 3);
+const bp = bodyGeo.attributes.position;
+for (let i = 0; i < bp.count; i++) {
+  const x = bp.getX(i), y = bp.getY(i), z = bp.getZ(i);
+  const n = 0.5 + 0.5 * Math.sin(x * 7.1 + z * 3.3) * Math.sin(z * 6.7 - y * 4.1) * Math.cos(x * 2.3 + y * 9.0);
+  const belly = THREE.MathUtils.smoothstep(-y, -0.1, 0.35);
+  const c = new THREE.Color('#3a332c').lerp(new THREE.Color('#5a5046'), n * 0.6).lerp(new THREE.Color('#6b655c'), belly * 0.5);
+  bc[i*3] = c.r; bc[i*3+1] = c.g; bc[i*3+2] = c.b;
+}
+bodyGeo.setAttribute('color', new THREE.BufferAttribute(bc, 3));
+const restBody = bodyGeo.attributes.position.array.slice();
+const skin = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.78, metalness: 0.05 });
+const shark = new THREE.Group();
+const body = new THREE.Mesh(bodyGeo, skin);
+shark.add(body);
+
+function finGeo(points, thick = 0.03) {
+  const s = new THREE.Shape(); s.moveTo(points[0][0], points[0][1]);
+  for (const p of points.slice(1)) s.lineTo(p[0], p[1]);
+  const g = new THREE.ExtrudeGeometry(s, { depth: thick, bevelEnabled: true, bevelThickness: 0.015, bevelSize: 0.02, bevelSegments: 2 });
+  g.translate(0, 0, -thick / 2);
+  return g;
+}
+const finMat = new THREE.MeshStandardMaterial({ color: '#3b342d', roughness: 0.8 });
+// fins are attached to body stations (x position) so they follow the swim wave
+const fins = [];
+function addFin(geo, station, offset, rot, mirror = false) {
+  const m = new THREE.Mesh(geo, finMat); m.rotation.set(...rot);
+  if (mirror) m.scale.z = -1;
+  shark.add(m); fins.push({ m, station, offset: new THREE.Vector3(...offset) });
+}
+const dorsal = finGeo([[0,0],[0.55,0],[0.18,0.42],[0.05,0.38]]);
+addFin(dorsal, -0.25, [0, 0.42, 0], [0, 0, 0]);
+addFin(finGeo([[0,0],[0.45,0],[0.15,0.32],[0.04,0.3]]), -1.25, [0, 0.27, 0], [0, 0, 0]);
+const pect = finGeo([[0,0],[0.75,0],[0.05,-0.95],[-0.1,-0.75]]);
+addFin(pect, 1.35, [0, -0.28, 0.42], [-1.15, 0.2, 0]);
+addFin(pect, 1.35, [0, -0.28, -0.42], [1.15, -0.2, 0]);
+// heterocercal tail (upper lobe longer)
+const tail = finGeo([[0,0],[-0.9,0.95],[-0.75,0.82],[-0.35,0.12],[-0.55,-0.55],[-0.4,-0.5],[0,-0.05]], 0.035);
+tail.scale(1.5, 1.5, 1);
+addFin(tail, -2.9, [0, 0.02, 0], [0, 0, 0]);
+// small pale eyes
+const eyeMat = new THREE.MeshStandardMaterial({ color: '#9aa7a3', roughness: 0.2, emissive: '#1a2224' });
+for (const z of [0.3, -0.3]) {
+  const e = new THREE.Mesh(new THREE.SphereGeometry(0.045, 16, 12), eyeMat);
+  e.userData.z = z; shark.add(e); fins.push({ m: e, station: 2.55, offset: new THREE.Vector3(0, 0.1, z) });
+}
+scene.add(shark);
+
+// swim wave: lateral (z) displacement grows toward the tail
+const wave = (x, t) => {
+  const k = (L / 2 - x) / L;                       // 0 at snout, 1 at tail
+  return 0.13 * Math.pow(k, 1.8) * Math.sin(2.2 * x - t * 2.1);
+};
+function swim(t) {
+  const p = body.geometry.attributes.position;
+  for (let i = 0; i < p.count; i++) {
+    const x = restBody[i*3];
+    p.setZ(i, restBody[i*3+2] + wave(x, t));
+  }
+  p.needsUpdate = true; body.geometry.computeVertexNormals();
+  for (const f of fins) {
+    const z = wave(f.station, t);
+    const slope = (wave(f.station + 0.05, t) - z) / 0.05;
+    f.m.position.set(f.station + f.offset.x, f.offset.y, f.offset.z + z);
+    if (f.station < -2) f.m.rotation.y = -Math.atan(slope) * 1.3; // tail follows the wave
+  }
+}
+
+// --- shot timing (5 s @ 24 fps)
+const ease = (a) => a * a * (3 - 2 * a);
+window.FRAMES = 6 * FPS;
+window.renderFrame = (i) => {
+  const t = i / FPS;
+  // shark glides left -> right into the beam, slightly below it
+  shark.position.set(-4.0 + t * 1.05, 1.0 + Math.sin(t * 0.6) * 0.08, 0.9);
+  shark.rotation.set(-0.14, 0.08, -0.04);
+  shark.scale.setScalar(1.05);
+  swim(t);
+  // camera: low angle looking up, imperceptible push-in
+  const pe = ease(Math.min(t / 6, 1));
+  camera.position.set(0.35, -6.4 + pe * 0.25, 10.5 - pe * 0.55);
+  camera.lookAt(0, 1.6, 0);
+  // light breathes a little, brightens as the shark crosses the beam
+  const cross = Math.exp(-Math.pow(shark.position.x, 2) / 4);
+  spot.intensity = 900 + 250 * cross;
+  for (const s of [shaft, shaftInner]) s.material.uniforms.uTime.value = t;
+  shaftMat.uniforms.uBoost.value = 1.0 + 0.15 * Math.sin(t * 0.9);
+  // marine snow drifts down, warm inside the beam, cold outside
+  for (let j = 0; j < N; j++) {
+    const bx = base[j*3], bz = base[j*3+2];
+    const x = bx + Math.sin(t * 0.3 + j) * 0.08;
+    let y = base[j*3+1] - t * 0.18; y = ((y + 10) % 20 + 20) % 20 - 10;
+    pos[j*3] = x; pos[j*3+1] = y; pos[j*3+2] = bz;
+    const rad = Math.hypot(x, bz), beamR = 1.3 + (9 - y) / 18 * 2.9;
+    const inBeam = THREE.MathUtils.smoothstep(beamR - rad, -0.4, 0.6);
+    const c = new THREE.Color('#1d3e46').lerp(new THREE.Color('#ffb36b'), inBeam);
+    col[j*3] = c.r; col[j*3+1] = c.g; col[j*3+2] = c.b;
+  }
+  snowGeo.attributes.position.needsUpdate = true; snowGeo.attributes.color.needsUpdate = true;
+  renderer.render(scene, camera);
+  return renderer.domElement.toDataURL('image/png');
+};
+window.READY = true;
+</script>
+</body></html>

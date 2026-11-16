@@ -1,0 +1,124 @@
+{
+ "id": "001-greenland-shark",
+ "title": "This Shark Was Born Before the Steam Engine",
+ "brand": "oddlight",
+ "voice": {
+  "engine": "kokoro-v1.0",
+  "voice": "bm_george",
+  "lang": "en-gb",
+  "speed": 1.0
+ },
+ "status": "APPROVAL_REQUIRED",
+ "scenes": [
+  {
+   "id": "s1",
+   "beat": "HOOK",
+   "text": "There's a shark in the Arctic... that is probably older than the United States.",
+   "lead": 0.5,
+   "tail": 0.35,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.5
+   }
+  },
+  {
+   "id": "s2",
+   "beat": "SETUP",
+   "text": "It's called the Greenland shark. It lives in water close to freezing...",
+   "lead": 0.35,
+   "tail": 0.15,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.5
+   }
+  },
+  {
+   "id": "s3",
+   "beat": "SETUP",
+   "text": "and moves slower than you walk.",
+   "lead": 0.35,
+   "tail": 0.55,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.6
+   }
+  },
+  {
+   "id": "s4",
+   "beat": "STORY",
+   "text": "For decades, no one could tell its age. Sharks don't have the bones scientists usually count.",
+   "lead": 0.4,
+   "tail": 0.3,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.5
+   }
+  },
+  {
+   "id": "s5",
+   "beat": "STORY",
+   "text": "So in twenty sixteen, researchers looked into its eyes.",
+   "lead": 0.35,
+   "tail": 0.3,
+   "transition_out": {
+    "type": "zoomin",
+    "d": 0.6
+   }
+  },
+  {
+   "id": "s6",
+   "beat": "STORY",
+   "text": "The core of the eye lens forms before birth, and never changes. Carbon dating it gave an answer.",
+   "lead": 0.4,
+   "tail": 0.35,
+   "transition_out": {
+    "type": "fadewhite",
+    "d": 0.5
+   }
+  },
+  {
+   "id": "s7",
+   "beat": "PAYOFF",
+   "text": "The largest shark they studied was around four hundred years old. Give or take a century.",
+   "lead": 0.5,
+   "tail": 0.8,
+   "transition_out": {
+    "type": "cut",
+    "d": 0.0
+   }
+  },
+  {
+   "id": "s8",
+   "beat": "PAYOFF",
+   "text": "And it doesn't become an adult until it's about one hundred and fifty.",
+   "lead": 0.35,
+   "tail": 0.4,
+   "transition_out": {
+    "type": "fadeblack",
+    "d": 0.6
+   }
+  },
+  {
+   "id": "s9",
+   "beat": "EXIT",
+   "text": "So the oldest ones down there were young before the steam engine... and they're still in no hurry.",
+   "lead": 0.45,
+   "tail": 1.4,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.6
+   }
+  },
+  {
+   "id": "end",
+   "beat": "END",
+   "text": "",
+   "lead": 0,
+   "tail": 2.6,
+   "transition_out": null
+  }
+ ],
+ "sources": [
+  "Nielsen, J. et al. (2016) Eye lens radiocarbon reveals centuries of longevity in the Greenland shark. Science 353(6300):702-704"
+ ]
+}
