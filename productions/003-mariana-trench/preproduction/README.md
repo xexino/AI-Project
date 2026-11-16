@@ -1,6 +1,46 @@
-# 003-mariana-trench: pre-production package (issue #97)
+# 003-mariana-trench: pre-production package and final render (issue #97)
 
-**Phase: PRE-PRODUCTION. Final render NOT authorised.** No final MP4 has been rendered. Nothing was published, merged or paid for.
+**Status: DELIVERY_READY (technical QC 25/25).** On 2026-11-16 the owner approved the voiceover, timings, beat table and references, and asked to push realism further and render. Nothing was published or merged, and nothing was paid for.
+
+## Final render (2026-11-16)
+
+| Item | Result |
+|---|---|
+| Output | `delivery/oddlight_003_mariana_trench_v1.mp4` (= `delivery/final_video.mp4`, git-ignored): 1080×1920, 24 fps, H.264 High, AAC 48 kHz, 59.50 s, 16.4 MB |
+| QC | 25/25 technical checks pass: −13.9 LUFS, −1.4 dBTP, the video stream covers the full 59.5 s timeline, no black segments, no frozen video, captions safe-zone and readability, end card. The editorial record is in `delivery/qc_report.json` |
+| Render time (last full pass, 4 vCPU, no GPU, `--jobs 2`) | visuals 343 s for 1,449 frames (per beat: b1 96 s, b2 95 s, b3 100 s, b4 41 s, b5 57 s, b6 75 s, b7 54 s, b8 94 s, end 7 s), assembly 192 s, QC 12 s: **≈ 9 min 12 s end to end**. A title-position fix afterwards re-ran only captions, assembly, QC and package (3 min 24 s) |
+| Cost | €0.00 (cost ledger in `work/production_report.json`) |
+| Manual work | engineer-written scene code and art direction (this repo); no manual frame editing |
+
+### Failures on the way (honest record)
+
+1. **First full render: the video track stopped after 10.7 s** of the 59.5 s runtime. Back-to-back zero-length cuts each lost a frame, and xfade silently dropped everything after the second one. The old QC duration check passed because it measured the container, which the audio track kept at 59.5 s. Fixes:
+   - assembly now refuses such a graph;
+   - a new QC check measures the **video stream** length;
+   - this production uses one-frame crossfades between beats.
+2. **Second full render: QC failed** on near-black stretches (b4 up-look, b5 approach, b7 exit) and a 1.8 s frozen hold on the gauge. Fixes:
+   - deep water keeps a faint tone, and the marine snow and lamp backscatter are brighter;
+   - the lander approach is closer and continuous with b4, and the beam fades as the camera tilts away;
+   - the gauge shot has a slow drift. QC thresholds were not changed.
+3. **Legibility:** the "> 1,000×" title sat over the white gauge dial and was moved above it.
+
+### Subjective assessment
+
+The video works as one continuous, readable descent, with one hero per line. The realism pass improved several elements:
+- sea spectrum and sky reflection;
+- sun shafts;
+- cyan-green backscatter;
+- braced lander with a netted bait bag;
+- translucent snailfish with fins;
+- pale silt floor.
+
+It is still **stylised procedural 3D, not photoreal**. Compared with the reference photos:
+- the bathymetric section is deliberately graphic;
+- the amphipods read as small pale grubs at this size;
+- the snailfish is simplified;
+- there is no volumetric scattering or depth of field.
+
+
 
 | Item | Where |
 |---|---|
