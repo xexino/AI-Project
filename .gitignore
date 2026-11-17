@@ -36,3 +36,5 @@ productions/**/delivery/
 productions/**/.delivery.tmp/
 productions/**/comparison/videos/
 productions/**/experiments/*/images/
+productions/006-*/stills/
+productions/006-*/look_test*.mp4
