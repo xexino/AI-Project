@@ -1,0 +1,416 @@
+{
+ "schema_version": 1,
+ "id": "004-pigeon-ceo",
+ "customer_id": "oddlight",
+ "topic": "Comedy short: a pigeon becomes CEO",
+ "title": "The Pigeon CEO \u2014 First Day on the Job",
+ "target_audience": "general, short-form comedy",
+ "format": {
+  "aspect_ratio": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 24,
+  "target_duration_s": [
+   24,
+   31
+  ]
+ },
+ "narration": {
+  "provider": "kokoro",
+  "voice": "am_onyx",
+  "lang": "en-us",
+  "speed": 0.92,
+  "aligner": "whisper"
+ },
+ "visual": {
+  "renderer": "threejs",
+  "style": "Colourful 3D cartoon, procedural characters, squash and stretch",
+  "grade": {
+   "grain": 2,
+   "vignette": "PI/5",
+   "contrast": 1.04,
+   "saturation": 1.08,
+   "bloom": 0.15
+  }
+ },
+ "scenes": [
+  {
+   "id": "s1",
+   "beat": "COMEDY",
+   "text": "Good morning, peasants.",
+   "lead": 1.3,
+   "tail": 0.7,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/office.js",
+   "uses_timeline": true,
+   "params": {
+    "shot": "s1"
+   },
+   "non_factual": true
+  },
+  {
+   "id": "s2",
+   "beat": "COMEDY",
+   "text": "I am your new C. E. O.",
+   "lead": 0.3,
+   "tail": 1.1,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/office.js",
+   "uses_timeline": true,
+   "params": {
+    "shot": "s2"
+   },
+   "non_factual": true
+  },
+  {
+   "id": "s3",
+   "beat": "COMEDY",
+   "text": "First board meeting. Our new strategy:",
+   "lead": 0.2,
+   "tail": 0.3,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/office.js",
+   "uses_timeline": true,
+   "params": {
+    "shot": "s3"
+   },
+   "non_factual": true
+  },
+  {
+   "id": "s4",
+   "beat": "COMEDY",
+   "text": "We steal... everyone's lunch.",
+   "lead": 0.2,
+   "tail": 0.9,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/office.js",
+   "uses_timeline": true,
+   "params": {
+    "shot": "s4"
+   },
+   "non_factual": true
+  },
+  {
+   "id": "s5",
+   "beat": "COMEDY",
+   "text": "MINE!",
+   "lead": 0.2,
+   "tail": 4.6,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/office.js",
+   "uses_timeline": true,
+   "params": {
+    "shot": "s5"
+   },
+   "non_factual": true
+  },
+  {
+   "id": "s6",
+   "beat": "COMEDY",
+   "text": "Quarterly profits are up. Bread expenses are down.",
+   "lead": 1.0,
+   "tail": 1.4,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.5
+   },
+   "module": "scenes/office.js",
+   "uses_timeline": true,
+   "params": {
+    "shot": "s6"
+   },
+   "non_factual": true
+  },
+  {
+   "id": "end",
+   "beat": "END",
+   "text": "",
+   "lead": 0,
+   "tail": 2.4,
+   "transition_out": null,
+   "module": "builtin:endcard",
+   "non_factual": true,
+   "params": {
+    "footer": [
+     "An ODDLIGHT comedy test",
+     "All characters are fictional. No sandwiches were harmed."
+    ]
+   }
+  }
+ ],
+ "overlays": [
+  {
+   "type": "big",
+   "text": "THE PIGEON CEO",
+   "sub": "first day on the job",
+   "at": {
+    "t": 0.35
+   },
+   "until": {
+    "t": 2.6
+   },
+   "size": 112,
+   "y": 420
+  },
+  {
+   "type": "big",
+   "text": "PROFITS: UP",
+   "sub": "bread expenses: DOWN",
+   "voices": {
+    "scene": "s6",
+    "text": "Quarterly profits are up. Bread expenses are down."
+   },
+   "at": {
+    "word": "quarterly",
+    "scene": "s6"
+   },
+   "until": {
+    "scene_start": "end"
+   },
+   "size": 120,
+   "y": 400
+  }
+ ],
+ "sound": {
+  "bed": null,
+  "pad": null,
+  "seed": 5,
+  "cues": [
+   {
+    "preset": "boom",
+    "at": {
+     "t": 0.25
+    },
+    "level": 0.9
+   },
+   {
+    "preset": "crack",
+    "at": {
+     "t": 0.25
+    },
+    "level": 0.7
+   },
+   {
+    "preset": "bell_hi",
+    "at": {
+     "scene_start": "s2",
+     "offset": 1.0
+    }
+   },
+   {
+    "preset": "whoosh",
+    "at": {
+     "scene_start": "s3",
+     "offset": 0.1
+    }
+   },
+   {
+    "preset": "thump",
+    "at": {
+     "scene_start": "s3",
+     "offset": 0.75
+    }
+   },
+   {
+    "preset": "boom",
+    "at": {
+     "word": "lunch",
+     "scene": "s4"
+    }
+   },
+   {
+    "preset": "crack",
+    "at": {
+     "word": "lunch",
+     "scene": "s4"
+    },
+    "level": 0.8
+   },
+   {
+    "preset": "rise",
+    "at": {
+     "scene_start": "s5",
+     "offset": 0.2
+    },
+    "d": 2.0
+   },
+   {
+    "preset": "whoosh",
+    "at": {
+     "scene_start": "s5",
+     "offset": 0.6
+    }
+   },
+   {
+    "preset": "crack",
+    "at": {
+     "scene_start": "s5",
+     "offset": 2.6
+    }
+   },
+   {
+    "preset": "pulse",
+    "at": {
+     "scene_start": "s5",
+     "offset": 2.7
+    }
+   },
+   {
+    "preset": "pulse",
+    "at": {
+     "scene_start": "s5",
+     "offset": 3.3
+    }
+   },
+   {
+    "preset": "pulse",
+    "at": {
+     "scene_start": "s5",
+     "offset": 3.9
+    }
+   },
+   {
+    "preset": "wind_gust",
+    "at": {
+     "scene_start": "s5",
+     "offset": 2.75
+    },
+    "d": 3.5,
+    "level": 0.9
+   },
+   {
+    "preset": "bell",
+    "at": {
+     "word": "down",
+     "scene": "s6",
+     "offset": 0.3
+    }
+   }
+  ]
+ },
+ "music": {
+  "provider": "synth",
+  "master_db": -21,
+  "sections": [
+   {
+    "from": {
+     "t": 0
+    },
+    "chords": [
+     [
+      "C3",
+      "E3",
+      "G3",
+      "C4"
+     ],
+     [
+      "F2",
+      "A3",
+      "C4"
+     ],
+     [
+      "G2",
+      "B3",
+      "D4"
+     ],
+     [
+      "C3",
+      "E3",
+      "G3"
+     ]
+    ],
+    "chord_s": 0.9,
+    "level": 0.6,
+    "brightness": 0.6
+   },
+   {
+    "from": {
+     "scene_start": "s5"
+    },
+    "chords": [
+     [
+      "D3",
+      "F#3",
+      "A3",
+      "D4"
+     ],
+     [
+      "E3",
+      "G#3",
+      "B3"
+     ]
+    ],
+    "chord_s": 0.45,
+    "level": 0.75,
+    "brightness": 0.8
+   },
+   {
+    "from": {
+     "scene_start": "s6"
+    },
+    "chords": [
+     [
+      "C3",
+      "E3",
+      "G3",
+      "B3"
+     ],
+     [
+      "F2",
+      "A3",
+      "C4",
+      "E4"
+     ]
+    ],
+    "chord_s": 1.6,
+    "level": 0.55,
+    "brightness": 0.5
+   }
+  ],
+  "hits": [],
+  "end_fade_s": 1.5
+ },
+ "sources": [
+  {
+   "id": "fiction",
+   "citation": "Original fictional comedy script (no factual claims)",
+   "url": "https://github.com/xexino/AI-Project"
+  }
+ ],
+ "claims": [],
+ "cover": {
+  "scene": "s6",
+  "frame": 60,
+  "lines": [
+   "THE PIGEON CEO"
+  ],
+  "y": 300,
+  "size": 96
+ },
+ "publishing": {
+  "enabled": false,
+  "platforms": {}
+ },
+ "qc": {
+  "loudness_lufs": -14.0,
+  "max_caption_chars": 24
+ },
+ "budget": {
+  "max_paid_eur": 0
+ }
+}
