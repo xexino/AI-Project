@@ -101,7 +101,8 @@ def build_graph(ctx: Context, tl: dict, clips: list[Path], ass: Path, music: Pat
         chain.append(f"[{lab}]{filt},adelay={ms}|{ms},apad=whole_dur={dur}[c{i}]"); amix.append(f"[c{i}]")
     q = ctx.project.data["qc"]
     measured = ctx.options.get("_loudness_measured")
-    ln = f"loudnorm=I={q['loudness_lufs']:g}:TP=-1.5:LRA=11"
+    tp = (ctx.project.data.get("sound") or {}).get("true_peak_target", -1.5)          # opt-in stricter ceiling; default unchanged
+    ln = f"loudnorm=I={q['loudness_lufs']:g}:TP={tp:g}:LRA=11"
     if measured == "measure":
         ln += ":print_format=json"
     elif measured:

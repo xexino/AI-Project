@@ -627,7 +627,8 @@
     "st": 10.833,
     "fo": 0.5
    }
-  ]
+  ],
+  "true_peak_target": -2.2
  },
  "music": {
   "provider": "synth",
