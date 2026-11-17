@@ -61,7 +61,7 @@ STAGES: list[Stage] = [
     Stage("script", _impl("editorial.script"), _cfg("title", "topic", "target_audience", "narration", "sources", extra=_scene_text), _code("stages/editorial.py"), status_after="SCRIPT_READY"),
     Stage("storyboard", _impl("editorial.storyboard"), _cfg("title", "format", "visual", extra=lambda c: [(s["id"], s.get("visual_goal"), s["module"], s["transition_out"]) for s in c.project.scenes]), _code("stages/editorial.py")),
     Stage("references", _impl("refs.references"), _refs_cfg, _code("stages/refs.py", "references.py")),
-    Stage("narration", _impl("narration.narration"), _cfg("narration", extra=lambda c: [(s["id"], s["text"]) for s in c.project.scenes]), _code("stages/narration.py", "providers/tts.py"), status_before="PRODUCING"),
+    Stage("narration", _impl("narration.narration"), _cfg("narration", extra=lambda c: [(s["id"], s["text"]) + ((s.get("voice"), s.get("speed")) if s.get("voice") or s.get("speed") else ()) for s in c.project.scenes]), _code("stages/narration.py", "providers/tts.py"), status_before="PRODUCING"),
     Stage("timing", _impl("narration.timing"), _cfg("format", "narration", extra=_scene_text), _code("stages/narration.py", "providers/align.py")),
     Stage("visuals", _impl("visuals.visuals"), _visual_cfg, _code("stages/visuals.py", "providers/render.py"), status_before="RENDERING", retries=1),
     Stage("music", _impl("audio.music"), _music_cfg, _code("stages/audio.py")),

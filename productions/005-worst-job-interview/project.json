@@ -1,0 +1,574 @@
+{
+ "schema_version": 1,
+ "id": "005-worst-job-interview",
+ "customer_id": "oddlight",
+ "topic": "Comedy short: the worst astronaut job interview",
+ "title": "The Worst Job Interview in History",
+ "target_audience": "general, family-friendly comedy",
+ "format": {
+  "aspect_ratio": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 24,
+  "target_duration_s": [
+   58,
+   92
+  ]
+ },
+ "narration": {
+  "provider": "kokoro",
+  "voice": "am_puck",
+  "lang": "en-us",
+  "speed": 1.0,
+  "aligner": "whisper"
+ },
+ "visual": {
+  "renderer": "threejs",
+  "style": "Original cel-shaded 2.5D cartoon",
+  "grade": {
+   "grain": 1,
+   "vignette": "PI/5",
+   "contrast": 1.03,
+   "saturation": 1.08,
+   "bloom": 0.0
+  }
+ },
+ "scenes": [
+  {
+   "id": "i1",
+   "beat": "INT",
+   "text": "So. Do you have any experience in space?",
+   "lead": 2.2,
+   "tail": 0.2,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/interview.js",
+   "uses_timeline": true,
+   "params": {
+    "who": "INT"
+   },
+   "voice": "bm_george",
+   "speed": 0.88,
+   "non_factual": true
+  },
+  {
+   "id": "c1",
+   "beat": "CAN",
+   "text": "Absolutely.",
+   "lead": 0.25,
+   "tail": 0.5,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/interview.js",
+   "uses_timeline": true,
+   "params": {
+    "who": "CAN"
+   },
+   "voice": "am_puck",
+   "speed": 1.05,
+   "non_factual": true
+  },
+  {
+   "id": "i2",
+   "beat": "INT",
+   "text": "Really?",
+   "lead": 0.5,
+   "tail": 0.3,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/interview.js",
+   "uses_timeline": true,
+   "params": {
+    "who": "INT"
+   },
+   "voice": "bm_george",
+   "speed": 0.88,
+   "non_factual": true
+  },
+  {
+   "id": "c2",
+   "beat": "CAN",
+   "text": "I once got lost in IKEA.",
+   "lead": 0.3,
+   "tail": 1.0,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/interview.js",
+   "uses_timeline": true,
+   "params": {
+    "who": "CAN"
+   },
+   "voice": "am_puck",
+   "speed": 1.05,
+   "non_factual": true
+  },
+  {
+   "id": "i3",
+   "beat": "INT",
+   "text": "That is not space.",
+   "lead": 0.6,
+   "tail": 0.2,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/interview.js",
+   "uses_timeline": true,
+   "params": {
+    "who": "INT"
+   },
+   "voice": "bm_george",
+   "speed": 0.88,
+   "non_factual": true
+  },
+  {
+   "id": "c3",
+   "beat": "CAN",
+   "text": "Have you SEEN that place? I was gone for three hours. My family held a funeral.",
+   "lead": 0.2,
+   "tail": 1.8,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/interview.js",
+   "uses_timeline": true,
+   "params": {
+    "who": "CAN"
+   },
+   "voice": "am_puck",
+   "speed": 1.05,
+   "non_factual": true
+  },
+  {
+   "id": "i4",
+   "beat": "INT",
+   "text": "Can you handle zero gravity?",
+   "lead": 0.8,
+   "tail": 0.2,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/interview.js",
+   "uses_timeline": true,
+   "params": {
+    "who": "INT"
+   },
+   "voice": "bm_george",
+   "speed": 0.88,
+   "non_factual": true
+  },
+  {
+   "id": "c4",
+   "beat": "CAN",
+   "text": "I don't even handle normal gravity very well.",
+   "lead": 0.2,
+   "tail": 3.0,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/interview.js",
+   "uses_timeline": true,
+   "params": {
+    "who": "CAN"
+   },
+   "voice": "am_puck",
+   "speed": 1.05,
+   "non_factual": true
+  },
+  {
+   "id": "i5",
+   "beat": "INT",
+   "text": "Right.",
+   "lead": 1.2,
+   "tail": 0.6,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/interview.js",
+   "uses_timeline": true,
+   "params": {
+    "who": "INT"
+   },
+   "voice": "bm_george",
+   "speed": 0.75,
+   "non_factual": true
+  },
+  {
+   "id": "c5",
+   "beat": "CAN",
+   "text": "That was a demonstration.",
+   "lead": 0.4,
+   "tail": 1.8,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/interview.js",
+   "uses_timeline": true,
+   "params": {
+    "who": "CAN"
+   },
+   "voice": "am_puck",
+   "speed": 1.05,
+   "non_factual": true
+  },
+  {
+   "id": "i6",
+   "beat": "INT",
+   "text": "Why should we hire you?",
+   "lead": 0.4,
+   "tail": 0.2,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/interview.js",
+   "uses_timeline": true,
+   "params": {
+    "who": "INT"
+   },
+   "voice": "bm_george",
+   "speed": 0.88,
+   "non_factual": true
+  },
+  {
+   "id": "c6",
+   "beat": "CAN",
+   "text": "Because if you don't, I'll tell everyone NASA rejected a man who has already been to IKEA.",
+   "lead": 0.3,
+   "tail": 0.9,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/interview.js",
+   "uses_timeline": true,
+   "params": {
+    "who": "CAN"
+   },
+   "voice": "am_puck",
+   "speed": 1.05,
+   "non_factual": true
+  },
+  {
+   "id": "i7",
+   "beat": "INT",
+   "text": "You're hired.",
+   "lead": 3.2,
+   "tail": 0.8,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/interview.js",
+   "uses_timeline": true,
+   "params": {
+    "who": "INT"
+   },
+   "voice": "bm_george",
+   "speed": 0.8,
+   "non_factual": true
+  },
+  {
+   "id": "c7",
+   "beat": "CAN",
+   "text": "Excellent! When do we leave?",
+   "lead": 0.3,
+   "tail": 0.3,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/interview.js",
+   "uses_timeline": true,
+   "params": {
+    "who": "CAN"
+   },
+   "voice": "am_puck",
+   "speed": 1.05,
+   "non_factual": true
+  },
+  {
+   "id": "i8",
+   "beat": "INT",
+   "text": "Tomorrow.",
+   "lead": 0.4,
+   "tail": 0.8,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/interview.js",
+   "uses_timeline": true,
+   "params": {
+    "who": "INT"
+   },
+   "voice": "bm_george",
+   "speed": 0.88,
+   "non_factual": true
+  },
+  {
+   "id": "c8",
+   "beat": "CAN",
+   "text": "Oh. I can't. I've got a dentist appointment.",
+   "lead": 0.6,
+   "tail": 3.2,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/interview.js",
+   "uses_timeline": true,
+   "params": {
+    "who": "CAN"
+   },
+   "voice": "am_puck",
+   "speed": 1.05,
+   "non_factual": true
+  },
+  {
+   "id": "end",
+   "beat": "END",
+   "text": "",
+   "lead": 0,
+   "tail": 3.0,
+   "transition_out": null,
+   "module": "builtin:endcard",
+   "non_factual": true,
+   "params": {
+    "footer": [
+     "An ODDLIGHT comedy short",
+     "A fictional parody. Nobody was harmed, except the chair."
+    ]
+   }
+  }
+ ],
+ "overlays": [
+  {
+   "type": "big",
+   "text": "THE WORST",
+   "sub": "JOB INTERVIEW IN HISTORY",
+   "at": {
+    "t": 0.2
+   },
+   "until": {
+    "t": 1.7
+   },
+   "size": 130,
+   "y": 380
+  },
+  {
+   "type": "big",
+   "text": "NASA HAS CANCELLED",
+   "sub": "THE MISSION",
+   "at": {
+    "word": "appointment",
+    "scene": "c8",
+    "offset": 0.9
+   },
+   "until": {
+    "scene_start": "end"
+   },
+   "size": 96,
+   "y": 400
+  }
+ ],
+ "sound": {
+  "bed": null,
+  "pad": null,
+  "seed": 9,
+  "cues": [
+   {
+    "preset": "bell_hi",
+    "at": {
+     "t": 0.2
+    }
+   },
+   {
+    "preset": "bell_low",
+    "at": {
+     "word": "ikea",
+     "scene": "c2",
+     "offset": 0.5
+    },
+    "level": 0.5
+   },
+   {
+    "preset": "whoosh",
+    "at": {
+     "word": "well",
+     "scene": "c4",
+     "offset": 0.6
+    },
+    "level": 0.6
+   },
+   {
+    "preset": "thump",
+    "at": {
+     "word": "well",
+     "scene": "c4",
+     "offset": 1.25
+    },
+    "level": 1.0
+   },
+   {
+    "preset": "crack",
+    "at": {
+     "word": "well",
+     "scene": "c4",
+     "offset": 1.25
+    },
+    "level": 0.6
+   },
+   {
+    "preset": "bell",
+    "at": {
+     "word": "demonstration",
+     "scene": "c5",
+     "offset": 0.5
+    },
+    "level": 0.4
+   },
+   {
+    "preset": "pulse",
+    "at": {
+     "scene_start": "i7",
+     "offset": 1.2
+    },
+    "level": 0.4
+   },
+   {
+    "preset": "thump",
+    "at": {
+     "word": "appointment",
+     "scene": "c8",
+     "offset": 0.75
+    },
+    "level": 0.9
+   },
+   {
+    "preset": "boom",
+    "at": {
+     "word": "appointment",
+     "scene": "c8",
+     "offset": 0.9
+    },
+    "level": 0.5
+   }
+  ]
+ },
+ "music": {
+  "provider": "synth",
+  "master_db": -27,
+  "sections": [
+   {
+    "from": {
+     "t": 0
+    },
+    "chords": [
+     [
+      "C3",
+      "E3",
+      "G3"
+     ],
+     [
+      "A2",
+      "C3",
+      "E3"
+     ],
+     [
+      "F2",
+      "A2",
+      "C3"
+     ],
+     [
+      "G2",
+      "B2",
+      "D3"
+     ]
+    ],
+    "chord_s": 1.2,
+    "level": 0.45,
+    "brightness": 0.5
+   },
+   {
+    "from": {
+     "scene_start": "i7"
+    },
+    "chords": [
+     [
+      "C3",
+      "E3",
+      "G3"
+     ]
+    ],
+    "chord_s": 4.0,
+    "level": 0.12,
+    "brightness": 0.2
+   },
+   {
+    "from": {
+     "scene_start": "c7"
+    },
+    "chords": [
+     [
+      "C3",
+      "E3",
+      "G3"
+     ],
+     [
+      "F2",
+      "A2",
+      "C3"
+     ]
+    ],
+    "chord_s": 1.0,
+    "level": 0.45,
+    "brightness": 0.5
+   }
+  ],
+  "hits": [],
+  "end_fade_s": 1.2
+ },
+ "sources": [
+  {
+   "id": "fiction",
+   "citation": "Original fictional comedy script (no factual claims)",
+   "url": "https://github.com/xexino/AI-Project"
+  }
+ ],
+ "claims": [],
+ "cover": {
+  "scene": "c4",
+  "frame": 100,
+  "lines": [
+   "THE WORST",
+   "JOB INTERVIEW"
+  ],
+  "y": 300,
+  "size": 96
+ },
+ "publishing": {
+  "enabled": false,
+  "platforms": {}
+ },
+ "qc": {
+  "loudness_lufs": -14.0,
+  "max_caption_chars": 24
+ },
+ "budget": {
+  "max_paid_eur": 0
+ }
+}
