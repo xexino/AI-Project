@@ -1,0 +1,837 @@
+{
+ "schema_version": 1,
+ "id": "006-deep-coral",
+ "customer_id": "oddlight",
+ "topic": "The deep cold-water coral reefs of the Gulf of Mexico, from NOAA's Lophelia II 2009 expedition",
+ "title": "The Reefs That Never See the Sun",
+ "target_audience": "documentary viewers",
+ "format": {
+  "aspect_ratio": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "fps": 24,
+  "target_duration_s": [
+   117,
+   123
+  ]
+ },
+ "narration": {
+  "provider": "kokoro",
+  "voice": "bm_george",
+  "lang": "en-gb",
+  "speed": 0.96,
+  "aligner": "whisper"
+ },
+ "visual": {
+  "renderer": "threejs",
+  "style": "stills-2.5D v1: public-domain NOAA photographs, depth-displaced and filmed by a real camera; LOOK_V1 grade (see LOOK.md)",
+  "grade": {
+   "grain": 0,
+   "vignette": "PI/12",
+   "contrast": 1.0,
+   "saturation": 1.0,
+   "bloom": 0.0
+  }
+ },
+ "editorial_rules": {
+  "phrase_once": true,
+  "one_hero_per_beat": false
+ },
+ "captions": {
+  "style": "plain"
+ },
+ "brand": {
+  "caption_style": {
+   "size": 48,
+   "margin_v": 420,
+   "box_alpha": 0.0
+  }
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "beat": "DOC",
+   "text": "Half a kilometre below the Gulf of Mexico, there are reefs that have never seen the sun. The water here is cold all year.",
+   "lead": 0.8,
+   "tail": 0.9,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/still.js",
+   "params": {
+    "image": "stills/expl2105.jpg",
+    "depth": "stills/expl2105.depth-a527c1895047.png",
+    "crop_x": 0.62,
+    "relief": 0.1,
+    "camera": {
+     "move": "locked",
+     "amount": 0.03,
+     "dir": 1,
+     "handheld": 0
+    },
+    "focus": {
+     "depth": 0.55
+    },
+    "seed": 39,
+    "subframes": 2
+   },
+   "claims": [
+    "c_depth_dark"
+   ]
+  },
+  {
+   "id": "s02",
+   "beat": "DOC",
+   "text": "No light reaches them. The water is cold and still. The corals here are animals, not plants, and they eat what drifts down through the dark, one polyp at a time.",
+   "lead": 0.4,
+   "tail": 0.8,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/still.js",
+   "params": {
+    "image": "stills/expl2332.jpg",
+    "depth": "stills/expl2332.depth-a7aa0a9f629b.png",
+    "crop_x": 0.36,
+    "relief": 0.1,
+    "camera": {
+     "move": "drift",
+     "amount": 0.03,
+     "dir": 1,
+     "handheld": 1
+    },
+    "focus": {
+     "depth": 0.6
+    },
+    "seed": 76,
+    "subframes": 2
+   },
+   "claims": [
+    "c_feed"
+   ]
+  },
+  {
+   "id": "s03",
+   "beat": "DOC",
+   "text": "In late summer, two thousand nine, a research ship holds its position above them for most of a month. Its robot goes down again and again: to reefs, to oil platforms, and to shipwrecks.",
+   "lead": 0.5,
+   "tail": 0.7,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/still.js",
+   "params": {
+    "image": "stills/expl2326.jpg",
+    "depth": "stills/expl2326.depth-476bf4562293.png",
+    "crop_x": 0.4,
+    "relief": 0.1,
+    "camera": {
+     "move": "locked",
+     "amount": 0.03,
+     "dir": 1,
+     "handheld": 0
+    },
+    "focus": {
+     "depth": 0.55
+    },
+    "seed": 40,
+    "subframes": 2
+   },
+   "claims": [
+    "c_cruise"
+   ]
+  },
+  {
+   "id": "s04",
+   "beat": "DOC",
+   "text": "A remotely operated vehicle works the bottom on a cable. It brings pieces of the reef to the surface. Every piece is labelled, photographed and kept cold.",
+   "lead": 0.3,
+   "tail": 1.0,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/still.js",
+   "params": {
+    "image": "stills/expl2323.jpg",
+    "depth": "stills/expl2323.depth-55fadd8dd2cb.png",
+    "crop_x": 0.63,
+    "relief": 0.1,
+    "camera": {
+     "move": "push",
+     "amount": 0.028,
+     "dir": 1,
+     "handheld": 1
+    },
+    "focus": {
+     "depth": 0.6
+    },
+    "seed": 93,
+    "subframes": 2
+   },
+   "claims": [
+    "c_rov"
+   ]
+  },
+  {
+   "id": "s05",
+   "beat": "DOC",
+   "text": "A brittle star, lifted from the reef, in a dish of cold seawater.",
+   "lead": 0.4,
+   "tail": 1.0,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/still.js",
+   "params": {
+    "image": "stills/expl2322.jpg",
+    "depth": "stills/expl2322.depth-2c9e69a908c0.png",
+    "crop_x": 0.42,
+    "relief": 0.1,
+    "camera": {
+     "move": "arc",
+     "amount": 0.03,
+     "dir": -1,
+     "handheld": 1
+    },
+    "focus": {
+     "depth": 0.6
+    },
+    "seed": 12,
+    "subframes": 2
+   },
+   "non_factual": true
+  },
+  {
+   "id": "s06",
+   "beat": "DOC",
+   "text": "Every branch is occupied. Snails, crabs and worms live in the coral the way birds live in a forest. Up close, the reef is less a wall than a tangle.",
+   "lead": 0.3,
+   "tail": 1.0,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/still.js",
+   "params": {
+    "image": "stills/expl2341.jpg",
+    "depth": "stills/expl2341.depth-966a98bb467b.png",
+    "crop_x": 0.6,
+    "relief": 0.1,
+    "camera": {
+     "move": "drift",
+     "amount": 0.03,
+     "dir": -1,
+     "handheld": 1
+    },
+    "focus": {
+     "depth": 0.35,
+     "rack_to": 0.7,
+     "rack_at": 4.0
+    },
+    "seed": 59,
+    "subframes": 2
+   },
+   "non_factual": true
+  },
+  {
+   "id": "s07",
+   "beat": "DOC",
+   "text": "Nothing here is in a hurry. Growth here is measured in lifetimes, not seasons.",
+   "lead": 0.6,
+   "tail": 1.6,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/still.js",
+   "params": {
+    "image": "stills/expl2334.jpg",
+    "depth": "stills/expl2334.depth-101bb57a3fb9.png",
+    "crop_x": 0.38,
+    "relief": 0.1,
+    "camera": {
+     "move": "locked",
+     "amount": 0.03,
+     "dir": 1,
+     "handheld": 0
+    },
+    "focus": {
+     "depth": 0.6
+    },
+    "seed": 10,
+    "subframes": 2
+   },
+   "claims": [
+    "c_growth"
+   ]
+  },
+  {
+   "id": "s08",
+   "beat": "DOC",
+   "text": "Black corals on these slopes have been dated by radiocarbon. The oldest have been growing for at least two thousand years.",
+   "lead": 0.3,
+   "tail": 1.2,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/still.js",
+   "params": {
+    "image": "stills/expl2328.jpg",
+    "depth": "stills/expl2328.depth-0edb618ac626.png",
+    "crop_x": 0.66,
+    "relief": 0.1,
+    "camera": {
+     "move": "push",
+     "amount": 0.025,
+     "dir": 1,
+     "handheld": 1
+    },
+    "focus": {
+     "depth": 0.6
+    },
+    "seed": 16,
+    "subframes": 2
+   },
+   "claims": [
+    "c_age"
+   ]
+  },
+  {
+   "id": "s09",
+   "beat": "DOC",
+   "text": "They add a layer thinner than a human hair each year. A branch as thick as a finger can hold centuries.",
+   "lead": 0.4,
+   "tail": 1.4,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/still.js",
+   "params": {
+    "image": "stills/expl2338.jpg",
+    "depth": "stills/expl2338.depth-40f25e690a23.png",
+    "crop_x": 0.44,
+    "relief": 0.1,
+    "camera": {
+     "move": "arc",
+     "amount": 0.03,
+     "dir": 1,
+     "handheld": 1
+    },
+    "focus": {
+     "depth": 0.6
+    },
+    "seed": 82,
+    "subframes": 2
+   },
+   "claims": [
+    "c_growth"
+   ]
+  },
+  {
+   "id": "s10",
+   "beat": "DOC",
+   "text": "In twenty ten, oil from a damaged well reached the deep sea. Corals near the well were found coated, and their tissue was dying.",
+   "lead": 0.4,
+   "tail": 1.0,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/still.js",
+   "params": {
+    "image": "stills/expl2342.jpg",
+    "depth": "stills/expl2342.depth-52fa3cbfaf12.png",
+    "crop_x": 0.58,
+    "relief": 0.1,
+    "camera": {
+     "move": "push",
+     "amount": 0.022,
+     "dir": 1,
+     "handheld": 1
+    },
+    "focus": {
+     "depth": 0.6
+    },
+    "seed": 89,
+    "subframes": 2
+   },
+   "claims": [
+    "c_spill"
+   ]
+  },
+  {
+   "id": "s11",
+   "beat": "DOC",
+   "text": "A reef that old does not grow back within a human lifetime.",
+   "lead": 0.6,
+   "tail": 1.4,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/still.js",
+   "params": {
+    "image": "stills/expl2333.jpg",
+    "depth": "stills/expl2333.depth-65b1dedb26e7.png",
+    "crop_x": 0.4,
+    "relief": 0.1,
+    "camera": {
+     "move": "locked",
+     "amount": 0.03,
+     "dir": 1,
+     "handheld": 0
+    },
+    "focus": {
+     "depth": 0.6
+    },
+    "seed": 48,
+    "subframes": 2
+   },
+   "claims": [
+    "c_age"
+   ]
+  },
+  {
+   "id": "s12",
+   "beat": "DOC",
+   "text": "Down there, a single year leaves almost no mark. Whatever happens at the surface now, the reef below will be living with it for centuries.",
+   "lead": 0.5,
+   "tail": 2.0,
+   "transition_out": {
+    "type": "fade",
+    "d": 0.0417
+   },
+   "module": "scenes/still.js",
+   "params": {
+    "image": "stills/expl2321.jpg",
+    "depth": "stills/expl2321.depth-099830d1a6e2.png",
+    "crop_x": 0.62,
+    "relief": 0.1,
+    "camera": {
+     "move": "drift",
+     "amount": 0.03,
+     "dir": 1,
+     "handheld": 1
+    },
+    "focus": {
+     "depth": 0.6
+    },
+    "seed": 84,
+    "subframes": 2
+   },
+   "claims": [
+    "c_age"
+   ]
+  },
+  {
+   "id": "end",
+   "beat": "END",
+   "text": "",
+   "lead": 0,
+   "tail": 2.4,
+   "transition_out": null,
+   "module": "builtin:endcard",
+   "non_factual": true,
+   "params": {
+    "footer": [
+     "Photographs: NOAA Office of Ocean Exploration and Research, Lophelia II 2009 (public domain)",
+     "Depth-animated stills \u00b7 not original footage"
+    ]
+   }
+  }
+ ],
+ "overlays": [
+  {
+   "type": "label",
+   "text": "Lophelia II expedition  \u00b7  Gulf of Mexico, 2009",
+   "at": {
+    "scene_start": "s03",
+    "offset": 0.4
+   },
+   "duration": 4.0
+  },
+  {
+   "type": "big",
+   "text": "2,000 years",
+   "voices": {
+    "scene": "s08",
+    "text": "at least two thousand years"
+   },
+   "at": {
+    "word": "least",
+    "scene": "s08"
+   },
+   "until": {
+    "scene_start": "s09"
+   },
+   "size": 110,
+   "y": 620
+  }
+ ],
+ "sound": {
+  "bed": {
+   "preset": "drone_bed",
+   "level": 0.55
+  },
+  "pad": null,
+  "seed": 11,
+  "loudness": "two_pass",
+  "cues": [
+   {
+    "preset": "fireball_roar",
+    "at": {
+     "t": 0.0
+    },
+    "d": 10.5,
+    "vol": 0.16,
+    "fi": 0.5,
+    "st": 10.0,
+    "fo": 0.5
+   },
+   {
+    "preset": "fireball_roar",
+    "at": {
+     "scene_start": "s02",
+     "offset": -0.25
+    },
+    "d": 12.458,
+    "vol": 0.16,
+    "fi": 0.5,
+    "st": 11.958,
+    "fo": 0.5
+   },
+   {
+    "preset": "whoosh",
+    "at": {
+     "scene_start": "s03",
+     "offset": -0.25
+    },
+    "d": 13.917,
+    "vol": 0.09,
+    "fi": 0.5,
+    "st": 13.417,
+    "fo": 0.5
+   },
+   {
+    "preset": "whoosh",
+    "at": {
+     "scene_start": "s04",
+     "offset": -0.25
+    },
+    "d": 12.292,
+    "vol": 0.09,
+    "fi": 0.5,
+    "st": 11.792,
+    "fo": 0.5
+   },
+   {
+    "preset": "whoosh",
+    "at": {
+     "scene_start": "s05",
+     "offset": -0.25
+    },
+    "d": 6.458,
+    "vol": 0.09,
+    "fi": 0.5,
+    "st": 5.958,
+    "fo": 0.5
+   },
+   {
+    "preset": "fireball_roar",
+    "at": {
+     "scene_start": "s06",
+     "offset": -0.25
+    },
+    "d": 11.833,
+    "vol": 0.16,
+    "fi": 0.5,
+    "st": 11.333,
+    "fo": 0.5
+   },
+   {
+    "preset": "fireball_roar",
+    "at": {
+     "scene_start": "s07",
+     "offset": -0.25
+    },
+    "d": 8.25,
+    "vol": 0.16,
+    "fi": 0.5,
+    "st": 7.75,
+    "fo": 0.5
+   },
+   {
+    "preset": "whoosh",
+    "at": {
+     "scene_start": "s08",
+     "offset": -0.25
+    },
+    "d": 9.875,
+    "vol": 0.09,
+    "fi": 0.5,
+    "st": 9.375,
+    "fo": 0.5
+   },
+   {
+    "preset": "whoosh",
+    "at": {
+     "scene_start": "s09",
+     "offset": -0.25
+    },
+    "d": 9.208,
+    "vol": 0.09,
+    "fi": 0.5,
+    "st": 8.708,
+    "fo": 0.5
+   },
+   {
+    "preset": "fireball_roar",
+    "at": {
+     "scene_start": "s10",
+     "offset": -0.25
+    },
+    "d": 10.292,
+    "vol": 0.16,
+    "fi": 0.5,
+    "st": 9.792,
+    "fo": 0.5
+   },
+   {
+    "preset": "whoosh",
+    "at": {
+     "scene_start": "s11",
+     "offset": -0.25
+    },
+    "d": 6.708,
+    "vol": 0.09,
+    "fi": 0.5,
+    "st": 6.208,
+    "fo": 0.5
+   },
+   {
+    "preset": "fireball_roar",
+    "at": {
+     "scene_start": "s12",
+     "offset": -0.25
+    },
+    "d": 11.333,
+    "vol": 0.16,
+    "fi": 0.5,
+    "st": 10.833,
+    "fo": 0.5
+   }
+  ]
+ },
+ "music": {
+  "provider": "synth",
+  "master_db": -26,
+  "sections": [
+   {
+    "from": {
+     "t": 0.0
+    },
+    "chords": [
+     [
+      "D2"
+     ]
+    ],
+    "chord_s": 8,
+    "level": 0.0,
+    "brightness": 0.1
+   },
+   {
+    "from": {
+     "t": 16.5
+    },
+    "chords": [
+     [
+      "D2",
+      "A2",
+      "D3"
+     ],
+     [
+      "Bb1",
+      "F2",
+      "D3"
+     ],
+     [
+      "G1",
+      "D2",
+      "Bb2"
+     ]
+    ],
+    "chord_s": 6.0,
+    "level": 0.32,
+    "brightness": 0.12
+   },
+   {
+    "from": {
+     "scene_start": "s07"
+    },
+    "chords": [
+     [
+      "D2"
+     ]
+    ],
+    "chord_s": 8,
+    "level": 0.0,
+    "brightness": 0.1
+   },
+   {
+    "from": {
+     "t": 94.54
+    },
+    "chords": [
+     [
+      "D2",
+      "A2",
+      "F3"
+     ],
+     [
+      "Bb1",
+      "F2",
+      "D3"
+     ],
+     [
+      "F2",
+      "C3",
+      "A3"
+     ]
+    ],
+    "chord_s": 6.5,
+    "level": 0.4,
+    "brightness": 0.15
+   }
+  ],
+  "hits": [],
+  "end_fade_s": 2.5
+ },
+ "sources": [
+  {
+   "id": "prouty2011",
+   "citation": "Prouty, N.G., Roark, E.B., Buster, N.A., Ross, S.W. (2011). Growth rate and age distribution of deep-sea black corals in the Gulf of Mexico. Marine Ecology Progress Series 423: 101-115",
+   "url": "https://www.int-res.com/abstracts/meps/v423/p101-115/",
+   "accessed": "2026-11-17"
+  },
+  {
+   "id": "white2012",
+   "citation": "White, H.K. et al. (2012). Impact of the Deepwater Horizon oil spill on a deep-water coral community in the Gulf of Mexico. PNAS 109(50): 20303-20308",
+   "doi": "10.1073/pnas.1118029109",
+   "url": "https://pubs.usgs.gov/publication/70045466",
+   "accessed": "2026-11-17"
+  },
+  {
+   "id": "noaa_lophelia09",
+   "citation": "NOAA Ocean Exploration, Lophelia II 2009: Deepwater Coral Expedition: Reefs, Rigs, and Wrecks (mission summary and logs)",
+   "url": "https://oceanexplorer.noaa.gov/explorations/09lophelia/welcome.html",
+   "accessed": "2026-11-17"
+  },
+  {
+   "id": "noaa_lophelia_bg",
+   "citation": "NOAA Ocean Exploration, Lophelia pertusa background (EX1711)",
+   "url": "https://oceanexplorer.noaa.gov/okeanos/explorations/ex1711/background/mpas/media/lophelia.html",
+   "accessed": "2026-11-17"
+  },
+  {
+   "id": "sciam_coldwater",
+   "citation": "Scientific American (Artful Amoeba blog), 'Deep-sea coral clings to oil platform at record Gulf depth'",
+   "url": "https://blogs.scientificamerican.com/artful-amoeba/deep-sea-coral-clings-to-oil-platform-at-record-gulf-depth/",
+   "accessed": "2026-11-17"
+  }
+ ],
+ "claims": [
+  {
+   "id": "c_depth_dark",
+   "text": "Deep-water coral reefs in the Gulf of Mexico occur around 500 m depth, in perpetual darkness.",
+   "sources": [
+    "noaa_lophelia_bg",
+    "sciam_coldwater"
+   ],
+   "status": "verified",
+   "note": "verified via search excerpts of the cited pages (pages not readable by the fetcher); ~500 m reefs, perpetual darkness, water colder than 12 C"
+  },
+  {
+   "id": "c_feed",
+   "text": "These corals are animals that feed on particles suspended in the water (suspension feeders), not on sunlight.",
+   "sources": [
+    "prouty2011",
+    "sciam_coldwater"
+   ],
+   "status": "verified",
+   "note": "Prouty 2011 abstract: black corals are benthic suspension feeders"
+  },
+  {
+   "id": "c_cruise",
+   "text": "The Lophelia II 2009 expedition ran 19 August - 12 September 2009 aboard NOAA ship Ronald H. Brown.",
+   "sources": [
+    "noaa_lophelia09"
+   ],
+   "status": "verified",
+   "note": "via search excerpt of the NOAA mission summary; 'most of a month' = 25 days"
+  },
+  {
+   "id": "c_rov",
+   "text": "The expedition used the ROV Jason II and collected physical samples of coral communities.",
+   "sources": [
+    "noaa_lophelia09"
+   ],
+   "status": "verified",
+   "note": "via search excerpt of NOAA logs (20 dives, 17 sites; samples collected, live corals kept in tanks)"
+  },
+  {
+   "id": "c_age",
+   "text": "Radiocarbon dating shows Gulf of Mexico black corals (Leiopathes sp.) growing continuously for at least two millennia.",
+   "sources": [
+    "prouty2011"
+   ],
+   "status": "verified",
+   "note": "read in the abstract: 'at least the last 2 millennia', 300 m, De Soto Slope"
+  },
+  {
+   "id": "c_growth",
+   "text": "Their radial growth is 8-22 micrometres per year, thinner than a human hair (~50-100 micrometres).",
+   "sources": [
+    "prouty2011"
+   ],
+   "status": "verified"
+  },
+  {
+   "id": "c_spill",
+   "text": "After the 2010 Deepwater Horizon spill, a deep-water coral community 11 km from the well showed widespread stress and tissue loss linked to Macondo oil.",
+   "sources": [
+    "white2012"
+   ],
+   "status": "verified",
+   "note": "via the USGS abstract page: 46% of 43 corals with >50% of the colony affected"
+  }
+ ],
+ "cover": {
+  "scene": "s06",
+  "frame": 120,
+  "lines": [
+   "The reefs that",
+   "never see the sun"
+  ],
+  "y": 300,
+  "size": 80
+ },
+ "publishing": {
+  "enabled": false,
+  "platforms": {}
+ },
+ "qc": {
+  "loudness_lufs": -14.0,
+  "true_peak_max_dbtp": -1.5,
+  "max_caption_chars": 24
+ },
+ "budget": {
+  "max_paid_eur": 0
+ }
+}

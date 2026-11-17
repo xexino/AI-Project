@@ -71,7 +71,7 @@ def caption_chunks(tl: dict, hidden: set[int] | None = None) -> list[list[dict]]
     return chunks + (chunk_words(run) if run else [])
 
 
-def build_ass(tl: dict, brand: dict, overlays: list[dict], fmt: dict) -> str:
+def build_ass(tl: dict, brand: dict, overlays: list[dict], fmt: dict, plain: bool = False) -> str:
     cs = brand.get("caption_style", {})
     pal = brand.get("palette", {})
     BONE = ass_color(cs.get("primary", pal.get("bone", "#ede6d6")))
@@ -102,6 +102,9 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     ev = []
     chunks = caption_chunks(tl, voiced_indices(tl, overlays))
     for (cs_, ce), ch in zip(chunk_windows(chunks), chunks):
+        if plain:                                       # documentary style: one quiet line per chunk, no word highlight
+            ev.append(f"Dialogue: 1,{ass_time(ch[0]['start'])},{ass_time(ce)},Cap,,0,0,0,,{{\\fad(120,120)}}{' '.join(x['word'] for x in ch)}")
+            continue
         for wi, w in enumerate(ch):
             a = w["start"]; b = ch[wi + 1]["start"] if wi + 1 < len(ch) else ce
             parts = [(f"{{\\c{HI}}}{x['word'].rstrip('.,')}{{\\c{BONE}}}{x['word'][len(x['word'].rstrip('.,')):]}" if j == wi else x["word"]) for j, x in enumerate(ch)]
@@ -153,7 +156,7 @@ def captions(ctx: Context) -> dict:
         if problems:
             raise EngineError("on-screen text breaks the project's editorial rules:\n  - " + "\n  - ".join(problems))
     ass = ctx.work("captions", "captions.ass")
-    atomic_write_text(ass, build_ass(tl, d["brand"], d.get("overlays", []), d["format"]))
+    atomic_write_text(ass, build_ass(tl, d["brand"], d.get("overlays", []), d["format"], plain=(d.get("captions") or {}).get("style") == "plain"))
     srt_txt, vtt_txt = build_srt_vtt(tl)
     srt, vtt = ctx.work("captions", "subtitles.srt"), ctx.work("captions", "subtitles.vtt")
     atomic_write_text(srt, srt_txt); atomic_write_text(vtt, vtt_txt)
